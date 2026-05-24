@@ -1,5 +1,6 @@
 # ——— Prompt / Docs internos ———
 *.md
+!README.md
 
 # ——— Xcode ———
 build/
