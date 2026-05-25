@@ -22,6 +22,10 @@ final class AppContainer {
     let foodRepository:        any FoodRepository
     let aiProviderRepository:  any AIProviderRepository
 
+    // MARK: - Public: ModelContainer (for .modelContainer() scene modifier)
+
+    let modelContainer: ModelContainer
+
     // MARK: - Public: Factories
 
     let providerFactory: ProviderFactory
@@ -31,6 +35,7 @@ final class AppContainer {
 
     private init(inMemory: Bool) {
         let persistence = inMemory ? PersistenceController.preview : PersistenceController.shared
+        modelContainer = persistence.container
         let context = persistence.mainContext
 
         // Build repositories

@@ -1,32 +1,14 @@
-//
-//  HealthTrackerApp.swift
-//  HealthTracker
-//
-//  Created by Erick Herrera on 5/23/26.
-//
-
 import SwiftUI
-import SwiftData
 
 @main
 struct HealthTrackerApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    @State private var container = AppContainer.shared
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppCoordinatorView(container: container)
+                .modelContainer(container.modelContainer)
         }
-        .modelContainer(sharedModelContainer)
     }
 }
