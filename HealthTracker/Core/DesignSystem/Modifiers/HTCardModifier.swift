@@ -5,6 +5,7 @@ import SwiftUI
 struct HTCardModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
+            .padding(HTSpacing.md)
             .background(Color.htSurface)
             .clipShape(RoundedRectangle(cornerRadius: HTDimensions.CornerRadius.card))
             .overlay(

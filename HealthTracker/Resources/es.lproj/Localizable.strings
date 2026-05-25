@@ -41,3 +41,55 @@
 "trafficlight.green"   = "Verde";
 "trafficlight.yellow"  = "Amarillo";
 "trafficlight.red"     = "Rojo";
+
+// MARK: - Pantalla Hoy — secciones
+"today.section.activity"   = "Actividad";
+"today.section.exercise"   = "Ejercicio";
+"today.section.meals"      = "Comidas";
+"today.section.hydration"  = "Hidratación";
+"today.section.health"     = "Indicadores de salud";
+"today.section.notes"      = "Notas";
+"today.section.analysis"   = "Análisis IA";
+
+// MARK: - Pantalla Hoy — campos
+"today.rest_day"             = "Día de descanso";
+"today.steps.label"          = "Pasos";
+"today.steps.placeholder"    = "0";
+"today.energy.label"         = "Nivel de energía";
+"today.sleep.label"          = "Sueño";
+"today.sleep.placeholder"    = "ej. 7.5";
+"today.water.unit"           = "vasos de 40 oz";
+"today.glucose.label"        = "Glucosa (mg/dL)";
+"today.glucose.placeholder"  = "—";
+"today.bp.label"             = "Presión arterial";
+"today.bp.placeholder"       = "ej. 120/80";
+"today.notes.placeholder"    = "¿Cómo te sentiste hoy?";
+
+// MARK: - Pantalla Hoy — acciones
+"today.analyze"         = "Analizar con IA";
+"today.reanalyze"       = "Re-analizar";
+"today.analyzed_at"     = "Analizado el %@";
+"today.add.label"       = "Agregar";
+"today.cancel.label"    = "Cancelar";
+"today.confirm.label"   = "Agregar";
+
+// MARK: - Pantalla Hoy — selector de ejercicio
+"today.exercise.empty"                = "Sin ejercicios registrados";
+"today.exercise.picker.title"         = "Seleccionar ejercicio";
+"today.exercise.search.placeholder"   = "Buscar ejercicios";
+"today.exercise.weight.label"         = "Peso";
+"today.exercise.weight.placeholder"   = "0";
+
+// MARK: - Pantalla Hoy — selector de comida
+"today.meal.slot.empty"             = "Sin registros";
+"today.meal.picker.title"           = "Agregar a %@";
+"today.meal.free_text.label"        = "Texto libre";
+"today.meal.free_text.subtitle"     = "Describe lo que comiste";
+"today.meal.free_text.placeholder"  = "ej. Huevos revueltos con tostadas";
+"today.meal.amount.label"           = "Cantidad";
+"today.meal.amount.placeholder"     = "0";
+"today.meal.catalog.label"          = "Del catálogo";
+"today.meal.search.placeholder"     = "Buscar alimentos";
+
+// MARK: - General
+"error.title"  = "Error";

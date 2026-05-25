@@ -41,3 +41,55 @@
 "trafficlight.green"   = "Green";
 "trafficlight.yellow"  = "Yellow";
 "trafficlight.red"     = "Red";
+
+// MARK: - Today screen — sections
+"today.section.activity"   = "Activity";
+"today.section.exercise"   = "Exercise";
+"today.section.meals"      = "Meals";
+"today.section.hydration"  = "Hydration";
+"today.section.health"     = "Health Indicators";
+"today.section.notes"      = "Notes";
+"today.section.analysis"   = "AI Analysis";
+
+// MARK: - Today screen — fields
+"today.rest_day"             = "Rest day";
+"today.steps.label"          = "Steps";
+"today.steps.placeholder"    = "0";
+"today.energy.label"         = "Energy level";
+"today.sleep.label"          = "Sleep";
+"today.sleep.placeholder"    = "e.g. 7.5";
+"today.water.unit"           = "40 oz glasses";
+"today.glucose.label"        = "Glucose (mg/dL)";
+"today.glucose.placeholder"  = "—";
+"today.bp.label"             = "Blood pressure";
+"today.bp.placeholder"       = "e.g. 120/80";
+"today.notes.placeholder"    = "How did you feel today?";
+
+// MARK: - Today screen — actions
+"today.analyze"         = "Analyze with AI";
+"today.reanalyze"       = "Re-analyze";
+"today.analyzed_at"     = "Analyzed %@";
+"today.add.label"       = "Add";
+"today.cancel.label"    = "Cancel";
+"today.confirm.label"   = "Add";
+
+// MARK: - Today screen — exercise picker
+"today.exercise.empty"                = "No exercises logged yet";
+"today.exercise.picker.title"         = "Select Exercise";
+"today.exercise.search.placeholder"   = "Search exercises";
+"today.exercise.weight.label"         = "Weight";
+"today.exercise.weight.placeholder"   = "0";
+
+// MARK: - Today screen — food picker
+"today.meal.slot.empty"             = "Nothing logged";
+"today.meal.picker.title"           = "Add to %@";
+"today.meal.free_text.label"        = "Free text";
+"today.meal.free_text.subtitle"     = "Describe what you ate";
+"today.meal.free_text.placeholder"  = "e.g. Scrambled eggs with toast";
+"today.meal.amount.label"           = "Amount";
+"today.meal.amount.placeholder"     = "0";
+"today.meal.catalog.label"          = "From catalog";
+"today.meal.search.placeholder"     = "Search foods";
+
+// MARK: - General
+"error.title"  = "Error";

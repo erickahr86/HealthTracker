@@ -10,18 +10,18 @@ struct AppCoordinatorView: View {
     var body: some View {
         TabView {
             // Tab 1: Today
-            Text("Today — coming soon")
+            DailyReportView(container: container)
                 .tabItem {
                     Label("Today", systemImage: "calendar")
                 }
 
-            // Tab 2: History
+            // Tab 2: History — placeholder
             Text("History — coming soon")
                 .tabItem {
                     Label("History", systemImage: "clock")
                 }
 
-            // Tab 3: Catalogs
+            // Tab 3: Catalogs — placeholder
             Text("Catalogs — coming soon")
                 .tabItem {
                     Label("Catalogs", systemImage: "list.bullet")

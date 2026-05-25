@@ -61,6 +61,67 @@ enum Strings {
         }
     }
 
+    // MARK: - Today screen
+
+    enum Today {
+        // Sections
+        static var activitySection:  String { L("today.section.activity") }
+        static var exerciseSection:  String { L("today.section.exercise") }
+        static var mealsSection:     String { L("today.section.meals") }
+        static var hydrationSection: String { L("today.section.hydration") }
+        static var healthSection:    String { L("today.section.health") }
+        static var notesSection:     String { L("today.section.notes") }
+        static var analysisSection:  String { L("today.section.analysis") }
+
+        // Fields
+        static var restDay:           String { L("today.rest_day") }
+        static var stepsLabel:        String { L("today.steps.label") }
+        static var stepsPlaceholder:  String { L("today.steps.placeholder") }
+        static var energyLabel:       String { L("today.energy.label") }
+        static var sleepLabel:        String { L("today.sleep.label") }
+        static var sleepPlaceholder:  String { L("today.sleep.placeholder") }
+        static var waterGlassesUnit:  String { L("today.water.unit") }
+        static var glucoseLabel:      String { L("today.glucose.label") }
+        static var glucosePlaceholder:String { L("today.glucose.placeholder") }
+        static var bpLabel:           String { L("today.bp.label") }
+        static var bpPlaceholder:     String { L("today.bp.placeholder") }
+        static var notesPlaceholder:  String { L("today.notes.placeholder") }
+
+        // Actions
+        static var analyze:       String { L("today.analyze") }
+        static var reanalyze:     String { L("today.reanalyze") }
+        static var addLabel:      String { L("today.add.label") }
+        static var cancelLabel:   String { L("today.cancel.label") }
+        static var confirmLabel:  String { L("today.confirm.label") }
+        static var errorTitle:    String { L("error.title") }
+
+        // Exercise picker
+        static var exerciseEmpty:         String { L("today.exercise.empty") }
+        static var exercisePickerTitle:   String { L("today.exercise.picker.title") }
+        static var searchExercisePlaceholder: String { L("today.exercise.search.placeholder") }
+        static var weightLabel:           String { L("today.exercise.weight.label") }
+        static var weightPlaceholder:     String { L("today.exercise.weight.placeholder") }
+
+        // Meal picker
+        static var mealSlotEmpty:        String { L("today.meal.slot.empty") }
+        static var freeTextLabel:        String { L("today.meal.free_text.label") }
+        static var freeTextSubtitle:     String { L("today.meal.free_text.subtitle") }
+        static var freeTextPlaceholder:  String { L("today.meal.free_text.placeholder") }
+        static var amountLabel:          String { L("today.meal.amount.label") }
+        static var amountPlaceholder:    String { L("today.meal.amount.placeholder") }
+        static var catalogLabel:         String { L("today.meal.catalog.label") }
+        static var searchFoodPlaceholder:String { L("today.meal.search.placeholder") }
+
+        static func mealPickerTitle(_ slotName: String) -> String {
+            String(format: L("today.meal.picker.title"), slotName)
+        }
+
+        static func analyzedAt(_ date: Date) -> String {
+            let formatted = date.formatted(date: .abbreviated, time: .shortened)
+            return String(format: L("today.analyzed_at"), formatted)
+        }
+    }
+
     // MARK: - Private helper
 
     private static func L(_ key: String) -> String {
