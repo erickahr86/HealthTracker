@@ -36,3 +36,8 @@
 // MARK: - Grupos musculares
 "muscle.group.superior"  = "Tren Superior";
 "muscle.group.inferior"  = "Tren Inferior";
+
+// MARK: - Semáforo
+"trafficlight.green"   = "Verde";
+"trafficlight.yellow"  = "Amarillo";
+"trafficlight.red"     = "Rojo";

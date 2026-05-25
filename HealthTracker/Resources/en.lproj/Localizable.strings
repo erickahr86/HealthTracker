@@ -36,3 +36,8 @@
 // MARK: - Muscle groups
 "muscle.group.superior"  = "Upper Body";
 "muscle.group.inferior"  = "Lower Body";
+
+// MARK: - Traffic light labels
+"trafficlight.green"   = "Green";
+"trafficlight.yellow"  = "Yellow";
+"trafficlight.red"     = "Red";

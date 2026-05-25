@@ -8,7 +8,7 @@ enum ReportFormatter {
     static func format(_ report: DailyReport) -> String {
         var lines: [String] = [Strings.Report.title, ""]
 
-        // 1. Physical Activity / Actividad Física
+        // 1. Physical Activity
         lines.append(Strings.Report.physicalActivity)
         if report.isRestDay {
             lines.append(Strings.Report.restDay)
@@ -27,7 +27,7 @@ enum ReportFormatter {
         }
         lines.append("")
 
-        // 2. Meals / Registro de Comidas
+        // 2. Meals
         lines.append(Strings.Report.meals)
         for slot in MealSlot.allCases {
             let slotLogs = report.mealLogs.filter { $0.mealSlot == slot }
@@ -48,11 +48,11 @@ enum ReportFormatter {
         }
         lines.append("")
 
-        // 3. Hydration / Hidratación
+        // 3. Hydration
         lines.append(Strings.Report.hydration(report.waterGlasses))
         lines.append("")
 
-        // 4. Feeling / Sensación
+        // 4. Feeling
         lines.append(Strings.Report.feeling)
         var items: [String] = []
         if let energy = report.energyLevel              { items.append(Strings.Report.energy(energy)) }
