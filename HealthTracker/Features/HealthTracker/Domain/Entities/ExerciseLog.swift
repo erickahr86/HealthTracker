@@ -5,15 +5,18 @@ import Foundation
 struct ExerciseLog: Identifiable, Hashable {
     let id: UUID
     var exercise: Exercise
-    var weightKg: Double
+    var weight: Double
+    var weightUnit: WeightUnit
 
     init(
         id: UUID = UUID(),
         exercise: Exercise,
-        weightKg: Double
+        weight: Double,
+        weightUnit: WeightUnit = .kg
     ) {
         self.id = id
         self.exercise = exercise
-        self.weightKg = weightKg
+        self.weight = weight
+        self.weightUnit = weightUnit
     }
 }

@@ -7,6 +7,10 @@ enum MealSlot: String, Codable, CaseIterable, Hashable {
     case comida
     case cena
     case snack
+
+    var displayName: String {
+        NSLocalizedString("meal.slot.\(rawValue)", comment: "Meal slot display name")
+    }
 }
 
 // MARK: - MealLog

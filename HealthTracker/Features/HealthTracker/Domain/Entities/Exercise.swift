@@ -5,6 +5,10 @@ import Foundation
 enum MuscleGroup: String, Codable, CaseIterable, Hashable {
     case superior
     case inferior
+
+    var displayName: String {
+        NSLocalizedString("muscle.group.\(rawValue)", comment: "Muscle group display name")
+    }
 }
 
 // MARK: - WeightUnit

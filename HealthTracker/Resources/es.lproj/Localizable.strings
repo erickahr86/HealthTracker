@@ -1,0 +1,38 @@
+// MARK: - Errores — API
+"error.invalid_url"          = "URL inválida.";
+"error.invalid_response"     = "La respuesta del servidor no es válida.";
+"error.api"                  = "Error de API (%d): %@";
+"error.decoding"             = "Error al procesar la respuesta: %@";
+"error.network"              = "Error de red: %@";
+
+// MARK: - Errores — Keychain
+"error.keychain.not_found"   = "API key no encontrada. Agrégala en Configuración.";
+"error.keychain.duplicate"   = "El elemento ya existe en Keychain.";
+"error.keychain.unexpected"  = "Error de Keychain (OSStatus %d).";
+
+// MARK: - Formateador de reporte
+"report.title"                        = "REPORTE DEL DÍA";
+"report.section.physical_activity"    = "1. Actividad Física:";
+"report.rest_day"                     = "Día de descanso";
+"report.gym"                          = "Gym:";
+"report.no_training"                  = "Sin entrenamiento registrado";
+"report.steps"                        = "Pasos aprox: %d";
+"report.section.meals"                = "2. Registro de Comidas:";
+"report.hydration"                    = "3. Hidratación: %d vasos de 40 oz";
+"report.section.feeling"              = "4. Sensación:";
+"report.photo_attached"               = " [foto adjunta]";
+"report.no_data"                      = "Sin datos registrados";
+"report.energy"                       = "energía %d/10";
+"report.sleep"                        = "sueño %@ hrs";
+"report.glucose"                      = "glucosa %d mg/dL";
+"report.blood_pressure"               = "presión %@";
+
+// MARK: - Slots de comida
+"meal.slot.desayuno"  = "Desayuno";
+"meal.slot.comida"    = "Comida";
+"meal.slot.cena"      = "Cena";
+"meal.slot.snack"     = "Snack";
+
+// MARK: - Grupos musculares
+"muscle.group.superior"  = "Tren Superior";
+"muscle.group.inferior"  = "Tren Inferior";

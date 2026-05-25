@@ -1,0 +1,38 @@
+// MARK: - Errors — API
+"error.invalid_url"          = "Invalid URL.";
+"error.invalid_response"     = "The server response is invalid.";
+"error.api"                  = "API error (%d): %@";
+"error.decoding"             = "Error processing response: %@";
+"error.network"              = "Network error: %@";
+
+// MARK: - Errors — Keychain
+"error.keychain.not_found"   = "API key not found. Please add it in Settings.";
+"error.keychain.duplicate"   = "Item already exists in Keychain.";
+"error.keychain.unexpected"  = "Keychain error (OSStatus %d).";
+
+// MARK: - Report formatter
+"report.title"                        = "DAILY REPORT";
+"report.section.physical_activity"    = "1. Physical Activity:";
+"report.rest_day"                     = "Rest day";
+"report.gym"                          = "Gym:";
+"report.no_training"                  = "No training registered";
+"report.steps"                        = "Steps approx: %d";
+"report.section.meals"                = "2. Meal Log:";
+"report.hydration"                    = "3. Hydration: %d 40oz glasses";
+"report.section.feeling"              = "4. Feeling:";
+"report.photo_attached"               = " [photo attached]";
+"report.no_data"                      = "No data registered";
+"report.energy"                       = "energy %d/10";
+"report.sleep"                        = "sleep %@ hrs";
+"report.glucose"                      = "glucose %d mg/dL";
+"report.blood_pressure"               = "blood pressure %@";
+
+// MARK: - Meal slots
+"meal.slot.desayuno"  = "Breakfast";
+"meal.slot.comida"    = "Lunch";
+"meal.slot.cena"      = "Dinner";
+"meal.slot.snack"     = "Snack";
+
+// MARK: - Muscle groups
+"muscle.group.superior"  = "Upper Body";
+"muscle.group.inferior"  = "Lower Body";

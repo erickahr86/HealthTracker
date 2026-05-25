@@ -60,5 +60,8 @@ Icon
 *.env
 Secrets.swift
 APIKeys.swift
-Config.xcconfig
 GoogleService-Info.plist
+
+# xcconfig con secrets (solo se commitean los .template)
+Secrets.xcconfig
+Config/Secrets.xcconfig
