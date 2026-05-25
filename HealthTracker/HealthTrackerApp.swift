@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 @main
 struct HealthTrackerApp: App {
@@ -8,7 +9,7 @@ struct HealthTrackerApp: App {
     var body: some Scene {
         WindowGroup {
             AppCoordinatorView(container: container)
-                .modelContainer(container.modelContainer)
         }
+        .modelContainer(container.modelContainer)
     }
 }
