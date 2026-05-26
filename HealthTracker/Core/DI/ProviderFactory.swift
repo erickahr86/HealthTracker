@@ -20,8 +20,7 @@ final class ProviderFactory {
             // TODO: return OpenAIAPIClient() when implemented
             return AnthropicAPIClient()
         case .gemini:
-            // TODO: return GeminiAPIClient() when implemented
-            return AnthropicAPIClient()
+            return GeminiAPIClient()
         }
     }
 }

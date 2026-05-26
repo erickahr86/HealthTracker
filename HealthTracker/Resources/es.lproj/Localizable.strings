@@ -4,6 +4,7 @@
 "error.api"                  = "Error de API (%d): %@";
 "error.decoding"             = "Error al procesar la respuesta: %@";
 "error.network"              = "Error de red: %@";
+"error.gemini.rate_limited"  = "Límite de peticiones de Gemini alcanzado (429). Espera un minuto e inténtalo de nuevo. El tier gratuito permite 15 peticiones por minuto.";
 
 // MARK: - Errores — Keychain
 "error.keychain.not_found"   = "API key no encontrada. Agrégala en Configuración.";
@@ -75,6 +76,8 @@
 "today.confirm.label"   = "Agregar";
 
 // MARK: - Pantalla Hoy — selector de ejercicio
+"today.edit.exercise.title"           = "Editar ejercicio";
+"today.edit.meal.title"               = "Editar";
 "today.exercise.empty"                = "Catálogo vacío";
 "today.exercise.empty.hint"           = "Ve a Configuración → Catálogo para agregar ejercicios.";
 "today.exercise.picker.title"         = "Seleccionar ejercicio";
@@ -297,6 +300,12 @@
 "food.other.olive_oil"      = "Aceite de oliva";
 "food.other.protein_powder" = "Proteína en polvo";
 
+// MARK: - Secciones de la card de análisis
+"analysis.section.metabolic"  = "Análisis Metabólico";
+"analysis.section.functional" = "Evaluación Funcional";
+"analysis.section.longevity"  = "Longevidad y Prevención";
+"analysis.section.mission"    = "Misión para Mañana";
+
 // MARK: - Sexo biológico
 "biological.sex.male"   = "Hombre";
 "biological.sex.female" = "Mujer";
@@ -367,6 +376,55 @@
 "profile.goals.label"          = "Objetivos";
 "profile.training_days.label"  = "Días de entrenamiento / semana";
 "profile.footer.goals"         = "Selecciona tus principales objetivos para que la IA enfoque sus recomendaciones.";
+
+// MARK: - Etiquetas del tab bar
+"tab.today"    = "Hoy";
+"tab.history"  = "Historial";
+"tab.catalog"  = "Catálogo";
+"tab.settings" = "Ajustes";
+
+// MARK: - Pantalla Historial
+"history.title"           = "Historial";
+"history.empty.title"     = "Sin reportes";
+"history.empty.subtitle"  = "Tus reportes diarios aparecerán aquí cuando empieces a registrar.";
+"history.rest_day"        = "Día de descanso";
+"history.no_data"         = "Sin datos";
+"history.one_exercise"    = "1 ejercicio";
+"history.exercises"       = "%d ejercicios";
+"history.one_meal"        = "1 comida";
+"history.meals"           = "%d comidas";
+"history.no_analysis"     = "Sin análisis";
+"history.no_exercises"    = "Sin ejercicios registrados";
+"history.delete.title"    = "¿Eliminar reporte?";
+"history.delete.confirm"  = "Eliminar";
+"history.delete.message"  = "Este reporte y todos sus datos se eliminarán de forma permanente.";
+"history.cancel"          = "Cancelar";
+
+// MARK: - Pantalla Catálogo
+"catalog.title"                    = "Catálogo";
+"catalog.tab.exercises"            = "Ejercicios";
+"catalog.tab.foods"                = "Alimentos";
+"catalog.add.exercise"             = "Agregar ejercicio";
+"catalog.add.food"                 = "Agregar alimento";
+"catalog.name.label"               = "Nombre";
+"catalog.exercise.name.placeholder"= "ej. Cruce de poleas";
+"catalog.food.name.placeholder"    = "ej. Yogurt griego";
+"catalog.weight.label"             = "Peso por defecto";
+"catalog.muscle.label"             = "Grupo muscular";
+"catalog.unit.label"               = "Unidad";
+"catalog.unit.placeholder"         = "ej. g, ml, pzas";
+"catalog.amount.label"             = "Cantidad por defecto";
+"catalog.exercise.default_weight"  = "Por defecto: %g %@";
+"catalog.food.default_amount"      = "Por defecto: %g %@";
+"catalog.delete.title"             = "¿Eliminar del catálogo?";
+"catalog.delete.confirm"           = "Eliminar";
+"catalog.delete.message"           = "Este elemento se eliminará del catálogo.";
+"catalog.seeded.note"              = "Los elementos predeterminados no se pueden eliminar.";
+"catalog.empty.exercises"          = "Sin ejercicios aún";
+"catalog.empty.foods"              = "Sin alimentos aún";
+"catalog.custom.badge"             = "Personalizado";
+"catalog.cancel"                   = "Cancelar";
+"catalog.save"                     = "Guardar";
 
 // MARK: - General
 "error.title"  = "Error";

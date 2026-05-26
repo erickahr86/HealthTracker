@@ -26,9 +26,9 @@ struct APIKeySectionView: View {
                 keyStatusBadge
             }
 
-            // Key input
+            // Key input — placeholder adapts to the selected provider
             SecureField(
-                Strings.Settings.apiKeyPlaceholder,
+                vm.selectedProvider.apiKeyPlaceholder,
                 text: $vm.apiKeyInput
             )
             .focused($isKeyFieldFocused)
@@ -71,8 +71,8 @@ struct APIKeySectionView: View {
         } header: {
             Text(Strings.Settings.aiSection)
         } footer: {
-            Link(destination: URL(string: "https://console.anthropic.com")!) {
-                Label(Strings.Settings.getKeyHint, systemImage: "arrow.up.right.square")
+            Link(destination: vm.selectedProvider.consoleURL) {
+                Label(vm.selectedProvider.consoleLabel, systemImage: "arrow.up.right.square")
                     .font(HTTypography.caption)
             }
         }

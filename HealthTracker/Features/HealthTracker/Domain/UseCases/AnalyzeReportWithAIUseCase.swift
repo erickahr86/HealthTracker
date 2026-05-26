@@ -1,4 +1,5 @@
 import Foundation
+import OSLog
 
 // MARK: - Protocol
 
@@ -33,6 +34,20 @@ final class AnalyzeReportWithAIUseCaseImpl: AnalyzeReportWithAIUseCase {
 
         let preferences  = userPreferencesRepository.get()
         let systemPrompt = SystemPrompts.build(for: preferences)
+
+        #if DEBUG
+        let reportText = ReportFormatter.format(report, hydrationUnit: preferences.hydrationUnit)
+        Logger.ai.debug("""
+
+            ┌─ PROVIDER ──────────────────────────────────
+            │ \(currentProvider.displayName, privacy: .public)
+            ├─ SYSTEM PROMPT ─────────────────────────────
+            \(systemPrompt, privacy: .public)
+            ├─ REPORT TEXT ───────────────────────────────
+            \(reportText, privacy: .public)
+            └─────────────────────────────────────────────
+            """)
+        #endif
 
         let result = try await llmProvider.analyze(
             report:         report,

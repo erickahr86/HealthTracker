@@ -23,6 +23,8 @@ enum Strings {
         static func network(_ error: Swift.Error) -> String {
             String(format: L("error.network"), error.localizedDescription)
         }
+        static var geminiRateLimited: String { L("error.gemini.rate_limited") }
+
         static func keychainUnexpected(_ status: Int32) -> String {
             String(format: L("error.keychain.unexpected"), status)
         }
@@ -112,6 +114,9 @@ enum Strings {
         static var amountPlaceholder:    String { L("today.meal.amount.placeholder") }
         static var catalogLabel:         String { L("today.meal.catalog.label") }
         static var searchFoodPlaceholder:String { L("today.meal.search.placeholder") }
+
+        static var editExerciseTitle: String { L("today.edit.exercise.title") }
+        static var editMealTitle:     String { L("today.edit.meal.title") }
 
         static func mealPickerTitle(_ slotName: String) -> String {
             String(format: L("today.meal.picker.title"), slotName)
@@ -232,6 +237,85 @@ enum Strings {
         }
         static func done(_ n: Int) -> String {
             n == 0 ? L("onboarding.exercises.done_empty") : String(format: L("onboarding.exercises.done"), n)
+        }
+    }
+
+    // MARK: - Analysis card sections
+
+    enum Analysis {
+        static var metabolic:  String { L("analysis.section.metabolic") }
+        static var functional: String { L("analysis.section.functional") }
+        static var longevity:  String { L("analysis.section.longevity") }
+        static var mission:    String { L("analysis.section.mission") }
+    }
+
+    // MARK: - Tab bar labels
+
+    enum Tab {
+        static var today:    String { L("tab.today") }
+        static var history:  String { L("tab.history") }
+        static var catalog:  String { L("tab.catalog") }
+        static var settings: String { L("tab.settings") }
+    }
+
+    // MARK: - History screen
+
+    enum History {
+        static var title:        String { L("history.title") }
+        static var emptyTitle:   String { L("history.empty.title") }
+        static var emptySubtitle:String { L("history.empty.subtitle") }
+        static var restDay:      String { L("history.rest_day") }
+        static var noData:       String { L("history.no_data") }
+        static var noAnalysis:   String { L("history.no_analysis") }
+        static var noExercises:  String { L("history.no_exercises") }
+        static var deleteTitle:  String { L("history.delete.title") }
+        static var deleteConfirm:String { L("history.delete.confirm") }
+        static var deleteMessage:String { L("history.delete.message") }
+        static var cancel:       String { L("history.cancel") }
+
+        static func exercises(_ n: Int) -> String {
+            n == 1
+                ? L("history.one_exercise")
+                : String(format: L("history.exercises"), n)
+        }
+        static func meals(_ n: Int) -> String {
+            n == 1
+                ? L("history.one_meal")
+                : String(format: L("history.meals"), n)
+        }
+    }
+
+    // MARK: - Catalog screen
+
+    enum Catalog {
+        static var title:                   String { L("catalog.title") }
+        static var tabExercises:            String { L("catalog.tab.exercises") }
+        static var tabFoods:                String { L("catalog.tab.foods") }
+        static var addExercise:             String { L("catalog.add.exercise") }
+        static var addFood:                 String { L("catalog.add.food") }
+        static var nameLabel:               String { L("catalog.name.label") }
+        static var exerciseNamePlaceholder: String { L("catalog.exercise.name.placeholder") }
+        static var foodNamePlaceholder:     String { L("catalog.food.name.placeholder") }
+        static var weightLabel:             String { L("catalog.weight.label") }
+        static var muscleGroupLabel:        String { L("catalog.muscle.label") }
+        static var unitLabel:               String { L("catalog.unit.label") }
+        static var unitPlaceholder:         String { L("catalog.unit.placeholder") }
+        static var amountLabel:             String { L("catalog.amount.label") }
+        static var deleteTitle:             String { L("catalog.delete.title") }
+        static var deleteConfirm:           String { L("catalog.delete.confirm") }
+        static var deleteMessage:           String { L("catalog.delete.message") }
+        static var seededNote:              String { L("catalog.seeded.note") }
+        static var emptyExercises:          String { L("catalog.empty.exercises") }
+        static var emptyFoods:              String { L("catalog.empty.foods") }
+        static var customBadge:             String { L("catalog.custom.badge") }
+        static var cancel:                  String { L("catalog.cancel") }
+        static var save:                    String { L("catalog.save") }
+
+        static func exerciseDefaultWeight(_ weight: Double, _ unit: String) -> String {
+            String(format: L("catalog.exercise.default_weight"), weight, unit)
+        }
+        static func foodDefaultAmount(_ amount: Double, _ unit: String) -> String {
+            String(format: L("catalog.food.default_amount"), amount, unit)
         }
     }
 

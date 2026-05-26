@@ -2,13 +2,13 @@ import Foundation
 
 // MARK: - SystemPrompts
 // Builds the clinical-sports system prompt dynamically from the user's saved profile.
-// Falls back to a generic prompt when no profile data is available.
+// Section markers ([METABOLIC], [FUNCTIONAL], [LONGEVITY], [MISSION]) are fixed ASCII
+// tags — independent of response language — so AnalysisTextParser can parse them reliably.
 
 enum SystemPrompts {
 
     // MARK: - Public API
 
-    /// Builds the system prompt for the given user preferences in the device's current locale.
     static func build(for preferences: UserPreferences) -> String {
         let lang = Locale.current.language.languageCode?.identifier ?? "en"
         return lang == "es" ? buildSpanish(for: preferences) : buildEnglish(for: preferences)
@@ -30,25 +30,27 @@ enum SystemPrompts {
         \(objectiveBlockSpanish(prefs))
         \(conditionsBlockSpanish(prefs))
 
-        FORMATO DE RESPUESTA OBLIGATORIO:
+        FORMATO DE RESPUESTA OBLIGATORIO — usa estos marcadores exactos:
 
-        📊 ANÁLISIS METABÓLICO CLÍNICO
+        [METABOLIC]
         [Calorías estimadas, proteína total, fibra, carga glucémica, distribución de macros\
         \(prefs.chronicConditions.isEmpty ? "" : ", impacto en condiciones médicas indicadas")]
 
         Semáforo del día: [🟢 Verde / 🟡 Amarillo / 🔴 Rojo] — [razón breve]
 
-        🏋️ EVALUACIÓN FUNCIONAL
+        [FUNCTIONAL]
         [Análisis del entrenamiento, volumen, progresión]
 
-        🩺 LONGEVIDAD Y PREVENCIÓN
+        [LONGEVITY]
         [Observaciones relevantes según el perfil de salud del usuario]
 
-        🎯 MICRO-MISIÓN PARA MAÑANA
-        [Un ajuste concreto y accionable]
+        [MISSION]
+        [Un ajuste concreto y accionable para mañana]
 
-        REGLAS: Responde SIEMPRE en español. NO uses emojis de caritas, partes del cuerpo, \
-        ni cohetes. Para el semáforo usa SOLO los emojis 🟢 🟡 🔴.
+        REGLAS: Responde SIEMPRE en español. NO uses emojis de caritas, partes del cuerpo \
+        ni cohetes. Para el semáforo usa SOLO los emojis 🟢 🟡 🔴. \
+        Incluye los marcadores [METABOLIC] [FUNCTIONAL] [LONGEVITY] [MISSION] tal cual — \
+        no los traduzcas ni modifiques.
         """
     }
 
@@ -78,10 +80,7 @@ enum SystemPrompts {
             parts.append("Entrena \(days) día\(days == 1 ? "" : "s")/semana")
         }
 
-        if parts.isEmpty {
-            return "• Perfil no configurado"
-        }
-        return parts.map { "• \($0)" }.joined(separator: "\n")
+        return parts.isEmpty ? "• Perfil no configurado" : parts.map { "• \($0)" }.joined(separator: "\n")
     }
 
     private static func objectiveBlockSpanish(_ prefs: UserPreferences) -> String {
@@ -121,25 +120,27 @@ enum SystemPrompts {
         \(objectiveBlockEnglish(prefs))
         \(conditionsBlockEnglish(prefs))
 
-        MANDATORY RESPONSE FORMAT:
+        MANDATORY RESPONSE FORMAT — use these exact markers:
 
-        📊 CLINICAL METABOLIC ANALYSIS
+        [METABOLIC]
         [Estimated calories, total protein, fiber, glycemic load, macro distribution\
         \(prefs.chronicConditions.isEmpty ? "" : ", impact on indicated medical conditions")]
 
-        Day traffic light: [🟢 Green / 🟡 Yellow / 🔴 Red] — [brief reason]
+        Traffic light: [🟢 Green / 🟡 Yellow / 🔴 Red] — [brief reason]
 
-        🏋️ FUNCTIONAL ASSESSMENT
+        [FUNCTIONAL]
         [Training analysis, volume, progression]
 
-        🩺 LONGEVITY AND PREVENTION
+        [LONGEVITY]
         [Relevant observations based on the user's health profile]
 
-        🎯 TOMORROW'S MICRO-MISSION
-        [One concrete, actionable adjustment]
+        [MISSION]
+        [One concrete, actionable adjustment for tomorrow]
 
         RULES: Always respond in English. Do NOT use face, body part, or rocket emojis. \
-        For the traffic light use ONLY the emojis 🟢 🟡 🔴.
+        For the traffic light use ONLY the emojis 🟢 🟡 🔴. \
+        Include the markers [METABOLIC] [FUNCTIONAL] [LONGEVITY] [MISSION] exactly as written — \
+        do not translate or modify them.
         """
     }
 
@@ -169,10 +170,7 @@ enum SystemPrompts {
             parts.append("Trains \(days) day\(days == 1 ? "" : "s")/week")
         }
 
-        if parts.isEmpty {
-            return "• Profile not configured"
-        }
-        return parts.map { "• \($0)" }.joined(separator: "\n")
+        return parts.isEmpty ? "• Profile not configured" : parts.map { "• \($0)" }.joined(separator: "\n")
     }
 
     private static func objectiveBlockEnglish(_ prefs: UserPreferences) -> String {

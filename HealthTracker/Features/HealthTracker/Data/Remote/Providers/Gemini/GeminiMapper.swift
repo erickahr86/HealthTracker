@@ -1,12 +1,17 @@
 import Foundation
 
-// MARK: - AnthropicMapper
+// MARK: - GeminiMapper
 
-enum AnthropicMapper {
+enum GeminiMapper {
 
-    /// Converts an `AnthropicResponse` into a domain `AnalysisResult`.
-    static func toAnalysisResult(_ response: AnthropicResponse) -> AnalysisResult {
-        let rawText = response.content
+    /// Converts a `GeminiResponse` into a domain `AnalysisResult`.
+    /// Throws `GeminiError.noContent` when the response contains no candidates.
+    static func toAnalysisResult(_ response: GeminiResponse) throws -> AnalysisResult {
+        guard let candidate = response.candidates.first else {
+            throw GeminiError.noContent
+        }
+
+        let rawText = candidate.content.parts
             .compactMap(\.text)
             .joined(separator: "\n")
 
@@ -18,10 +23,10 @@ enum AnthropicMapper {
             longevitySection:  AnalysisTextParser.extractSection(from: rawText, startMarker: AnalysisTextParser.Marker.longevity),
             missionSection:    AnalysisTextParser.extractSection(from: rawText, startMarker: AnalysisTextParser.Marker.mission),
             tokenUsage: TokenUsage(
-                inputTokens:  response.usage.inputTokens,
-                outputTokens: response.usage.outputTokens
+                inputTokens:  response.usageMetadata?.promptTokenCount     ?? 0,
+                outputTokens: response.usageMetadata?.candidatesTokenCount ?? 0
             ),
-            model: .claudeSonnet
+            model: .geminiFlash
         )
     }
 }

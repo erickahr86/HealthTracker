@@ -39,25 +39,25 @@ struct AppCoordinatorView: View {
             // Tab 1: Today
             DailyReportView(container: container)
                 .tabItem {
-                    Label("Today", systemImage: "calendar")
+                    Label(Strings.Tab.today, systemImage: "calendar")
                 }
 
-            // Tab 2: History — placeholder
-            Text("History — coming soon")
+            // Tab 2: History
+            ReportHistoryView(container: container)
                 .tabItem {
-                    Label("History", systemImage: "clock")
+                    Label(Strings.Tab.history, systemImage: "clock")
                 }
 
-            // Tab 3: Catalogs — placeholder
-            Text("Catalogs — coming soon")
+            // Tab 3: Catalog
+            CatalogsView(container: container)
                 .tabItem {
-                    Label("Catalogs", systemImage: "list.bullet")
+                    Label(Strings.Tab.catalog, systemImage: "square.grid.2x2")
                 }
 
             // Tab 4: Settings
             SettingsView(container: container)
                 .tabItem {
-                    Label("Settings", systemImage: "gearshape")
+                    Label(Strings.Tab.settings, systemImage: "gearshape")
                 }
         }
         .tint(Color.htAccent)

@@ -85,6 +85,17 @@ final class DailyReportViewModel {
         scheduleAutoSave()
     }
 
+    func removeExerciseLog(_ log: ExerciseLog) {
+        report.exerciseLogs.removeAll { $0.id == log.id }
+        scheduleAutoSave()
+    }
+
+    func updateExerciseLog(_ updated: ExerciseLog) {
+        guard let index = report.exerciseLogs.firstIndex(where: { $0.id == updated.id }) else { return }
+        report.exerciseLogs[index] = updated
+        scheduleAutoSave()
+    }
+
     // MARK: - Meal mutations
 
     func addMealLog(_ log: MealLog) {
@@ -96,6 +107,17 @@ final class DailyReportViewModel {
         let slotIndices = report.mealLogs.indices.filter { report.mealLogs[$0].mealSlot == slot }
         let toRemove = IndexSet(offsets.map { slotIndices[$0] })
         report.mealLogs.remove(atOffsets: toRemove)
+        scheduleAutoSave()
+    }
+
+    func removeMealLog(_ log: MealLog) {
+        report.mealLogs.removeAll { $0.id == log.id }
+        scheduleAutoSave()
+    }
+
+    func updateMealLog(_ updated: MealLog) {
+        guard let index = report.mealLogs.firstIndex(where: { $0.id == updated.id }) else { return }
+        report.mealLogs[index] = updated
         scheduleAutoSave()
     }
 

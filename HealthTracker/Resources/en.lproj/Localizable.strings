@@ -4,6 +4,7 @@
 "error.api"                  = "API error (%d): %@";
 "error.decoding"             = "Error processing response: %@";
 "error.network"              = "Network error: %@";
+"error.gemini.rate_limited"  = "Gemini rate limit reached (429). Wait a minute and try again. The free tier allows 15 requests per minute.";
 
 // MARK: - Errors — Keychain
 "error.keychain.not_found"   = "API key not found. Please add it in Settings.";
@@ -74,6 +75,8 @@
 "today.confirm.label"   = "Add";
 
 // MARK: - Today screen — exercise picker
+"today.edit.exercise.title"           = "Edit Exercise";
+"today.edit.meal.title"               = "Edit";
 "today.exercise.empty"                = "No exercises in catalog";
 "today.exercise.empty.hint"           = "Go to Settings → Catalog to add exercises.";
 "today.exercise.picker.title"         = "Select Exercise";
@@ -299,6 +302,12 @@
 "food.other.olive_oil"      = "Olive Oil";
 "food.other.protein_powder" = "Protein Powder";
 
+// MARK: - Analysis card sections
+"analysis.section.metabolic"  = "Metabolic Analysis";
+"analysis.section.functional" = "Functional Assessment";
+"analysis.section.longevity"  = "Longevity & Prevention";
+"analysis.section.mission"    = "Tomorrow's Mission";
+
 // MARK: - Biological sex
 "biological.sex.male"   = "Male";
 "biological.sex.female" = "Female";
@@ -369,6 +378,55 @@
 "profile.goals.label"          = "Fitness Goals";
 "profile.training_days.label"  = "Training days / week";
 "profile.footer.goals"         = "Select your main objectives so the AI can focus its recommendations.";
+
+// MARK: - Tab bar labels
+"tab.today"    = "Today";
+"tab.history"  = "History";
+"tab.catalog"  = "Catalog";
+"tab.settings" = "Settings";
+
+// MARK: - History screen
+"history.title"           = "History";
+"history.empty.title"     = "No Reports Yet";
+"history.empty.subtitle"  = "Your daily reports will appear here once you start tracking.";
+"history.rest_day"        = "Rest day";
+"history.no_data"         = "No data";
+"history.one_exercise"    = "1 exercise";
+"history.exercises"       = "%d exercises";
+"history.one_meal"        = "1 meal";
+"history.meals"           = "%d meals";
+"history.no_analysis"     = "Not analyzed";
+"history.no_exercises"    = "No exercises logged";
+"history.delete.title"    = "Delete Report?";
+"history.delete.confirm"  = "Delete";
+"history.delete.message"  = "This report and all its data will be permanently deleted.";
+"history.cancel"          = "Cancel";
+
+// MARK: - Catalog screen
+"catalog.title"                    = "Catalog";
+"catalog.tab.exercises"            = "Exercises";
+"catalog.tab.foods"                = "Foods";
+"catalog.add.exercise"             = "Add Exercise";
+"catalog.add.food"                 = "Add Food";
+"catalog.name.label"               = "Name";
+"catalog.exercise.name.placeholder"= "e.g. Cable Fly";
+"catalog.food.name.placeholder"    = "e.g. Greek Yogurt";
+"catalog.weight.label"             = "Default weight";
+"catalog.muscle.label"             = "Muscle group";
+"catalog.unit.label"               = "Unit";
+"catalog.unit.placeholder"         = "e.g. g, ml, pcs";
+"catalog.amount.label"             = "Default amount";
+"catalog.exercise.default_weight"  = "Default: %g %@";
+"catalog.food.default_amount"      = "Default: %g %@";
+"catalog.delete.title"             = "Delete from Catalog?";
+"catalog.delete.confirm"           = "Delete";
+"catalog.delete.message"           = "This item will be removed from the catalog.";
+"catalog.seeded.note"              = "Default items cannot be deleted.";
+"catalog.empty.exercises"          = "No exercises yet";
+"catalog.empty.foods"              = "No foods yet";
+"catalog.custom.badge"             = "Custom";
+"catalog.cancel"                   = "Cancel";
+"catalog.save"                     = "Save";
 
 // MARK: - General
 "error.title"  = "Error";

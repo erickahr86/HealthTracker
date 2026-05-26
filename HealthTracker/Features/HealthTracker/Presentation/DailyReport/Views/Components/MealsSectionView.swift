@@ -8,6 +8,8 @@ struct MealsSectionView: View {
     @Bindable var vm: DailyReportViewModel
     let onAddInSlot: (MealSlot) -> Void
 
+    @State private var editingLog: MealLog?
+
     var body: some View {
         VStack(alignment: .leading, spacing: HTSpacing.sm) {
             SectionHeader(Strings.Today.mealsSection,
@@ -17,8 +19,9 @@ struct MealsSectionView: View {
                 MealSlotSection(
                     slot: slot,
                     logs: vm.mealLogs(for: slot),
-                    onAdd: { onAddInSlot(slot) },
-                    onDelete: { vm.removeMealLogs(in: slot, at: $0) }
+                    onAdd:    { onAddInSlot(slot) },
+                    onEdit:   { editingLog = $0 },
+                    onDelete: { vm.removeMealLog($0) }
                 )
                 if slot != MealSlot.allCases.last {
                     Divider().background(Color.htBorder)
@@ -26,6 +29,11 @@ struct MealsSectionView: View {
             }
         }
         .htCard()
+        .sheet(item: $editingLog) { log in
+            EditMealLogSheet(log: log) { updated in
+                vm.updateMealLog(updated)
+            }
+        }
     }
 }
 
@@ -33,10 +41,11 @@ struct MealsSectionView: View {
 
 private struct MealSlotSection: View {
 
-    let slot: MealSlot
-    let logs: [MealLog]
-    let onAdd: () -> Void
-    let onDelete: (IndexSet) -> Void
+    let slot:     MealSlot
+    let logs:     [MealLog]
+    let onAdd:    () -> Void
+    let onEdit:   (MealLog) -> Void
+    let onDelete: (MealLog) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: HTSpacing.xs) {
@@ -60,9 +69,12 @@ private struct MealSlotSection: View {
                     .padding(.leading, HTSpacing.xs)
             } else {
                 ForEach(logs) { log in
-                    MealLogRow(log: log)
+                    MealLogRow(
+                        log:      log,
+                        onEdit:   { onEdit(log) },
+                        onDelete: { onDelete(log) }
+                    )
                 }
-                .onDelete(perform: onDelete)
             }
         }
     }
@@ -72,7 +84,9 @@ private struct MealSlotSection: View {
 
 private struct MealLogRow: View {
 
-    let log: MealLog
+    let log:      MealLog
+    let onEdit:   () -> Void
+    let onDelete: () -> Void
 
     var body: some View {
         HStack(spacing: HTSpacing.sm) {
@@ -80,24 +94,41 @@ private struct MealLogRow: View {
                 .font(.system(size: 6))
                 .foregroundStyle(Color.htAccent)
 
-            if let food = log.food {
-                Text(food.name)
-                    .font(HTTypography.body)
-                Spacer()
-                if let amount = log.amount {
-                    let formatted = amount.truncatingRemainder(dividingBy: 1) == 0
-                        ? String(Int(amount))
-                        : String(format: "%.1f", amount)
-                    Text("\(formatted) \(food.unit)")
-                        .font(HTTypography.caption)
-                        .foregroundStyle(.secondary)
+            // Tappable area — opens edit sheet
+            Button(action: onEdit) {
+                HStack {
+                    if let food = log.food {
+                        Text(food.name)
+                            .font(HTTypography.body)
+                            .foregroundStyle(.primary)
+                        Spacer()
+                        if let amount = log.amount {
+                            let formatted = amount.truncatingRemainder(dividingBy: 1) == 0
+                                ? String(Int(amount))
+                                : String(format: "%.1f", amount)
+                            Text("\(formatted) \(food.unit)")
+                                .font(HTTypography.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    } else if let text = log.freeText {
+                        Text(text)
+                            .font(HTTypography.body)
+                            .foregroundStyle(.primary)
+                            .lineLimit(2)
+                        Spacer()
+                    }
                 }
-            } else if let text = log.freeText {
-                Text(text)
-                    .font(HTTypography.body)
-                    .foregroundStyle(.primary)
-                Spacer()
             }
+            .buttonStyle(.plain)
+
+            // Delete button
+            Button(action: onDelete) {
+                Image(systemName: "trash")
+                    .font(.system(size: 13))
+                    .foregroundStyle(Color.secondary.opacity(0.6))
+                    .padding(.leading, HTSpacing.xs)
+            }
+            .buttonStyle(.plain)
         }
     }
 }

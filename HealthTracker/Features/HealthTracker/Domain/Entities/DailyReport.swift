@@ -10,7 +10,7 @@ enum TrafficLight: String, Codable, Hashable {
 
 // MARK: - DailyReport
 
-struct DailyReport: Identifiable {
+struct DailyReport: Identifiable, Hashable {
     let id: UUID
     var date: Date
     var isRestDay: Bool
