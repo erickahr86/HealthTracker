@@ -91,5 +91,13 @@
 "today.meal.catalog.label"          = "Del catálogo";
 "today.meal.search.placeholder"     = "Buscar alimentos";
 
+// MARK: - Unidades de hidratación (selector de configuración)
+"hydration.unit.glass8oz"   = "Vaso estándar (8 fl oz)";
+"hydration.unit.glass16oz"  = "Botella mediana (16 fl oz)";
+"hydration.unit.glass40oz"  = "Botella grande (40 fl oz)";
+"hydration.unit.ml250"      = "Vaso estándar (250 ml)";
+"hydration.unit.ml500"      = "Botella mediana (500 ml)";
+"hydration.unit.liter"      = "Botella de 1 litro";
+
 // MARK: - General
 "error.title"  = "Error";

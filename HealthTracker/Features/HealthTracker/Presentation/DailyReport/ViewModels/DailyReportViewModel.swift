@@ -10,20 +10,22 @@ final class DailyReportViewModel {
 
     // MARK: - State
 
-    var report:       DailyReport = DailyReport()
-    var exercises:    [Exercise]  = []
-    var foods:        [Food]      = []
-    var isLoading     = false
-    var isAnalyzing   = false
-    var errorMessage: String?
+    var report:        DailyReport   = DailyReport()
+    var exercises:     [Exercise]    = []
+    var foods:         [Food]        = []
+    var hydrationUnit: HydrationUnit = .deviceDefault
+    var isLoading      = false
+    var isAnalyzing    = false
+    var errorMessage:  String?
 
     // MARK: - Private
 
-    private let getTodayReport:  any GetOrCreateTodayReportUseCase
-    private let saveReportUC:    any SaveDailyReportUseCase
-    private let analyzeReportUC: any AnalyzeReportWithAIUseCase
-    private let getExercisesUC:  any GetExercisesUseCase
-    private let getFoodsUC:      any GetFoodsUseCase
+    private let getTodayReport:   any GetOrCreateTodayReportUseCase
+    private let saveReportUC:     any SaveDailyReportUseCase
+    private let analyzeReportUC:  any AnalyzeReportWithAIUseCase
+    private let getExercisesUC:   any GetExercisesUseCase
+    private let getFoodsUC:       any GetFoodsUseCase
+    private let preferencesRepo:  any UserPreferencesRepository
 
     private var isDataLoaded  = false
     private var autoSaveTask: Task<Void, Never>?
@@ -36,6 +38,7 @@ final class DailyReportViewModel {
         analyzeReportUC = factory.makeAnalyzeReportWithAIUseCase()
         getExercisesUC  = factory.makeGetExercisesUseCase()
         getFoodsUC      = factory.makeGetFoodsUseCase()
+        preferencesRepo = factory.userPreferencesRepository
     }
 
     // MARK: - Load
@@ -48,10 +51,11 @@ final class DailyReportViewModel {
             async let r = getTodayReport.execute()
             async let e = getExercisesUC.execute(filter: nil)
             async let f = getFoodsUC.execute()
-            report    = try await r
-            exercises = try await e
-            foods     = try await f
-            isDataLoaded = true
+            report        = try await r
+            exercises     = try await e
+            foods         = try await f
+            hydrationUnit = preferencesRepo.getHydrationUnit()
+            isDataLoaded  = true
         } catch {
             errorMessage = error.localizedDescription
         }
@@ -140,5 +144,13 @@ final class DailyReportViewModel {
         report.mealLogs
             .last(where: { $0.food?.id == food.id })
             .flatMap(\.amount) ?? food.defaultAmount
+    }
+
+    // MARK: - User preferences
+
+    /// Updates the hydration unit preference and persists it immediately.
+    func updateHydrationUnit(_ unit: HydrationUnit) {
+        hydrationUnit = unit
+        preferencesRepo.setHydrationUnit(unit)
     }
 }

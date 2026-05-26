@@ -8,26 +8,31 @@ final class FeatureFactory {
 
     // MARK: - Dependencies
 
-    private let dailyReportRepository: any DailyReportRepository
-    private let exerciseRepository:    any ExerciseRepository
-    private let foodRepository:        any FoodRepository
-    private let aiProviderRepository:  any AIProviderRepository
-    private let providerFactory:       ProviderFactory
+    private let dailyReportRepository:    any DailyReportRepository
+    private let exerciseRepository:       any ExerciseRepository
+    private let foodRepository:           any FoodRepository
+    private let aiProviderRepository:     any AIProviderRepository
+    private let providerFactory:          ProviderFactory
+
+    /// Exposed so ViewModels can read and write user preferences directly.
+    let userPreferencesRepository: any UserPreferencesRepository
 
     // MARK: - Init
 
     init(
-        dailyReportRepository: any DailyReportRepository,
-        exerciseRepository:    any ExerciseRepository,
-        foodRepository:        any FoodRepository,
-        aiProviderRepository:  any AIProviderRepository,
-        providerFactory:       ProviderFactory
+        dailyReportRepository:    any DailyReportRepository,
+        exerciseRepository:       any ExerciseRepository,
+        foodRepository:           any FoodRepository,
+        aiProviderRepository:     any AIProviderRepository,
+        userPreferencesRepository: any UserPreferencesRepository,
+        providerFactory:          ProviderFactory
     ) {
-        self.dailyReportRepository = dailyReportRepository
-        self.exerciseRepository    = exerciseRepository
-        self.foodRepository        = foodRepository
-        self.aiProviderRepository  = aiProviderRepository
-        self.providerFactory       = providerFactory
+        self.dailyReportRepository    = dailyReportRepository
+        self.exerciseRepository       = exerciseRepository
+        self.foodRepository           = foodRepository
+        self.aiProviderRepository     = aiProviderRepository
+        self.userPreferencesRepository = userPreferencesRepository
+        self.providerFactory          = providerFactory
     }
 
     // MARK: - Use Cases

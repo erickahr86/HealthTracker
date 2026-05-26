@@ -91,5 +91,13 @@
 "today.meal.catalog.label"          = "From catalog";
 "today.meal.search.placeholder"     = "Search foods";
 
+// MARK: - Hydration units (Settings picker)
+"hydration.unit.glass8oz"   = "Standard glass (8 fl oz)";
+"hydration.unit.glass16oz"  = "Medium bottle (16 fl oz)";
+"hydration.unit.glass40oz"  = "Large bottle (40 fl oz)";
+"hydration.unit.ml250"      = "Standard glass (250 ml)";
+"hydration.unit.ml500"      = "Medium bottle (500 ml)";
+"hydration.unit.liter"      = "1-litre bottle";
+
 // MARK: - General
 "error.title"  = "Error";
