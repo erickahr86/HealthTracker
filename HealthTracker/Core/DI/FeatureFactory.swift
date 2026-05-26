@@ -76,4 +76,8 @@ final class FeatureFactory {
     func makeSeedExercisesUseCase() -> any SeedExercisesUseCase {
         SeedExercisesUseCaseImpl(exerciseRepository: exerciseRepository)
     }
+
+    func makeSeedFoodsUseCase() -> any SeedFoodsUseCase {
+        SeedFoodsUseCaseImpl(foodRepository: foodRepository)
+    }
 }

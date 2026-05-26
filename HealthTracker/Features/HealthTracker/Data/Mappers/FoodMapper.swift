@@ -6,21 +6,23 @@ enum FoodMapper {
 
     static func toDomain(_ model: FoodModel) -> Food {
         Food(
-            id: model.id,
-            name: model.name,
-            unit: model.unit,
+            id:            model.id,
+            name:          model.name,
+            unit:          model.unit,
             defaultAmount: model.defaultAmount,
-            isCustom: model.isCustom
+            category:      model.categoryRaw.flatMap { FoodCategory(rawValue: $0) },
+            isCustom:      model.isCustom
         )
     }
 
     static func toModel(_ entity: Food) -> FoodModel {
         FoodModel(
-            id: entity.id,
-            name: entity.name,
-            unit: entity.unit,
+            id:            entity.id,
+            name:          entity.name,
+            unit:          entity.unit,
             defaultAmount: entity.defaultAmount,
-            isCustom: entity.isCustom
+            categoryRaw:   entity.category?.rawValue,
+            isCustom:      entity.isCustom
         )
     }
 }

@@ -7,6 +7,7 @@ struct Food: Identifiable, Hashable {
     var name: String
     var unit: String
     var defaultAmount: Double
+    var category: FoodCategory?   // nil for user-added custom foods
     var isCustom: Bool
 
     init(
@@ -14,12 +15,14 @@ struct Food: Identifiable, Hashable {
         name: String,
         unit: String,
         defaultAmount: Double,
+        category: FoodCategory? = nil,
         isCustom: Bool = false
     ) {
         self.id = id
         self.name = name
         self.unit = unit
         self.defaultAmount = defaultAmount
+        self.category = category
         self.isCustom = isCustom
     }
 }

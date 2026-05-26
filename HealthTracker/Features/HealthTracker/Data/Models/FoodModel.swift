@@ -10,6 +10,7 @@ final class FoodModel {
     var name: String
     var unit: String
     var defaultAmount: Double
+    var categoryRaw: String?     // FoodCategory.rawValue; nil for custom foods
     var isCustom: Bool
 
     @Relationship(deleteRule: .nullify, inverse: \MealLogModel.food)
@@ -20,12 +21,14 @@ final class FoodModel {
         name: String,
         unit: String,
         defaultAmount: Double,
+        categoryRaw: String? = nil,
         isCustom: Bool = false
     ) {
         self.id = id
         self.name = name
         self.unit = unit
         self.defaultAmount = defaultAmount
+        self.categoryRaw = categoryRaw
         self.isCustom = isCustom
         self.logs = []
     }

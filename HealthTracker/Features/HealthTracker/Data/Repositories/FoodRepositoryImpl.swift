@@ -25,6 +25,7 @@ final class FoodRepositoryImpl: FoodRepository {
             existing.name          = food.name
             existing.unit          = food.unit
             existing.defaultAmount = food.defaultAmount
+            existing.categoryRaw   = food.category?.rawValue
             existing.isCustom      = food.isCustom
         } else {
             context.insert(FoodMapper.toModel(food))

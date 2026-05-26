@@ -75,7 +75,8 @@
 "today.confirm.label"   = "Agregar";
 
 // MARK: - Pantalla Hoy — selector de ejercicio
-"today.exercise.empty"                = "Sin ejercicios registrados";
+"today.exercise.empty"                = "Catálogo vacío";
+"today.exercise.empty.hint"           = "Ve a Configuración → Catálogo para agregar ejercicios.";
 "today.exercise.picker.title"         = "Seleccionar ejercicio";
 "today.exercise.search.placeholder"   = "Buscar ejercicios";
 "today.exercise.weight.label"         = "Peso";
@@ -233,6 +234,68 @@
 "exercise.ot.hiit"                  = "HIIT genérico";
 "exercise.ot.walking"               = "Caminata";
 "exercise.ot.yoga_flow"             = "Yoga flujo";
+
+// MARK: - Categorías de alimentos
+"food.category.protein"    = "Proteínas";
+"food.category.grains"     = "Cereales";
+"food.category.vegetables" = "Verduras";
+"food.category.fruits"     = "Frutas";
+"food.category.dairy"      = "Lácteos";
+"food.category.legumes"    = "Leguminosas";
+"food.category.other"      = "Otros";
+
+// MARK: - Nombres de alimentos — Proteínas
+"food.protein.chicken_breast" = "Pechuga de pollo";
+"food.protein.ground_beef"    = "Carne molida";
+"food.protein.egg"            = "Huevo";
+"food.protein.tuna"           = "Atún";
+"food.protein.salmon"         = "Salmón";
+"food.protein.beef_fillet"    = "Res (filete)";
+"food.protein.shrimp"         = "Camarón";
+"food.protein.pork"           = "Cerdo";
+
+// MARK: - Nombres de alimentos — Cereales
+"food.grains.white_rice"    = "Arroz blanco";
+"food.grains.corn_tortilla" = "Tortilla de maíz";
+"food.grains.whole_bread"   = "Pan integral";
+"food.grains.oats"          = "Avena";
+"food.grains.potato"        = "Papa";
+"food.grains.sweet_potato"  = "Camote";
+
+// MARK: - Nombres de alimentos — Verduras
+"food.vegetables.tomato"   = "Jitomate";
+"food.vegetables.lettuce"  = "Lechuga";
+"food.vegetables.cucumber" = "Pepino";
+"food.vegetables.carrot"   = "Zanahoria";
+"food.vegetables.broccoli" = "Brócoli";
+"food.vegetables.spinach"  = "Espinaca";
+"food.vegetables.nopal"    = "Nopal";
+
+// MARK: - Nombres de alimentos — Frutas
+"food.fruits.apple"        = "Manzana";
+"food.fruits.banana"       = "Plátano";
+"food.fruits.orange"       = "Naranja";
+"food.fruits.mango"        = "Mango";
+"food.fruits.watermelon"   = "Sandía";
+"food.fruits.strawberries" = "Fresas";
+
+// MARK: - Nombres de alimentos — Lácteos
+"food.dairy.milk"           = "Leche";
+"food.dairy.plain_yogurt"   = "Yogurt natural";
+"food.dairy.fresh_cheese"   = "Queso fresco";
+"food.dairy.cottage_cheese" = "Queso cottage";
+
+// MARK: - Nombres de alimentos — Leguminosas
+"food.legumes.black_beans" = "Frijol negro";
+"food.legumes.pinto_beans" = "Frijol pinto";
+"food.legumes.lentils"     = "Lenteja";
+
+// MARK: - Nombres de alimentos — Otros
+"food.other.avocado"        = "Aguacate";
+"food.other.almonds"        = "Almendras";
+"food.other.walnut"         = "Nuez";
+"food.other.olive_oil"      = "Aceite de oliva";
+"food.other.protein_powder" = "Proteína en polvo";
 
 // MARK: - General
 "error.title"  = "Error";

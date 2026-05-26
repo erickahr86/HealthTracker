@@ -2,16 +2,20 @@ import SwiftUI
 
 // MARK: - ExercisePickerSheet
 // Two-step sheet: pick exercise → adjust weight → confirm.
+//
+// Data flow:
+//   DailyReportViewModel.exercises  ← GetExercisesUseCase ← ExerciseRepository (SwiftData)
+//   Exercises are seeded during onboarding or added from Settings → Catalog.
 
 struct ExercisePickerSheet: View {
 
-    let exercises: [Exercise]
+    let exercises:       [Exercise]
     let suggestedWeight: (Exercise) -> (Double, WeightUnit)
-    let onConfirm: (ExerciseLog) -> Void
+    let onConfirm:       (ExerciseLog) -> Void
 
     @Environment(\.dismiss) private var dismiss
 
-    @State private var searchText    = ""
+    @State private var searchText  = ""
     @State private var selected:   Exercise?
     @State private var weightText  = ""
     @State private var weightUnit: WeightUnit = .kg
@@ -30,11 +34,7 @@ struct ExercisePickerSheet: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button(Strings.Today.cancelLabel) {
-                        if selected != nil {
-                            selected = nil
-                        } else {
-                            dismiss()
-                        }
+                        if selected != nil { selected = nil } else { dismiss() }
                     }
                 }
             }
@@ -44,30 +44,28 @@ struct ExercisePickerSheet: View {
 
     // MARK: - Exercise list
 
+    @ViewBuilder
     private var exerciseList: some View {
+        if exercises.isEmpty {
+            emptyCatalogState
+        } else {
+            populatedList
+                .overlay {
+                    if filtered.isEmpty {
+                        emptySearchState
+                    }
+                }
+        }
+    }
+
+    private var populatedList: some View {
         List {
             ForEach(MuscleGroup.allCases, id: \.self) { group in
                 let groupExercises = filtered.filter { $0.muscleGroup == group }
                 if !groupExercises.isEmpty {
                     Section(group.displayName) {
                         ForEach(groupExercises) { exercise in
-                            Button {
-                                let (weight, unit) = suggestedWeight(exercise)
-                                selected   = exercise
-                                weightUnit = unit
-                                weightText = weight.truncatingRemainder(dividingBy: 1) == 0
-                                    ? String(Int(weight))
-                                    : String(format: "%.1f", weight)
-                            } label: {
-                                HStack {
-                                    Text(exercise.name)
-                                        .foregroundStyle(.primary)
-                                    Spacer()
-                                    Image(systemName: "chevron.right")
-                                        .font(.caption)
-                                        .foregroundStyle(.secondary)
-                                }
-                            }
+                            exerciseRow(exercise)
                         }
                     }
                 }
@@ -79,9 +77,45 @@ struct ExercisePickerSheet: View {
         .scrollContentBackground(.hidden)
     }
 
+    private func exerciseRow(_ exercise: Exercise) -> some View {
+        Button {
+            let (weight, unit) = suggestedWeight(exercise)
+            selected   = exercise
+            weightUnit = unit
+            weightText = weight.truncatingRemainder(dividingBy: 1) == 0
+                ? String(Int(weight))
+                : String(format: "%.1f", weight)
+        } label: {
+            HStack {
+                Text(exercise.name)
+                    .foregroundStyle(.primary)
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
+    }
+
     private var filtered: [Exercise] {
         guard !searchText.isEmpty else { return exercises }
         return exercises.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+    }
+
+    // MARK: - Empty states
+
+    /// Shown when the catalog has no exercises at all (user skipped onboarding).
+    private var emptyCatalogState: some View {
+        ContentUnavailableView {
+            Label(Strings.Today.exerciseEmpty, systemImage: "dumbbell")
+        } description: {
+            Text(Strings.Today.exerciseEmptyHint)
+        }
+    }
+
+    /// Shown when the search query yields no matches.
+    private var emptySearchState: some View {
+        ContentUnavailableView.search(text: searchText)
     }
 
     // MARK: - Weight adjuster
@@ -100,8 +134,7 @@ struct ExercisePickerSheet: View {
             // Weight field + unit picker
             VStack(spacing: HTSpacing.sm) {
                 HStack(spacing: HTSpacing.sm) {
-                    TextField(Strings.Today.weightPlaceholder,
-                              text: $weightText)
+                    TextField(Strings.Today.weightPlaceholder, text: $weightText)
                         .keyboardType(.decimalPad)
                         .font(.system(size: 40, weight: .bold, design: .rounded))
                         .multilineTextAlignment(.center)
@@ -126,7 +159,7 @@ struct ExercisePickerSheet: View {
                 guard let exercise = selected,
                       let weight = Double(weightText) else { return }
                 let log = ExerciseLog(exercise: exercise,
-                                     weight: weight,
+                                     weight:   weight,
                                      weightUnit: weightUnit)
                 onConfirm(log)
                 dismiss()
@@ -139,7 +172,19 @@ struct ExercisePickerSheet: View {
 
 // MARK: - Preview
 
-#Preview {
+#Preview("With exercises") {
+    ExercisePickerSheet(
+        exercises: [
+            Exercise(name: "Bench Press",   defaultWeight: 60, muscleGroup: .superior),
+            Exercise(name: "Barbell Squat", defaultWeight: 80, muscleGroup: .inferior),
+            Exercise(name: "Treadmill",     defaultWeight:  0, muscleGroup: .fullBody),
+        ],
+        suggestedWeight: { ($0.defaultWeight, $0.weightUnit) },
+        onConfirm: { _ in }
+    )
+}
+
+#Preview("Empty catalog") {
     ExercisePickerSheet(
         exercises: [],
         suggestedWeight: { ($0.defaultWeight, $0.weightUnit) },

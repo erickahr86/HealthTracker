@@ -97,6 +97,7 @@ enum Strings {
 
         // Exercise picker
         static var exerciseEmpty:         String { L("today.exercise.empty") }
+        static var exerciseEmptyHint:     String { L("today.exercise.empty.hint") }
         static var exercisePickerTitle:   String { L("today.exercise.picker.title") }
         static var searchExercisePlaceholder: String { L("today.exercise.search.placeholder") }
         static var weightLabel:           String { L("today.exercise.weight.label") }

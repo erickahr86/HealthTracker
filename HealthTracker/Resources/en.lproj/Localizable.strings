@@ -74,7 +74,8 @@
 "today.confirm.label"   = "Add";
 
 // MARK: - Today screen — exercise picker
-"today.exercise.empty"                = "No exercises logged yet";
+"today.exercise.empty"                = "No exercises in catalog";
+"today.exercise.empty.hint"           = "Go to Settings → Catalog to add exercises.";
 "today.exercise.picker.title"         = "Select Exercise";
 "today.exercise.search.placeholder"   = "Search exercises";
 "today.exercise.weight.label"         = "Weight";
@@ -235,6 +236,68 @@
 "exercise.ot.hiit"                  = "Generic HIIT";
 "exercise.ot.walking"               = "Walking";
 "exercise.ot.yoga_flow"             = "Yoga Flow";
+
+// MARK: - Food categories
+"food.category.protein"    = "Proteins";
+"food.category.grains"     = "Grains";
+"food.category.vegetables" = "Vegetables";
+"food.category.fruits"     = "Fruits";
+"food.category.dairy"      = "Dairy";
+"food.category.legumes"    = "Legumes";
+"food.category.other"      = "Other";
+
+// MARK: - Food names — Proteins
+"food.protein.chicken_breast" = "Chicken Breast";
+"food.protein.ground_beef"    = "Ground Beef";
+"food.protein.egg"            = "Egg";
+"food.protein.tuna"           = "Tuna";
+"food.protein.salmon"         = "Salmon";
+"food.protein.beef_fillet"    = "Beef Fillet";
+"food.protein.shrimp"         = "Shrimp";
+"food.protein.pork"           = "Pork";
+
+// MARK: - Food names — Grains
+"food.grains.white_rice"    = "White Rice";
+"food.grains.corn_tortilla" = "Corn Tortilla";
+"food.grains.whole_bread"   = "Whole Grain Bread";
+"food.grains.oats"          = "Oats";
+"food.grains.potato"        = "Potato";
+"food.grains.sweet_potato"  = "Sweet Potato";
+
+// MARK: - Food names — Vegetables
+"food.vegetables.tomato"   = "Tomato";
+"food.vegetables.lettuce"  = "Lettuce";
+"food.vegetables.cucumber" = "Cucumber";
+"food.vegetables.carrot"   = "Carrot";
+"food.vegetables.broccoli" = "Broccoli";
+"food.vegetables.spinach"  = "Spinach";
+"food.vegetables.nopal"    = "Nopal (Cactus Pad)";
+
+// MARK: - Food names — Fruits
+"food.fruits.apple"        = "Apple";
+"food.fruits.banana"       = "Banana";
+"food.fruits.orange"       = "Orange";
+"food.fruits.mango"        = "Mango";
+"food.fruits.watermelon"   = "Watermelon";
+"food.fruits.strawberries" = "Strawberries";
+
+// MARK: - Food names — Dairy
+"food.dairy.milk"           = "Milk";
+"food.dairy.plain_yogurt"   = "Plain Yogurt";
+"food.dairy.fresh_cheese"   = "Fresh Cheese";
+"food.dairy.cottage_cheese" = "Cottage Cheese";
+
+// MARK: - Food names — Legumes
+"food.legumes.black_beans" = "Black Beans";
+"food.legumes.pinto_beans" = "Pinto Beans";
+"food.legumes.lentils"     = "Lentils";
+
+// MARK: - Food names — Other
+"food.other.avocado"        = "Avocado";
+"food.other.almonds"        = "Almonds";
+"food.other.walnut"         = "Walnuts";
+"food.other.olive_oil"      = "Olive Oil";
+"food.other.protein_powder" = "Protein Powder";
 
 // MARK: - General
 "error.title"  = "Error";
