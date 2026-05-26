@@ -4,9 +4,13 @@ import SwiftUI
 
 struct SettingsView: View {
 
-    @State private var vm: SettingsViewModel
+    let container: AppContainer
+
+    @State private var vm:                  SettingsViewModel
+    @State private var showExerciseCatalog = false
 
     init(container: AppContainer) {
+        self.container = container
         _vm = State(wrappedValue: SettingsViewModel(container: container))
     }
 
@@ -21,7 +25,10 @@ struct SettingsView: View {
                 // 2. Unit preferences
                 MeasurementsSectionView(vm: vm)
 
-                // 3. About
+                // 3. Catalog
+                catalogSection
+
+                // 4. About
                 aboutSection
             }
             .navigationTitle(Strings.Settings.title)
@@ -29,6 +36,30 @@ struct SettingsView: View {
             .background(Color.htBackground.ignoresSafeArea())
         }
         .onAppear { vm.loadData() }
+        .fullScreenCover(isPresented: $showExerciseCatalog) {
+            OnboardingView(
+                container:    container,
+                startingStep: .exerciseSelection,
+                onComplete:   { showExerciseCatalog = false }
+            )
+        }
+    }
+
+    // MARK: - Catalog section
+
+    private var catalogSection: some View {
+        Section {
+            Button {
+                showExerciseCatalog = true
+            } label: {
+                Label(Strings.Settings.exerciseCatalog, systemImage: "dumbbell")
+                    .foregroundStyle(Color.primary)
+            }
+        } header: {
+            Text(Strings.Settings.catalogSection)
+        } footer: {
+            Text(Strings.Settings.exerciseCatalogHint)
+        }
     }
 
     // MARK: - About section

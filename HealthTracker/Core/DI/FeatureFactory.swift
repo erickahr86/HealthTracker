@@ -72,4 +72,8 @@ final class FeatureFactory {
             reportRepository:     dailyReportRepository
         )
     }
+
+    func makeSeedExercisesUseCase() -> any SeedExercisesUseCase {
+        SeedExercisesUseCaseImpl(exerciseRepository: exerciseRepository)
+    }
 }

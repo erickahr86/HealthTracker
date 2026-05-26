@@ -9,9 +9,10 @@ final class UserPreferencesRepositoryImpl: UserPreferencesRepository {
     // MARK: - Private
 
     private let defaults: UserDefaults
-    private let storageKey = "ht.user_preferences"
-    private let encoder    = JSONEncoder()
-    private let decoder    = JSONDecoder()
+    private let storageKey      = "ht.user_preferences"
+    private let onboardingKey   = "ht.has_completed_onboarding"
+    private let encoder         = JSONEncoder()
+    private let decoder         = JSONDecoder()
 
     // MARK: - Init
 
@@ -46,5 +47,15 @@ final class UserPreferencesRepositoryImpl: UserPreferencesRepository {
         var prefs = get()
         prefs.hydrationUnit = unit
         save(prefs)
+    }
+
+    // MARK: - Onboarding
+
+    func hasCompletedOnboarding() -> Bool {
+        defaults.bool(forKey: onboardingKey)
+    }
+
+    func setHasCompletedOnboarding(_ value: Bool) {
+        defaults.set(value, forKey: onboardingKey)
     }
 }

@@ -153,8 +153,37 @@ enum Strings {
         static var versionLabel:        String { L("settings.version.label") }
         static var anthropicDocs:       String { L("settings.anthropic.docs") }
 
+        // Catalog
+        static var catalogSection:      String { L("settings.section.catalog") }
+        static var exerciseCatalog:     String { L("settings.exercise_catalog") }
+        static var exerciseCatalogHint: String { L("settings.exercise_catalog.hint") }
+
         // Shared
         static var errorTitle:          String { L("error.title") }
+    }
+
+    // MARK: - Onboarding
+
+    enum Onboarding {
+        // Welcome step
+        static var welcomeTitle:    String { L("onboarding.welcome.title") }
+        static var welcomeSubtitle: String { L("onboarding.welcome.subtitle") }
+        static var welcomeDetail:   String { L("onboarding.welcome.detail") }
+        static var welcomeCTA:      String { L("onboarding.welcome.cta") }
+
+        // Exercise selection step
+        static var exerciseTitle:   String { L("onboarding.exercises.title") }
+        static var exerciseSubtitle:String { L("onboarding.exercises.subtitle") }
+        static var selectAll:       String { L("onboarding.exercises.select_all") }
+        static var deselectAll:     String { L("onboarding.exercises.deselect_all") }
+        static var skip:            String { L("onboarding.exercises.skip") }
+
+        static func selectedCount(_ n: Int) -> String {
+            String(format: L("onboarding.exercises.selected_count"), n)
+        }
+        static func done(_ n: Int) -> String {
+            n == 0 ? L("onboarding.exercises.done_empty") : String(format: L("onboarding.exercises.done"), n)
+        }
     }
 
     // MARK: - Private helper

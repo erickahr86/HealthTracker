@@ -36,6 +36,7 @@
 // MARK: - Grupos musculares
 "muscle.group.superior"  = "Tren Superior";
 "muscle.group.inferior"  = "Tren Inferior";
+"muscle.group.fullBody"  = "Cardio / Cuerpo completo";
 
 // MARK: - Semáforo
 "trafficlight.green"   = "Verde";
@@ -118,9 +119,120 @@
 "settings.section.measurements"    = "Medidas";
 "settings.hydration.label"         = "Unidad de hidratación";
 "settings.measurements.footer"     = "Unidad utilizada para registrar la ingesta de agua diaria. Se detecta automáticamente según la región del dispositivo.";
+"settings.section.catalog"         = "Catálogo";
+"settings.exercise_catalog"        = "Catálogo de ejercicios";
+"settings.exercise_catalog.hint"   = "Agrega o cambia los ejercicios disponibles al registrar un entrenamiento.";
 "settings.section.about"           = "Acerca de";
 "settings.version.label"           = "Versión";
 "settings.anthropic.docs"          = "Documentación de Anthropic";
+
+// MARK: - Estilos de entrenamiento (tabs del onboarding)
+"training.style.gym"          = "Gym";
+"training.style.calisthenics" = "Calistenia";
+"training.style.pilates"      = "Pilates";
+"training.style.crossfit"     = "CrossFit";
+"training.style.others"       = "Otros";
+
+// MARK: - Onboarding — pantalla de bienvenida
+"onboarding.welcome.title"    = "HealthTracker";
+"onboarding.welcome.subtitle" = "Tu compañero personal de salud";
+"onboarding.welcome.detail"   = "Cuéntanos qué ejercicios practicas para personalizar tu catálogo. Podrás ajustarlo en cualquier momento.";
+"onboarding.welcome.cta"      = "Comenzar";
+
+// MARK: - Onboarding — selección de ejercicios
+"onboarding.exercises.title"          = "Tus ejercicios";
+"onboarding.exercises.subtitle"       = "Selecciona los ejercicios que practicas habitualmente";
+"onboarding.exercises.select_all"     = "Seleccionar todos";
+"onboarding.exercises.deselect_all"   = "Deseleccionar todos";
+"onboarding.exercises.skip"           = "Omitir";
+"onboarding.exercises.selected_count" = "%d seleccionados";
+"onboarding.exercises.done"           = "Listo (%d)";
+"onboarding.exercises.done_empty"     = "Listo";
+
+// MARK: - Nombres de ejercicios — Gym
+"exercise.gym.bench_press"    = "Press de banca plano";
+"exercise.gym.military_press" = "Press militar";
+"exercise.gym.barbell_row"    = "Remo con barra";
+"exercise.gym.lat_pulldown"   = "Jalón al pecho";
+"exercise.gym.parallel_dips"  = "Fondos en paralelas";
+"exercise.gym.barbell_squat"  = "Sentadilla con barra";
+"exercise.gym.deadlift"       = "Peso muerto";
+"exercise.gym.leg_press"      = "Prensa de pierna";
+"exercise.gym.leg_curl"       = "Curl femoral";
+"exercise.gym.leg_extension"  = "Extensión de cuádriceps";
+"exercise.gym.treadmill"      = "Cinta de correr";
+"exercise.gym.elliptical"     = "Elíptica";
+"exercise.gym.rowing_machine" = "Remo ergómetro";
+"exercise.gym.battle_ropes"   = "Battle ropes";
+"exercise.gym.stair_climber"  = "Escaladora";
+
+// MARK: - Nombres de ejercicios — Calistenia
+"exercise.cal.push_ups"          = "Flexiones";
+"exercise.cal.pull_ups"          = "Dominadas";
+"exercise.cal.bar_dips"          = "Dips en paralelas";
+"exercise.cal.pike_push_ups"     = "Pike push-ups";
+"exercise.cal.australian_row"    = "Remo australiano";
+"exercise.cal.bulgarian_squat"   = "Sentadilla búlgara";
+"exercise.cal.pistol_squat"      = "Pistol squat";
+"exercise.cal.lunges"            = "Zancadas";
+"exercise.cal.step_ups"          = "Step-ups";
+"exercise.cal.glute_bridge"      = "Puente de glúteos";
+"exercise.cal.burpees"           = "Burpees";
+"exercise.cal.mountain_climbers" = "Mountain climbers";
+"exercise.cal.jumping_jacks"     = "Jumping jacks";
+"exercise.cal.tuck_jumps"        = "Tuck jumps";
+"exercise.cal.bear_crawls"       = "Bear crawls";
+
+// MARK: - Nombres de ejercicios — Pilates
+"exercise.pil.front_plank"         = "Plank frontal";
+"exercise.pil.side_plank"          = "Side plank";
+"exercise.pil.roll_up"             = "Roll-up";
+"exercise.pil.teaser"              = "Teaser";
+"exercise.pil.swan_dive"           = "Swan dive";
+"exercise.pil.single_leg_stretch"  = "Single leg stretch";
+"exercise.pil.double_leg_stretch"  = "Double leg stretch";
+"exercise.pil.clamshell"           = "Clamshell";
+"exercise.pil.donkey_kicks"        = "Donkey kicks";
+"exercise.pil.bridge"              = "Bridge";
+"exercise.pil.hundred"             = "The Hundred";
+"exercise.pil.rolling_ball"        = "Rolling like a ball";
+"exercise.pil.criss_cross"         = "Criss-cross";
+"exercise.pil.swimming"            = "Swimming (pilates)";
+"exercise.pil.scissors"            = "Scissors";
+
+// MARK: - Nombres de ejercicios — CrossFit
+"exercise.cf.clean_and_press"   = "Clean and press";
+"exercise.cf.thruster"          = "Thruster";
+"exercise.cf.push_jerk"         = "Push jerk";
+"exercise.cf.snatch"            = "Snatch";
+"exercise.cf.handstand_pushups" = "Handstand push-ups";
+"exercise.cf.box_jump"          = "Box jump";
+"exercise.cf.kettlebell_swing"  = "Kettlebell swing";
+"exercise.cf.goblet_squat"      = "Goblet squat";
+"exercise.cf.wall_ball"         = "Wall ball";
+"exercise.cf.jump_squat"        = "Jump squat";
+"exercise.cf.double_unders"     = "Double unders";
+"exercise.cf.row"               = "Remo (CrossFit)";
+"exercise.cf.assault_bike"      = "Assault bike";
+"exercise.cf.deadball_carry"    = "Deadball carry";
+"exercise.cf.run_400m"          = "Run 400 m";
+
+// MARK: - Nombres de ejercicios — Otros
+"exercise.ot.trx_rows"              = "TRX rows";
+"exercise.ot.yoga_arms"             = "Yoga flow (brazos)";
+"exercise.ot.swimming_freestyle"    = "Natación (brazada)";
+"exercise.ot.shadow_boxing"         = "Boxeo (sombra)";
+"exercise.ot.resistance_band_press" = "Banda elástica press";
+"exercise.ot.cycling"               = "Ciclismo";
+"exercise.ot.hiking"                = "Senderismo";
+"exercise.ot.skating"               = "Patinaje";
+"exercise.ot.yoga_warrior"          = "Yoga guerrero";
+"exercise.ot.resistance_band_squat" = "Banda elástica sentadilla";
+"exercise.ot.dancing"               = "Baile";
+"exercise.ot.swimming_full"         = "Natación (completa)";
+"exercise.ot.hiit"                  = "HIIT genérico";
+"exercise.ot.walking"               = "Caminata";
+"exercise.ot.yoga_flow"             = "Yoga flujo";
 
 // MARK: - General
 "error.title"  = "Error";

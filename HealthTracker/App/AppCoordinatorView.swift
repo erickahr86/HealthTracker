@@ -1,13 +1,35 @@
 import SwiftUI
 
 // MARK: - AppCoordinatorView
-// Root tab bar. Each tab will be replaced with its real screen as development progresses.
+// Root coordinator. Shows OnboardingView on first launch;
+// switches to the main TabView once onboarding is complete.
 
 struct AppCoordinatorView: View {
 
     let container: AppContainer
 
+    @State private var showOnboarding = false
+
     var body: some View {
+        Group {
+            if showOnboarding {
+                OnboardingView(container: container) {
+                    withAnimation(.easeInOut(duration: 0.35)) {
+                        showOnboarding = false
+                    }
+                }
+            } else {
+                mainTabView
+            }
+        }
+        .onAppear {
+            showOnboarding = !container.userPreferencesRepository.hasCompletedOnboarding()
+        }
+    }
+
+    // MARK: - Main tab view
+
+    private var mainTabView: some View {
         TabView {
             // Tab 1: Today
             DailyReportView(container: container)

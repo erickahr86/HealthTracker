@@ -118,9 +118,123 @@
 "settings.section.measurements"    = "Measurements";
 "settings.hydration.label"         = "Hydration unit";
 "settings.measurements.footer"     = "Unit used to log daily water intake. Detected automatically from your device region.";
+"settings.section.catalog"         = "Catalog";
+"settings.exercise_catalog"        = "Exercise catalog";
+"settings.exercise_catalog.hint"   = "Add or change the exercises available when logging a workout.";
 "settings.section.about"           = "About";
 "settings.version.label"           = "Version";
 "settings.anthropic.docs"          = "Anthropic documentation";
+
+// MARK: - Muscle groups (extended)
+"muscle.group.fullBody"  = "Cardio / Full Body";
+
+// MARK: - Training styles (onboarding tabs)
+"training.style.gym"          = "Gym";
+"training.style.calisthenics" = "Calisthenics";
+"training.style.pilates"      = "Pilates";
+"training.style.crossfit"     = "CrossFit";
+"training.style.others"       = "Others";
+
+// MARK: - Onboarding — welcome step
+"onboarding.welcome.title"    = "HealthTracker";
+"onboarding.welcome.subtitle" = "Your personal health companion";
+"onboarding.welcome.detail"   = "Tell us which exercises you practice so we can personalise your catalog. You can adjust it anytime.";
+"onboarding.welcome.cta"      = "Get Started";
+
+// MARK: - Onboarding — exercise selection step
+"onboarding.exercises.title"          = "Your exercises";
+"onboarding.exercises.subtitle"       = "Select the exercises you usually do";
+"onboarding.exercises.select_all"     = "Select all";
+"onboarding.exercises.deselect_all"   = "Deselect all";
+"onboarding.exercises.skip"           = "Skip";
+"onboarding.exercises.selected_count" = "%d selected";
+"onboarding.exercises.done"           = "Done (%d)";
+"onboarding.exercises.done_empty"     = "Done";
+
+// MARK: - Exercise names — Gym
+"exercise.gym.bench_press"    = "Bench Press";
+"exercise.gym.military_press" = "Military Press";
+"exercise.gym.barbell_row"    = "Barbell Row";
+"exercise.gym.lat_pulldown"   = "Lat Pulldown";
+"exercise.gym.parallel_dips"  = "Parallel Bar Dips";
+"exercise.gym.barbell_squat"  = "Barbell Squat";
+"exercise.gym.deadlift"       = "Deadlift";
+"exercise.gym.leg_press"      = "Leg Press";
+"exercise.gym.leg_curl"       = "Leg Curl";
+"exercise.gym.leg_extension"  = "Leg Extension";
+"exercise.gym.treadmill"      = "Treadmill";
+"exercise.gym.elliptical"     = "Elliptical";
+"exercise.gym.rowing_machine" = "Rowing Machine";
+"exercise.gym.battle_ropes"   = "Battle Ropes";
+"exercise.gym.stair_climber"  = "Stair Climber";
+
+// MARK: - Exercise names — Calisthenics
+"exercise.cal.push_ups"          = "Push-ups";
+"exercise.cal.pull_ups"          = "Pull-ups";
+"exercise.cal.bar_dips"          = "Bar Dips";
+"exercise.cal.pike_push_ups"     = "Pike Push-ups";
+"exercise.cal.australian_row"    = "Australian Row";
+"exercise.cal.bulgarian_squat"   = "Bulgarian Squat";
+"exercise.cal.pistol_squat"      = "Pistol Squat";
+"exercise.cal.lunges"            = "Lunges";
+"exercise.cal.step_ups"          = "Step-ups";
+"exercise.cal.glute_bridge"      = "Glute Bridge";
+"exercise.cal.burpees"           = "Burpees";
+"exercise.cal.mountain_climbers" = "Mountain Climbers";
+"exercise.cal.jumping_jacks"     = "Jumping Jacks";
+"exercise.cal.tuck_jumps"        = "Tuck Jumps";
+"exercise.cal.bear_crawls"       = "Bear Crawls";
+
+// MARK: - Exercise names — Pilates
+"exercise.pil.front_plank"         = "Front Plank";
+"exercise.pil.side_plank"          = "Side Plank";
+"exercise.pil.roll_up"             = "Roll-up";
+"exercise.pil.teaser"              = "Teaser";
+"exercise.pil.swan_dive"           = "Swan Dive";
+"exercise.pil.single_leg_stretch"  = "Single Leg Stretch";
+"exercise.pil.double_leg_stretch"  = "Double Leg Stretch";
+"exercise.pil.clamshell"           = "Clamshell";
+"exercise.pil.donkey_kicks"        = "Donkey Kicks";
+"exercise.pil.bridge"              = "Bridge";
+"exercise.pil.hundred"             = "The Hundred";
+"exercise.pil.rolling_ball"        = "Rolling Like a Ball";
+"exercise.pil.criss_cross"         = "Criss-cross";
+"exercise.pil.swimming"            = "Swimming (Pilates)";
+"exercise.pil.scissors"            = "Scissors";
+
+// MARK: - Exercise names — CrossFit
+"exercise.cf.clean_and_press"   = "Clean and Press";
+"exercise.cf.thruster"          = "Thruster";
+"exercise.cf.push_jerk"         = "Push Jerk";
+"exercise.cf.snatch"            = "Snatch";
+"exercise.cf.handstand_pushups" = "Handstand Push-ups";
+"exercise.cf.box_jump"          = "Box Jump";
+"exercise.cf.kettlebell_swing"  = "Kettlebell Swing";
+"exercise.cf.goblet_squat"      = "Goblet Squat";
+"exercise.cf.wall_ball"         = "Wall Ball";
+"exercise.cf.jump_squat"        = "Jump Squat";
+"exercise.cf.double_unders"     = "Double Unders";
+"exercise.cf.row"               = "Rowing (CrossFit)";
+"exercise.cf.assault_bike"      = "Assault Bike";
+"exercise.cf.deadball_carry"    = "Deadball Carry";
+"exercise.cf.run_400m"          = "Run 400 m";
+
+// MARK: - Exercise names — Others
+"exercise.ot.trx_rows"              = "TRX Rows";
+"exercise.ot.yoga_arms"             = "Yoga Flow (Arms)";
+"exercise.ot.swimming_freestyle"    = "Swimming (Freestyle)";
+"exercise.ot.shadow_boxing"         = "Shadow Boxing";
+"exercise.ot.resistance_band_press" = "Resistance Band Press";
+"exercise.ot.cycling"               = "Cycling";
+"exercise.ot.hiking"                = "Hiking";
+"exercise.ot.skating"               = "Skating";
+"exercise.ot.yoga_warrior"          = "Yoga Warrior";
+"exercise.ot.resistance_band_squat" = "Resistance Band Squat";
+"exercise.ot.dancing"               = "Dancing";
+"exercise.ot.swimming_full"         = "Swimming";
+"exercise.ot.hiit"                  = "Generic HIIT";
+"exercise.ot.walking"               = "Walking";
+"exercise.ot.yoga_flow"             = "Yoga Flow";
 
 // MARK: - General
 "error.title"  = "Error";

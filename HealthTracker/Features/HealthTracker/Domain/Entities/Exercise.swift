@@ -5,6 +5,7 @@ import Foundation
 enum MuscleGroup: String, Codable, CaseIterable, Hashable {
     case superior
     case inferior
+    case fullBody   // Cardio and full-body exercises
 
     var displayName: String {
         NSLocalizedString("muscle.group.\(rawValue)", comment: "Muscle group display name")

@@ -16,4 +16,9 @@ protocol UserPreferencesRepository {
 
     func getHydrationUnit() -> HydrationUnit
     func setHydrationUnit(_ unit: HydrationUnit)
+
+    // MARK: - Onboarding
+
+    func hasCompletedOnboarding() -> Bool
+    func setHasCompletedOnboarding(_ value: Bool)
 }
