@@ -122,6 +122,41 @@ enum Strings {
         }
     }
 
+    // MARK: - Settings screen
+
+    enum Settings {
+        static var title:               String { L("settings.title") }
+
+        // AI section
+        static var aiSection:           String { L("settings.section.ai") }
+        static var providerLabel:       String { L("settings.provider.label") }
+        static var apiKeyLabel:         String { L("settings.api_key.label") }
+        static var apiKeyPlaceholder:   String { L("settings.api_key.placeholder") }
+        static var keyStored:           String { L("settings.api_key.stored") }
+        static var keyMissing:          String { L("settings.api_key.missing") }
+        static var saveKey:             String { L("settings.api_key.save") }
+        static var deleteKey:           String { L("settings.api_key.delete") }
+        static var keySavedFeedback:    String { L("settings.api_key.saved_feedback") }
+        static var getKeyHint:          String { L("settings.api_key.get_hint") }
+        static var deleteKeyTitle:      String { L("settings.delete_key.title") }
+        static var deleteKeyMessage:    String { L("settings.delete_key.message") }
+        static var deleteKeyConfirm:    String { L("settings.delete_key.confirm") }
+        static var cancelLabel:         String { L("settings.cancel") }
+
+        // Measurements section
+        static var measurementsSection: String { L("settings.section.measurements") }
+        static var hydrationUnitLabel:  String { L("settings.hydration.label") }
+        static var measurementsFooter:  String { L("settings.measurements.footer") }
+
+        // About section
+        static var aboutSection:        String { L("settings.section.about") }
+        static var versionLabel:        String { L("settings.version.label") }
+        static var anthropicDocs:       String { L("settings.anthropic.docs") }
+
+        // Shared
+        static var errorTitle:          String { L("error.title") }
+    }
+
     // MARK: - Private helper
 
     private static func L(_ key: String) -> String {

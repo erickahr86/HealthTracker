@@ -26,6 +26,12 @@ struct AppCoordinatorView: View {
                 .tabItem {
                     Label("Catalogs", systemImage: "list.bullet")
                 }
+
+            // Tab 4: Settings
+            SettingsView(container: container)
+                .tabItem {
+                    Label("Settings", systemImage: "gearshape")
+                }
         }
         .tint(Color.htAccent)
     }

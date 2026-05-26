@@ -148,6 +148,13 @@ final class DailyReportViewModel {
 
     // MARK: - User preferences
 
+    /// Re-reads all user preferences from storage.
+    /// Call on every view appearance to pick up changes made in Settings
+    /// without triggering a full report reload.
+    func refreshPreferences() {
+        hydrationUnit = preferencesRepo.getHydrationUnit()
+    }
+
     /// Updates the hydration unit preference and persists it immediately.
     func updateHydrationUnit(_ unit: HydrationUnit) {
         hydrationUnit = unit

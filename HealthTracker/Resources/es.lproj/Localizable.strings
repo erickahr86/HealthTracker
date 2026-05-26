@@ -99,5 +99,28 @@
 "hydration.unit.ml500"      = "Botella mediana (500 ml)";
 "hydration.unit.liter"      = "Botella de 1 litro";
 
+// MARK: - Pantalla de configuración
+"settings.title"                   = "Configuración";
+"settings.section.ai"              = "Proveedor IA";
+"settings.provider.label"          = "Proveedor";
+"settings.api_key.label"           = "API Key";
+"settings.api_key.placeholder"     = "sk-ant-api03-...";
+"settings.api_key.stored"          = "Guardada";
+"settings.api_key.missing"         = "Sin configurar";
+"settings.api_key.save"            = "Guardar key";
+"settings.api_key.delete"          = "Eliminar key";
+"settings.api_key.saved_feedback"  = "Key guardada exitosamente";
+"settings.api_key.get_hint"        = "Obtén tu key en console.anthropic.com";
+"settings.delete_key.title"        = "¿Eliminar API Key?";
+"settings.delete_key.message"      = "Necesitarás ingresarla nuevamente para usar el análisis IA.";
+"settings.delete_key.confirm"      = "Eliminar";
+"settings.cancel"                  = "Cancelar";
+"settings.section.measurements"    = "Medidas";
+"settings.hydration.label"         = "Unidad de hidratación";
+"settings.measurements.footer"     = "Unidad utilizada para registrar la ingesta de agua diaria. Se detecta automáticamente según la región del dispositivo.";
+"settings.section.about"           = "Acerca de";
+"settings.version.label"           = "Versión";
+"settings.anthropic.docs"          = "Documentación de Anthropic";
+
 // MARK: - General
 "error.title"  = "Error";
