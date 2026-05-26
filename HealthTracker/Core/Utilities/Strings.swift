@@ -159,8 +159,56 @@ enum Strings {
         static var exerciseCatalog:     String { L("settings.exercise_catalog") }
         static var exerciseCatalogHint: String { L("settings.exercise_catalog.hint") }
 
+        // Profile
+        static var profileSection:      String { L("settings.section.profile") }
+        static var profileLabel:        String { L("settings.profile.label") }
+        static var profileHint:         String { L("settings.profile.hint") }
+
         // Shared
         static var errorTitle:          String { L("error.title") }
+    }
+
+    // MARK: - User Profile screen
+
+    enum UserProfile {
+        static var title:                  String { L("profile.title") }
+        static var save:                   String { L("profile.save") }
+        static var saved:                  String { L("profile.saved") }
+        static var notSpecified:           String { L("profile.none") }
+        static var yearsOld:               String { L("profile.years_old") }
+
+        // Sections
+        static var personalSection:        String { L("profile.section.personal") }
+        static var bodySection:            String { L("profile.section.body") }
+        static var healthSection:          String { L("profile.section.health") }
+        static var goalsSection:           String { L("profile.section.goals") }
+
+        // Personal fields
+        static var nameLabel:              String { L("profile.name.label") }
+        static var namePlaceholder:        String { L("profile.name.placeholder") }
+        static var sexLabel:               String { L("profile.sex.label") }
+        static var birthYearLabel:         String { L("profile.birth_year.label") }
+        static var birthYearPlaceholder:   String { L("profile.birth_year.placeholder") }
+
+        // Body fields
+        static var heightLabel:            String { L("profile.height.label") }
+        static var heightPlaceholder:      String { L("profile.height.placeholder") }
+        static var weightLabel:            String { L("profile.weight.label") }
+        static var weightPlaceholder:      String { L("profile.weight.placeholder") }
+        static var bodyFatLabel:           String { L("profile.body_fat.label") }
+        static var bodyFatPlaceholder:     String { L("profile.body_fat.placeholder") }
+        static var weightUnitLabel:        String { L("profile.weight_unit.label") }
+
+        // Health fields
+        static var conditionsLabel:        String { L("profile.conditions.label") }
+        static var medicationsLabel:       String { L("profile.medications.label") }
+        static var medicationsPlaceholder: String { L("profile.medications.placeholder") }
+        static var healthFooter:           String { L("profile.footer.health") }
+
+        // Goals fields
+        static var goalsLabel:             String { L("profile.goals.label") }
+        static var trainingDaysLabel:      String { L("profile.training_days.label") }
+        static var goalsFooter:            String { L("profile.footer.goals") }
     }
 
     // MARK: - Onboarding

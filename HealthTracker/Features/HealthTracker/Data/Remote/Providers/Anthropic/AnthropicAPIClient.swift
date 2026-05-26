@@ -46,8 +46,8 @@ final class AnthropicAPIClient: LLMProvider {
 
     // MARK: - LLMProvider
 
-    func analyze(report: DailyReport, apiKey: String) async throws -> AnalysisResult {
-        let urlRequest = try buildURLRequest(for: report, apiKey: apiKey)
+    func analyze(report: DailyReport, apiKey: String, systemPrompt: String, hydrationUnit: HydrationUnit) async throws -> AnalysisResult {
+        let urlRequest = try buildURLRequest(for: report, apiKey: apiKey, systemPrompt: systemPrompt, hydrationUnit: hydrationUnit)
 
         let (data, response): (Data, URLResponse)
         do {
@@ -76,23 +76,23 @@ final class AnthropicAPIClient: LLMProvider {
 
     // MARK: - Private
 
-    private func buildURLRequest(for report: DailyReport, apiKey: String) throws -> URLRequest {
+    private func buildURLRequest(for report: DailyReport, apiKey: String, systemPrompt: String, hydrationUnit: HydrationUnit) throws -> URLRequest {
         guard let url = URL(string: API.endpoint) else { throw AnthropicError.invalidURL }
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.setValue(apiKey,          forHTTPHeaderField: "x-api-key")
-        request.setValue(API.version,     forHTTPHeaderField: "anthropic-version")
+        request.setValue(apiKey,             forHTTPHeaderField: "x-api-key")
+        request.setValue(API.version,        forHTTPHeaderField: "anthropic-version")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         let body = AnthropicRequest(
             model: model.id,
             maxTokens: API.maxTokens,
-            system: SystemPrompts.clinicalSports,
+            system: systemPrompt,
             messages: [
                 AnthropicMessage(
                     role: "user",
-                    content: buildContentBlocks(for: report)
+                    content: buildContentBlocks(for: report, hydrationUnit: hydrationUnit)
                 )
             ]
         )
@@ -102,7 +102,7 @@ final class AnthropicAPIClient: LLMProvider {
     }
 
     /// Builds content blocks: images first (meal photos), then the text report.
-    private func buildContentBlocks(for report: DailyReport) -> [AnthropicContentBlock] {
+    private func buildContentBlocks(for report: DailyReport, hydrationUnit: HydrationUnit) -> [AnthropicContentBlock] {
         var blocks: [AnthropicContentBlock] = []
 
         for log in report.mealLogs {
@@ -111,7 +111,7 @@ final class AnthropicAPIClient: LLMProvider {
             }
         }
 
-        blocks.append(.text(ReportFormatter.format(report)))
+        blocks.append(.text(ReportFormatter.format(report, hydrationUnit: hydrationUnit)))
         return blocks
     }
 }

@@ -67,9 +67,10 @@ final class FeatureFactory {
 
     func makeAnalyzeReportWithAIUseCase() -> any AnalyzeReportWithAIUseCase {
         AnalyzeReportWithAIUseCaseImpl(
-            llmProvider:          providerFactory.makeLLMProvider(),
-            aiProviderRepository: aiProviderRepository,
-            reportRepository:     dailyReportRepository
+            llmProvider:               providerFactory.makeLLMProvider(),
+            aiProviderRepository:      aiProviderRepository,
+            reportRepository:          dailyReportRepository,
+            userPreferencesRepository: userPreferencesRepository
         )
     }
 

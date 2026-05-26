@@ -297,5 +297,76 @@
 "food.other.olive_oil"      = "Aceite de oliva";
 "food.other.protein_powder" = "Proteína en polvo";
 
+// MARK: - Sexo biológico
+"biological.sex.male"   = "Hombre";
+"biological.sex.female" = "Mujer";
+
+// MARK: - Condiciones crónicas
+"condition.type2Diabetes"      = "Diabetes tipo 2";
+"condition.type1Diabetes"      = "Diabetes tipo 1";
+"condition.hypertension"       = "Hipertensión";
+"condition.highTriglycerides"  = "Triglicéridos altos";
+"condition.fattyLiver"         = "Hígado graso";
+"condition.renalDisease"       = "Enfermedad renal";
+"condition.hypothyroidism"     = "Hipotiroidismo";
+"condition.obesity"            = "Obesidad";
+"condition.insulinResistance"  = "Resistencia a la insulina";
+"condition.highCholesterol"    = "Colesterol alto";
+"condition.heartDisease"       = "Enfermedad cardíaca";
+"condition.asthma"             = "Asma";
+"condition.arthritis"          = "Artritis";
+
+// MARK: - Objetivos de salud
+"goal.weightLoss"           = "Bajar de peso";
+"goal.muscleGain"           = "Ganar masa muscular";
+"goal.improveCardio"        = "Mejorar cardio";
+"goal.longevity"            = "Longevidad";
+"goal.improveMobility"      = "Mejorar movilidad";
+"goal.improveStrength"      = "Mejorar fuerza";
+"goal.manageBloodSugar"     = "Control de glucosa";
+"goal.lowerBloodPressure"   = "Reducir presión arterial";
+"goal.generalHealth"        = "Salud general";
+"goal.athleticPerformance"  = "Rendimiento atlético";
+
+// MARK: - Ajustes — Perfil
+"settings.section.profile"  = "Perfil";
+"settings.profile.label"    = "Perfil de salud";
+"settings.profile.hint"     = "Edad, peso, objetivos y condiciones. Se usan para personalizar tu análisis de IA.";
+
+// MARK: - Pantalla de perfil de usuario
+"profile.title"              = "Mi perfil";
+"profile.save"               = "Guardar";
+"profile.saved"              = "Guardado";
+"profile.none"               = "No especificado";
+"profile.years_old"          = "años";
+
+"profile.section.personal"   = "Personal";
+"profile.section.body"       = "Cuerpo";
+"profile.section.health"     = "Salud";
+"profile.section.goals"      = "Objetivos";
+
+"profile.name.label"         = "Nombre";
+"profile.name.placeholder"   = "Opcional";
+"profile.sex.label"          = "Sexo biológico";
+"profile.birth_year.label"   = "Año de nacimiento";
+"profile.birth_year.placeholder" = "ej. 1985";
+
+"profile.height.label"       = "Altura";
+"profile.height.placeholder" = "ej. 175";
+"profile.weight.label"       = "Peso";
+"profile.weight.placeholder" = "ej. 80";
+"profile.body_fat.label"     = "% graso";
+"profile.body_fat.placeholder" = "ej. 25";
+"profile.weight_unit.label"  = "Unidad de peso preferida";
+
+"profile.conditions.label"       = "Condiciones crónicas";
+"profile.medications.label"      = "Medicamentos";
+"profile.medications.placeholder" = "ej. Metformina 500 mg";
+"profile.footer.health"          = "Esta información se envía a la IA para personalizar tu análisis. Se almacena únicamente en tu dispositivo.";
+
+"profile.goals.label"          = "Objetivos";
+"profile.training_days.label"  = "Días de entrenamiento / semana";
+"profile.footer.goals"         = "Selecciona tus principales objetivos para que la IA enfoque sus recomendaciones.";
+
 // MARK: - General
 "error.title"  = "Error";

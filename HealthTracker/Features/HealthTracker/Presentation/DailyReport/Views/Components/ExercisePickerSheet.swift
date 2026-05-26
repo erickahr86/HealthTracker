@@ -3,7 +3,7 @@ import SwiftUI
 // MARK: - ExercisePickerSheet
 // Two-step sheet: pick exercise → adjust weight → confirm.
 //
-// Data flow:
+// Data flo
 //   DailyReportViewModel.exercises  ← GetExercisesUseCase ← ExerciseRepository (SwiftData)
 //   Exercises are seeded during onboarding or added from Settings → Catalog.
 

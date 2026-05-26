@@ -299,5 +299,76 @@
 "food.other.olive_oil"      = "Olive Oil";
 "food.other.protein_powder" = "Protein Powder";
 
+// MARK: - Biological sex
+"biological.sex.male"   = "Male";
+"biological.sex.female" = "Female";
+
+// MARK: - Chronic conditions
+"condition.type2Diabetes"      = "Type 2 Diabetes";
+"condition.type1Diabetes"      = "Type 1 Diabetes";
+"condition.hypertension"       = "Hypertension";
+"condition.highTriglycerides"  = "High Triglycerides";
+"condition.fattyLiver"         = "Fatty Liver";
+"condition.renalDisease"       = "Renal Disease";
+"condition.hypothyroidism"     = "Hypothyroidism";
+"condition.obesity"            = "Obesity";
+"condition.insulinResistance"  = "Insulin Resistance";
+"condition.highCholesterol"    = "High Cholesterol";
+"condition.heartDisease"       = "Heart Disease";
+"condition.asthma"             = "Asthma";
+"condition.arthritis"          = "Arthritis";
+
+// MARK: - Fitness goals
+"goal.weightLoss"           = "Weight Loss";
+"goal.muscleGain"           = "Muscle Gain";
+"goal.improveCardio"        = "Cardiovascular Fitness";
+"goal.longevity"            = "Longevity";
+"goal.improveMobility"      = "Improve Mobility";
+"goal.improveStrength"      = "Improve Strength";
+"goal.manageBloodSugar"     = "Blood Sugar Control";
+"goal.lowerBloodPressure"   = "Lower Blood Pressure";
+"goal.generalHealth"        = "General Health";
+"goal.athleticPerformance"  = "Athletic Performance";
+
+// MARK: - Settings — Profile
+"settings.section.profile"  = "Profile";
+"settings.profile.label"    = "Health Profile";
+"settings.profile.hint"     = "Age, weight, goals and conditions used to personalise your AI analysis.";
+
+// MARK: - User Profile screen
+"profile.title"              = "My Profile";
+"profile.save"               = "Save";
+"profile.saved"              = "Saved";
+"profile.none"               = "Not specified";
+"profile.years_old"          = "yrs";
+
+"profile.section.personal"   = "Personal";
+"profile.section.body"       = "Body";
+"profile.section.health"     = "Health";
+"profile.section.goals"      = "Goals";
+
+"profile.name.label"         = "Name";
+"profile.name.placeholder"   = "Optional";
+"profile.sex.label"          = "Biological Sex";
+"profile.birth_year.label"   = "Birth Year";
+"profile.birth_year.placeholder" = "e.g. 1985";
+
+"profile.height.label"       = "Height";
+"profile.height.placeholder" = "e.g. 175";
+"profile.weight.label"       = "Weight";
+"profile.weight.placeholder" = "e.g. 80";
+"profile.body_fat.label"     = "Body Fat";
+"profile.body_fat.placeholder" = "e.g. 25";
+"profile.weight_unit.label"  = "Preferred weight unit";
+
+"profile.conditions.label"       = "Chronic Conditions";
+"profile.medications.label"      = "Medications";
+"profile.medications.placeholder" = "e.g. Metformin 500 mg";
+"profile.footer.health"          = "This information is sent to the AI to personalise your health analysis. It is stored only on your device.";
+
+"profile.goals.label"          = "Fitness Goals";
+"profile.training_days.label"  = "Training days / week";
+"profile.footer.goals"         = "Select your main objectives so the AI can focus its recommendations.";
+
 // MARK: - General
 "error.title"  = "Error";

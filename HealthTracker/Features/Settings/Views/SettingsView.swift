@@ -19,16 +19,19 @@ struct SettingsView: View {
 
         NavigationStack {
             Form {
-                // 1. AI Provider + API key
+                // 1. Health profile
+                profileSection
+
+                // 2. AI Provider + API key
                 APIKeySectionView(vm: vm)
 
-                // 2. Unit preferences
+                // 3. Unit preferences
                 MeasurementsSectionView(vm: vm)
 
-                // 3. Catalog
+                // 4. Catalog
                 catalogSection
 
-                // 4. About
+                // 5. About
                 aboutSection
             }
             .navigationTitle(Strings.Settings.title)
@@ -42,6 +45,23 @@ struct SettingsView: View {
                 startingStep: .exerciseSelection,
                 onComplete:   { showExerciseCatalog = false }
             )
+        }
+    }
+
+    // MARK: - Profile section
+
+    private var profileSection: some View {
+        Section {
+            NavigationLink {
+                UserProfileView(repository: container.featureFactory.userPreferencesRepository)
+            } label: {
+                Label(Strings.Settings.profileLabel, systemImage: "person.crop.circle")
+                    .foregroundStyle(Color.primary)
+            }
+        } header: {
+            Text(Strings.Settings.profileSection)
+        } footer: {
+            Text(Strings.Settings.profileHint)
         }
     }
 

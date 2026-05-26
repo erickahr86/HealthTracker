@@ -5,7 +5,7 @@ import Foundation
 /// Formats a domain `DailyReport` into the plain-text string sent to the AI.
 enum ReportFormatter {
 
-    static func format(_ report: DailyReport) -> String {
+    static func format(_ report: DailyReport, hydrationUnit: HydrationUnit) -> String {
         var lines: [String] = [Strings.Report.title, ""]
 
         // 1. Physical Activity
@@ -48,8 +48,9 @@ enum ReportFormatter {
         }
         lines.append("")
 
-        // 3. Hydration
-        lines.append(Strings.Report.hydration(report.waterGlasses))
+        // 3. Hydration — uses the actual unit from user preferences
+        let totalVol = hydrationUnit.formattedTotalVolume(count: report.waterGlasses)
+        lines.append("3. Hydration: \(report.waterGlasses) × \(hydrationUnit.shortLabel) (\(totalVol))")
         lines.append("")
 
         // 4. Feeling
