@@ -32,8 +32,9 @@ struct AnalysisCardView: View {
 
             Divider().background(Color.htBorder)
 
-            // Analysis text
-            Text(text)
+            // Analysis text — LocalizedStringKey init enables SwiftUI markdown rendering
+            // (**bold**, *italic*) while plain emoji section headers still display normally.
+            Text(.init(text))
                 .font(HTTypography.body)
                 .foregroundStyle(.primary)
                 .frame(maxWidth: .infinity, alignment: .leading)
