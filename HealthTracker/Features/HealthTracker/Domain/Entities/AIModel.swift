@@ -61,8 +61,8 @@ extension AIModel {
     )
 
     static let geminiFlash = AIModel(
-        id:          "gemini-2.0-flash",
+        id:          "gemini-3.1-flash-lite",
         provider:    .gemini,
-        displayName: "Gemini 2.0 Flash"
+        displayName: "Gemini 3.1 Flash Lite"
     )
 }
