@@ -14,10 +14,10 @@ final class ExerciseRepositoryImpl: ExerciseRepository {
     // MARK: - ExerciseRepository
 
     func getAll() async throws -> [Exercise] {
-        let descriptor = FetchDescriptor<ExerciseModel>(
-            sortBy: [SortDescriptor(\.name)]
-        )
-        return try context.fetch(descriptor).map { ExerciseMapper.toDomain($0) }
+        let descriptor = FetchDescriptor<ExerciseModel>(sortBy: [SortDescriptor(\.name)])
+        let all = try context.fetch(descriptor).map { ExerciseMapper.toDomain($0) }
+        var seen = Set<String>()
+        return all.filter { seen.insert($0.name.lowercased()).inserted }
     }
 
     func getBy(muscleGroup: MuscleGroup) async throws -> [Exercise] {
@@ -60,6 +60,26 @@ final class ExerciseRepositoryImpl: ExerciseRepository {
             .sorted { ($0.report?.date ?? .distantPast) > ($1.report?.date ?? .distantPast) }
             .first?
             .weight
+    }
+
+    func deduplicateByName() async throws {
+        let all = try context.fetch(FetchDescriptor<ExerciseModel>())
+        var canonical: [String: ExerciseModel] = [:]
+        for m in all {
+            let key = m.name.lowercased()
+            if canonical[key] == nil { canonical[key] = m }
+        }
+        let allLogs = try context.fetch(FetchDescriptor<ExerciseLogModel>())
+        for log in allLogs {
+            guard let ex = log.exercise else { continue }
+            let key = ex.name.lowercased()
+            if let c = canonical[key], c.id != ex.id { log.exercise = c }
+        }
+        for m in all {
+            let key = m.name.lowercased()
+            if let c = canonical[key], c.id != m.id { context.delete(m) }
+        }
+        try context.save()
     }
 
     // MARK: - Private

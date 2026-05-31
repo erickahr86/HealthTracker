@@ -21,8 +21,8 @@ struct FoodCatalogView: View {
             }
         }
         .sheet(isPresented: $showAddSheet) {
-            AddFoodSheet { name, unit, amount in
-                await vm.addFood(name: name, unit: unit, defaultAmount: amount)
+            AddFoodSheet { name, unit, amount, category in
+                await vm.addFood(name: name, unit: unit, defaultAmount: amount, category: category)
             }
         }
         .confirmationDialog(
@@ -108,33 +108,17 @@ struct FoodCatalogView: View {
 
             Spacer()
 
-            if food.isCustom {
-                customBadge
-
-                Button {
-                    foodToDelete = food
-                } label: {
-                    Image(systemName: "trash")
-                        .font(.system(size: HTDimensions.Icon.sm))
-                        .foregroundStyle(Color.htTrafficRed)
-                }
-                .buttonStyle(.plain)
-                .padding(.leading, HTSpacing.xs)
+            Button {
+                foodToDelete = food
+            } label: {
+                Image(systemName: "trash")
+                    .font(.system(size: HTDimensions.Icon.sm))
+                    .foregroundStyle(Color.htTrafficRed)
             }
+            .buttonStyle(.plain)
         }
     }
 
-    // MARK: - Shared badge
-
-    private var customBadge: some View {
-        Text(Strings.Catalog.customBadge)
-            .font(HTTypography.caption2)
-            .foregroundStyle(Color.htAccent)
-            .padding(.horizontal, HTSpacing.xs)
-            .padding(.vertical, HTSpacing.xxs)
-            .background(Color.htAccent.opacity(0.15))
-            .clipShape(Capsule())
-    }
 }
 
 // MARK: - Preview

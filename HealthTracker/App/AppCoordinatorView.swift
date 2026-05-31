@@ -26,9 +26,8 @@ struct AppCoordinatorView: View {
             showOnboarding = !container.userPreferencesRepository.hasCompletedOnboarding()
         }
         .task {
-            // Seed default food catalog silently on every launch;
-            // SeedFoodsUseCase is a no-op after the first run.
             try? await container.featureFactory.makeSeedFoodsUseCase().execute()
+            try? await container.featureFactory.makeDeduplicateCatalogsUseCase().execute()
         }
     }
 

@@ -8,4 +8,5 @@ protocol ExerciseRepository {
     func save(_ exercise: Exercise) async throws
     func delete(_ exercise: Exercise) async throws
     func getLastWeight(for exercise: Exercise) async throws -> Double?
+    func deduplicateByName() async throws
 }

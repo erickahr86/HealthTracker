@@ -413,6 +413,7 @@
 "catalog.food.name.placeholder"    = "e.g. Greek Yogurt";
 "catalog.weight.label"             = "Default weight";
 "catalog.muscle.label"             = "Muscle group";
+"catalog.category.label"           = "Category";
 "catalog.unit.label"               = "Unit";
 "catalog.unit.placeholder"         = "e.g. g, ml, pcs";
 "catalog.amount.label"             = "Default amount";

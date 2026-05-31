@@ -79,6 +79,16 @@ final class FeatureFactory {
     }
 
     func makeSeedFoodsUseCase() -> any SeedFoodsUseCase {
-        SeedFoodsUseCaseImpl(foodRepository: foodRepository)
+        SeedFoodsUseCaseImpl(
+            foodRepository:            foodRepository,
+            userPreferencesRepository: userPreferencesRepository
+        )
+    }
+
+    func makeDeduplicateCatalogsUseCase() -> any DeduplicateCatalogsUseCase {
+        DeduplicateCatalogsUseCaseImpl(
+            exerciseRepository: exerciseRepository,
+            foodRepository:     foodRepository
+        )
     }
 }

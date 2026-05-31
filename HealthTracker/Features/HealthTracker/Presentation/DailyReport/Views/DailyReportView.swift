@@ -43,7 +43,10 @@ struct DailyReportView: View {
             }
         }
         .task { await vm.loadData() }
-        .onAppear { vm.refreshPreferences() }
+        .onAppear {
+            vm.refreshPreferences()
+            Task { await vm.reloadCatalogs() }
+        }
         .alert(
             Strings.Today.errorTitle,
             isPresented: Binding(

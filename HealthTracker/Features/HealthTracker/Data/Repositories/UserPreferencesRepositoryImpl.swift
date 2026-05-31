@@ -11,6 +11,7 @@ final class UserPreferencesRepositoryImpl: UserPreferencesRepository {
     private let defaults: UserDefaults
     private let storageKey      = "ht.user_preferences"
     private let onboardingKey   = "ht.has_completed_onboarding"
+    private let seedFoodsKey    = "ht.has_seeded_foods"
     private let encoder         = JSONEncoder()
     private let decoder         = JSONDecoder()
 
@@ -57,5 +58,15 @@ final class UserPreferencesRepositoryImpl: UserPreferencesRepository {
 
     func setHasCompletedOnboarding(_ value: Bool) {
         defaults.set(value, forKey: onboardingKey)
+    }
+
+    // MARK: - Seed flags
+
+    func hasSeedInitialFoods() -> Bool {
+        defaults.bool(forKey: seedFoodsKey)
+    }
+
+    func setHasSeedInitialFoods(_ value: Bool) {
+        defaults.set(value, forKey: seedFoodsKey)
     }
 }

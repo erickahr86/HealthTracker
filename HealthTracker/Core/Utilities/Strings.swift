@@ -298,6 +298,7 @@ enum Strings {
         static var foodNamePlaceholder:     String { L("catalog.food.name.placeholder") }
         static var weightLabel:             String { L("catalog.weight.label") }
         static var muscleGroupLabel:        String { L("catalog.muscle.label") }
+        static var categoryLabel:           String { L("catalog.category.label") }
         static var unitLabel:               String { L("catalog.unit.label") }
         static var unitPlaceholder:         String { L("catalog.unit.placeholder") }
         static var amountLabel:             String { L("catalog.amount.label") }

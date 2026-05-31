@@ -3,7 +3,7 @@ import Foundation
 // MARK: - Protocol
 
 protocol AddCustomFoodUseCase {
-    func execute(name: String, unit: String, defaultAmount: Double) async throws -> Food
+    func execute(name: String, unit: String, defaultAmount: Double, category: FoodCategory?) async throws -> Food
 }
 
 // MARK: - Implementation
@@ -16,11 +16,12 @@ final class AddCustomFoodUseCaseImpl: AddCustomFoodUseCase {
         self.foodRepository = foodRepository
     }
 
-    func execute(name: String, unit: String, defaultAmount: Double) async throws -> Food {
+    func execute(name: String, unit: String, defaultAmount: Double, category: FoodCategory?) async throws -> Food {
         let food = Food(
             name: name,
             unit: unit,
             defaultAmount: defaultAmount,
+            category: category,
             isCustom: true
         )
         try await foodRepository.save(food)

@@ -411,6 +411,7 @@
 "catalog.food.name.placeholder"    = "ej. Yogurt griego";
 "catalog.weight.label"             = "Peso por defecto";
 "catalog.muscle.label"             = "Grupo muscular";
+"catalog.category.label"           = "Categoría";
 "catalog.unit.label"               = "Unidad";
 "catalog.unit.placeholder"         = "ej. g, ml, pzas";
 "catalog.amount.label"             = "Cantidad por defecto";

@@ -90,11 +90,40 @@ final class DailyReportRepositoryImpl: DailyReportRepository {
         model.analysisDate   = entity.analysisDate
         model.trafficLightRaw = entity.trafficLight?.rawValue
 
-        // Replace logs: delete existing, insert updated
+        // Replace logs: delete existing, insert updated.
+        // Important: fetch existing Food/Exercise models by UUID instead of creating new
+        // instances via the mapper — creating new @Model instances causes SwiftData to
+        // implicitly insert them as duplicates in the catalog.
         model.exerciseLogs.forEach { context.delete($0) }
-        model.exerciseLogs = entity.exerciseLogs.map { ExerciseLogMapper.toModel($0) }
+        model.exerciseLogs = entity.exerciseLogs.map { log in
+            ExerciseLogModel(
+                id: log.id,
+                weight: log.weight,
+                weightUnitRaw: log.weightUnit.rawValue,
+                exercise: fetchExerciseModel(id: log.exercise.id)
+            )
+        }
 
         model.mealLogs.forEach { context.delete($0) }
-        model.mealLogs = entity.mealLogs.map { MealLogMapper.toModel($0) }
+        model.mealLogs = entity.mealLogs.map { log in
+            MealLogModel(
+                id: log.id,
+                mealSlotRaw: log.mealSlot.rawValue,
+                amount: log.amount,
+                freeText: log.freeText,
+                photoData: log.photoData,
+                food: log.food.flatMap { fetchFoodModel(id: $0.id) }
+            )
+        }
+    }
+
+    private func fetchFoodModel(id: UUID) -> FoodModel? {
+        let descriptor = FetchDescriptor<FoodModel>(predicate: #Predicate { $0.id == id })
+        return try? context.fetch(descriptor).first
+    }
+
+    private func fetchExerciseModel(id: UUID) -> ExerciseModel? {
+        let descriptor = FetchDescriptor<ExerciseModel>(predicate: #Predicate { $0.id == id })
+        return try? context.fetch(descriptor).first
     }
 }

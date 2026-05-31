@@ -21,4 +21,9 @@ protocol UserPreferencesRepository {
 
     func hasCompletedOnboarding() -> Bool
     func setHasCompletedOnboarding(_ value: Bool)
+
+    // MARK: - Seed flags
+
+    func hasSeedInitialFoods() -> Bool
+    func setHasSeedInitialFoods(_ value: Bool)
 }

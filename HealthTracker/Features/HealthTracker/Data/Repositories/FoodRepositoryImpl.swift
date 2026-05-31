@@ -14,10 +14,10 @@ final class FoodRepositoryImpl: FoodRepository {
     // MARK: - FoodRepository
 
     func getAll() async throws -> [Food] {
-        let descriptor = FetchDescriptor<FoodModel>(
-            sortBy: [SortDescriptor(\.name)]
-        )
-        return try context.fetch(descriptor).map { FoodMapper.toDomain($0) }
+        let descriptor = FetchDescriptor<FoodModel>(sortBy: [SortDescriptor(\.name)])
+        let all = try context.fetch(descriptor).map { FoodMapper.toDomain($0) }
+        var seen = Set<String>()
+        return all.filter { seen.insert($0.name.lowercased()).inserted }
     }
 
     func save(_ food: Food) async throws {
@@ -52,6 +52,26 @@ final class FoodRepositoryImpl: FoodRepository {
             .sorted { ($0.report?.date ?? .distantPast) > ($1.report?.date ?? .distantPast) }
             .first?
             .amount
+    }
+
+    func deduplicateByName() async throws {
+        let all = try context.fetch(FetchDescriptor<FoodModel>())
+        var canonical: [String: FoodModel] = [:]
+        for m in all {
+            let key = m.name.lowercased()
+            if canonical[key] == nil { canonical[key] = m }
+        }
+        let allLogs = try context.fetch(FetchDescriptor<MealLogModel>())
+        for log in allLogs {
+            guard let food = log.food else { continue }
+            let key = food.name.lowercased()
+            if let c = canonical[key], c.id != food.id { log.food = c }
+        }
+        for m in all {
+            let key = m.name.lowercased()
+            if let c = canonical[key], c.id != m.id { context.delete(m) }
+        }
+        try context.save()
     }
 
     // MARK: - Private

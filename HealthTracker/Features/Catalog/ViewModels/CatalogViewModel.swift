@@ -80,6 +80,8 @@ final class CatalogViewModel {
     func loadAll() async {
         isLoading = true
         defer { isLoading = false }
+        try? await exerciseRepository.deduplicateByName()
+        try? await foodRepository.deduplicateByName()
         await loadExercises()
         await loadFoods()
     }
@@ -122,7 +124,6 @@ final class CatalogViewModel {
     }
 
     func deleteExercise(_ exercise: Exercise) async {
-        guard exercise.isCustom else { return }
         do {
             try await exerciseRepository.delete(exercise)
             exercises.removeAll { $0.id == exercise.id }
@@ -133,12 +134,13 @@ final class CatalogViewModel {
 
     // MARK: - Food actions
 
-    func addFood(name: String, unit: String, defaultAmount: Double) async {
+    func addFood(name: String, unit: String, defaultAmount: Double, category: FoodCategory) async {
         do {
             let food = try await addCustomFoodUseCase.execute(
                 name:          name,
                 unit:          unit,
-                defaultAmount: defaultAmount
+                defaultAmount: defaultAmount,
+                category:      category
             )
             foods.append(food)
         } catch {
@@ -147,7 +149,6 @@ final class CatalogViewModel {
     }
 
     func deleteFood(_ food: Food) async {
-        guard food.isCustom else { return }
         do {
             try await foodRepository.delete(food)
             foods.removeAll { $0.id == food.id }

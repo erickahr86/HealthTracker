@@ -7,11 +7,12 @@ struct AddFoodSheet: View {
 
     @Environment(\.dismiss) private var dismiss
 
-    let onSave: (String, String, Double) async -> Void
+    let onSave: (String, String, Double, FoodCategory) async -> Void
 
     @State private var name        = ""
     @State private var unit        = ""
     @State private var amountText  = ""
+    @State private var category    = FoodCategory.other
     @State private var isSaving    = false
 
     private var isValid: Bool {
@@ -38,6 +39,18 @@ struct AddFoodSheet: View {
                         .textInputAutocapitalization(.never)
                 } header: {
                     Text(Strings.Catalog.unitLabel)
+                }
+
+                // Category
+                Section {
+                    Picker(Strings.Catalog.categoryLabel, selection: $category) {
+                        ForEach(FoodCategory.allCases, id: \.self) { cat in
+                            Text(cat.displayName).tag(cat)
+                        }
+                    }
+                    .pickerStyle(.menu)
+                } header: {
+                    Text(Strings.Catalog.categoryLabel)
                 }
 
                 // Default amount
@@ -67,7 +80,8 @@ struct AddFoodSheet: View {
                             await onSave(
                                 name.trimmingCharacters(in: .whitespaces),
                                 unit.trimmingCharacters(in: .whitespaces),
-                                amount
+                                amount,
+                                category
                             )
                             dismiss()
                         }
@@ -84,5 +98,5 @@ struct AddFoodSheet: View {
 // MARK: - Preview
 
 #Preview {
-    AddFoodSheet { _, _, _ in }
+    AddFoodSheet { _, _, _, _ in }
 }

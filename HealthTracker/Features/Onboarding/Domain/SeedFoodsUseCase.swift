@@ -12,18 +12,23 @@ protocol SeedFoodsUseCase {
 
 final class SeedFoodsUseCaseImpl: SeedFoodsUseCase {
 
-    private let foodRepository: any FoodRepository
+    private let foodRepository:           any FoodRepository
+    private let userPreferencesRepository: any UserPreferencesRepository
 
-    init(foodRepository: any FoodRepository) {
-        self.foodRepository = foodRepository
+    init(
+        foodRepository:           any FoodRepository,
+        userPreferencesRepository: any UserPreferencesRepository
+    ) {
+        self.foodRepository            = foodRepository
+        self.userPreferencesRepository = userPreferencesRepository
     }
 
     func execute() async throws {
-        let existing = try await foodRepository.getAll()
-        guard existing.isEmpty else { return }
+        guard !userPreferencesRepository.hasSeedInitialFoods() else { return }
 
         for entry in DefaultFoodCatalog.all {
             try await foodRepository.save(entry.toFood())
         }
+        userPreferencesRepository.setHasSeedInitialFoods(true)
     }
 }

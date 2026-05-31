@@ -61,6 +61,18 @@ final class DailyReportViewModel {
         }
     }
 
+    func reloadCatalogs() async {
+        guard isDataLoaded else { return }
+        do {
+            async let e = getExercisesUC.execute(filter: nil)
+            async let f = getFoodsUC.execute()
+            exercises = try await e
+            foods     = try await f
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+
     // MARK: - Auto-save (0.8 s debounce)
 
     func scheduleAutoSave() {
