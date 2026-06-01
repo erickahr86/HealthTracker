@@ -82,17 +82,21 @@ struct ExerciseCatalogView: View {
     // MARK: - List
 
     private var exerciseList: some View {
-        List {
-            ForEach(vm.exercisesByGroup, id: \.0) { group, exercises in
-                Section(group.displayName) {
-                    ForEach(exercises) { exercise in
-                        exerciseRow(exercise)
+        ScrollView {
+            VStack(spacing: HTSpacing.md) {
+                ForEach(vm.exercisesByGroup, id: \.0) { group, exercises in
+                    VStack(alignment: .leading, spacing: HTSpacing.sm) {
+                        SectionHeader(group.displayName, systemImage: group.systemImage)
+                        ForEach(Array(exercises.enumerated()), id: \.element.id) { idx, exercise in
+                            if idx > 0 { Divider().background(Color.htBorder) }
+                            exerciseRow(exercise)
+                        }
                     }
+                    .htCard()
                 }
             }
+            .padding(HTSpacing.md)
         }
-        .scrollContentBackground(.hidden)
-        .listStyle(.insetGrouped)
     }
 
     @ViewBuilder

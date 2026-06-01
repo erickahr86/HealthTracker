@@ -10,6 +10,14 @@ enum MuscleGroup: String, Codable, CaseIterable, Hashable {
     var displayName: String {
         NSLocalizedString("muscle.group.\(rawValue)", comment: "Muscle group display name")
     }
+
+    var systemImage: String {
+        switch self {
+        case .superior: return "figure.strengthtraining.traditional"
+        case .inferior: return "figure.strengthtraining.functional"
+        case .fullBody: return "figure.run"
+        }
+    }
 }
 
 // MARK: - WeightUnit

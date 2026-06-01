@@ -26,11 +26,10 @@ struct CatalogsView: View {
 
                 VStack(spacing: 0) {
                     // Tab switcher
-                    Picker(Strings.Catalog.title, selection: $vm.selectedTab) {
-                        Text(Strings.Catalog.tabExercises).tag(CatalogTab.exercises)
-                        Text(Strings.Catalog.tabFoods).tag(CatalogTab.foods)
+                    HStack(spacing: HTSpacing.sm) {
+                        tabButton(Strings.Catalog.tabExercises, tab: .exercises, vm: vm)
+                        tabButton(Strings.Catalog.tabFoods,     tab: .foods,     vm: vm)
                     }
-                    .pickerStyle(.segmented)
                     .padding(.horizontal, HTSpacing.md)
                     .padding(.vertical, HTSpacing.sm)
 
@@ -58,6 +57,30 @@ struct CatalogsView: View {
         } message: {
             Text(vm.errorMessage ?? "")
         }
+    }
+
+    // MARK: - Helpers
+
+    @ViewBuilder
+    private func tabButton(_ label: String, tab: CatalogTab, vm: CatalogViewModel) -> some View {
+        let isSelected = vm.selectedTab == tab
+        Button { vm.selectedTab = tab } label: {
+            Text(label)
+                .font(HTTypography.subheadlineBold)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, HTSpacing.xs)
+                .background(isSelected ? Color.htAccent : Color.htSurfaceVariant)
+                .foregroundStyle(isSelected ? Color.white : Color.primary)
+                .clipShape(Capsule())
+                .overlay {
+                    Capsule().strokeBorder(
+                        isSelected ? Color.htAccent : Color.htBorder,
+                        lineWidth: HTDimensions.Border.regular
+                    )
+                }
+        }
+        .buttonStyle(.plain)
+        .animation(.spring(response: 0.25, dampingFraction: 0.8), value: isSelected)
     }
 }
 

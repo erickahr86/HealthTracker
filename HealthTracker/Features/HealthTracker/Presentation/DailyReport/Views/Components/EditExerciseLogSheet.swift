@@ -59,6 +59,8 @@ struct EditExerciseLogSheet: View {
                         .font(HTTypography.caption)
                         .foregroundStyle(.secondary)
                 }
+                .htCard()
+                .padding(.horizontal, HTSpacing.md)
 
                 Spacer()
 

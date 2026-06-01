@@ -59,22 +59,26 @@ struct ExercisePickerSheet: View {
     }
 
     private var populatedList: some View {
-        List {
-            ForEach(MuscleGroup.allCases, id: \.self) { group in
-                let groupExercises = filtered.filter { $0.muscleGroup == group }
-                if !groupExercises.isEmpty {
-                    Section(group.displayName) {
-                        ForEach(groupExercises) { exercise in
-                            exerciseRow(exercise)
+        ScrollView {
+            VStack(spacing: HTSpacing.md) {
+                ForEach(MuscleGroup.allCases, id: \.self) { group in
+                    let groupExercises = filtered.filter { $0.muscleGroup == group }
+                    if !groupExercises.isEmpty {
+                        VStack(alignment: .leading, spacing: HTSpacing.sm) {
+                            SectionHeader(group.displayName, systemImage: group.systemImage)
+                            ForEach(Array(groupExercises.enumerated()), id: \.element.id) { idx, exercise in
+                                if idx > 0 { Divider().background(Color.htBorder) }
+                                exerciseRow(exercise)
+                            }
                         }
+                        .htCard()
                     }
                 }
             }
+            .padding(HTSpacing.md)
         }
         .searchable(text: $searchText,
                     prompt: Strings.Today.searchExercisePlaceholder)
-        .listStyle(.insetGrouped)
-        .scrollContentBackground(.hidden)
         .scrollDismissesKeyboard(.interactively)
     }
 
@@ -89,13 +93,15 @@ struct ExercisePickerSheet: View {
         } label: {
             HStack {
                 Text(exercise.name)
+                    .font(HTTypography.body)
                     .foregroundStyle(.primary)
                 Spacer()
                 Image(systemName: "chevron.right")
-                    .font(.caption)
+                    .font(.caption.weight(.semibold))
                     .foregroundStyle(.secondary)
             }
         }
+        .buttonStyle(.plain)
     }
 
     private var filtered: [Exercise] {

@@ -27,16 +27,26 @@ struct UserProfileView: View {
     var body: some View {
         @Bindable var vm = vm
 
-        Form {
-            personalSection
-            bodySection
-            healthSection
-            goalsSection
+        ScrollView {
+            VStack(spacing: HTSpacing.md) {
+                personalSection
+                bodySection
+                healthSection
+                Text(Strings.UserProfile.healthFooter)
+                    .font(HTTypography.caption)
+                    .foregroundStyle(.secondary)
+                    .padding(.horizontal, HTSpacing.xs)
+                goalsSection
+                Text(Strings.UserProfile.goalsFooter)
+                    .font(HTTypography.caption)
+                    .foregroundStyle(.secondary)
+                    .padding(.horizontal, HTSpacing.xs)
+            }
+            .padding(HTSpacing.md)
         }
         .scrollDismissesKeyboard(.interactively)
         .navigationTitle(Strings.UserProfile.title)
         .navigationBarTitleDisplayMode(.large)
-        .scrollContentBackground(.hidden)
         .background(Color.htBackground.ignoresSafeArea())
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -46,7 +56,6 @@ struct UserProfileView: View {
         .onAppear { loadTextBuffers() }
         .onChange(of: vm.isSaved) { _, saved in
             if saved {
-                // Reset flag after brief feedback delay
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     vm.isSaved = false
                 }
@@ -71,10 +80,12 @@ struct UserProfileView: View {
     // MARK: - Personal section
 
     private var personalSection: some View {
-        Section {
-            // Name
+        VStack(alignment: .leading, spacing: HTSpacing.sm) {
+            SectionHeader(Strings.UserProfile.personalSection, systemImage: "person")
+
             HStack {
                 Text(Strings.UserProfile.nameLabel)
+                    .font(HTTypography.body)
                 Spacer()
                 TextField(Strings.UserProfile.namePlaceholder, text: Binding(
                     get: { vm.preferences.name ?? "" },
@@ -83,47 +94,59 @@ struct UserProfileView: View {
                 .multilineTextAlignment(.trailing)
                 .foregroundStyle(.secondary)
             }
+            .padding(.vertical, HTSpacing.xs)
 
-            // Biological sex
-            Picker(Strings.UserProfile.sexLabel, selection: Binding(
-                get: { vm.preferences.biologicalSex },
-                set: { vm.preferences.biologicalSex = $0 }
-            )) {
-                Text(Strings.UserProfile.notSpecified).tag(Optional<BiologicalSex>.none)
-                ForEach(BiologicalSex.allCases, id: \.self) { sex in
-                    Text(sex.displayName).tag(Optional(sex))
+            Divider().background(Color.htBorder)
+
+            HStack {
+                Text(Strings.UserProfile.sexLabel)
+                    .font(HTTypography.body)
+                Spacer()
+                Picker("", selection: Binding(
+                    get: { vm.preferences.biologicalSex },
+                    set: { vm.preferences.biologicalSex = $0 }
+                )) {
+                    Text(Strings.UserProfile.notSpecified).tag(Optional<BiologicalSex>.none)
+                    ForEach(BiologicalSex.allCases, id: \.self) { sex in
+                        Text(sex.displayName).tag(Optional(sex))
+                    }
                 }
+                .pickerStyle(.menu)
+                .tint(Color.htAccent)
             }
+            .padding(.vertical, HTSpacing.xs)
 
-            // Birth year
+            Divider().background(Color.htBorder)
+
             HStack {
                 Text(Strings.UserProfile.birthYearLabel)
+                    .font(HTTypography.body)
                 Spacer()
                 TextField(Strings.UserProfile.birthYearPlaceholder, text: $birthYearText)
                     .keyboardType(.numberPad)
                     .multilineTextAlignment(.trailing)
                     .foregroundStyle(.secondary)
                     .frame(width: 80)
-
                 if let age = vm.computedAge {
                     Text("(\(age) \(Strings.UserProfile.yearsOld))")
                         .font(HTTypography.caption)
                         .foregroundStyle(.secondary)
                 }
             }
-
-        } header: {
-            Text(Strings.UserProfile.personalSection)
+            .padding(.vertical, HTSpacing.xs)
         }
+        .htCard()
     }
 
     // MARK: - Body section
 
     private var bodySection: some View {
-        Section {
-            // Height
+        VStack(alignment: .leading, spacing: HTSpacing.sm) {
+            SectionHeader(Strings.UserProfile.bodySection, systemImage: "figure.stand")
+
             HStack {
                 Text(Strings.UserProfile.heightLabel)
+                    .font(HTTypography.body)
                 Spacer()
                 TextField(Strings.UserProfile.heightPlaceholder, text: $heightText)
                     .keyboardType(.decimalPad)
@@ -134,10 +157,13 @@ struct UserProfileView: View {
                     .foregroundStyle(.secondary)
                     .font(HTTypography.caption)
             }
+            .padding(.vertical, HTSpacing.xs)
 
-            // Weight
+            Divider().background(Color.htBorder)
+
             HStack {
                 Text(Strings.UserProfile.weightLabel)
+                    .font(HTTypography.body)
                 Spacer()
                 TextField(Strings.UserProfile.weightPlaceholder, text: $weightText)
                     .keyboardType(.decimalPad)
@@ -148,10 +174,13 @@ struct UserProfileView: View {
                     .foregroundStyle(.secondary)
                     .font(HTTypography.caption)
             }
+            .padding(.vertical, HTSpacing.xs)
 
-            // Body fat
+            Divider().background(Color.htBorder)
+
             HStack {
                 Text(Strings.UserProfile.bodyFatLabel)
+                    .font(HTTypography.body)
                 Spacer()
                 TextField(Strings.UserProfile.bodyFatPlaceholder, text: $bodyFatText)
                     .keyboardType(.decimalPad)
@@ -162,52 +191,59 @@ struct UserProfileView: View {
                     .foregroundStyle(.secondary)
                     .font(HTTypography.caption)
             }
+            .padding(.vertical, HTSpacing.xs)
 
-            // Preferred weight unit — changing it also reconverts height / weight text buffers
-            Picker(Strings.UserProfile.weightUnitLabel, selection: Binding(
-                get: { vm.preferences.preferredWeightUnit },
-                set: { vm.preferences.preferredWeightUnit = $0 }
-            )) {
-                ForEach(WeightUnit.allCases, id: \.self) { unit in
-                    Text(unit.displayName).tag(unit)
+            Divider().background(Color.htBorder)
+
+            HStack {
+                Text(Strings.UserProfile.weightUnitLabel)
+                    .font(HTTypography.body)
+                Spacer()
+                Picker("", selection: Binding(
+                    get: { vm.preferences.preferredWeightUnit },
+                    set: { vm.preferences.preferredWeightUnit = $0 }
+                )) {
+                    ForEach(WeightUnit.allCases, id: \.self) { unit in
+                        Text(unit.displayName).tag(unit)
+                    }
+                }
+                .pickerStyle(.menu)
+                .tint(Color.htAccent)
+                .onChange(of: vm.preferences.preferredWeightUnit) { old, new in
+                    reconvertUnits(from: old, to: new)
                 }
             }
-            .onChange(of: vm.preferences.preferredWeightUnit) { old, new in
-                reconvertUnits(from: old, to: new)
-            }
-
-        } header: {
-            Text(Strings.UserProfile.bodySection)
+            .padding(.vertical, HTSpacing.xs)
         }
+        .htCard()
     }
 
     // MARK: - Health section
 
     private var healthSection: some View {
-        Section {
-            // Chronic conditions chip grid
-            if !ChronicCondition.allCases.isEmpty {
-                VStack(alignment: .leading, spacing: HTSpacing.xs) {
-                    Text(Strings.UserProfile.conditionsLabel)
-                        .font(HTTypography.subheadline)
-                        .foregroundStyle(.secondary)
-                        .padding(.bottom, HTSpacing.xs)
+        VStack(alignment: .leading, spacing: HTSpacing.sm) {
+            SectionHeader(Strings.UserProfile.healthSection, systemImage: "heart")
 
-                    WrapLayout(horizontalSpacing: 8, verticalSpacing: 8) {
-                        ForEach(ChronicCondition.allCases, id: \.self) { condition in
-                            SelectableChipView(
-                                label:      condition.displayName,
-                                isSelected: vm.preferences.chronicConditions.contains(condition),
-                                onToggle:   { vm.toggleCondition(condition) }
-                            )
-                        }
+            VStack(alignment: .leading, spacing: HTSpacing.xs) {
+                Text(Strings.UserProfile.conditionsLabel)
+                    .font(HTTypography.subheadline)
+                    .foregroundStyle(.secondary)
+                    .padding(.bottom, HTSpacing.xs)
+
+                WrapLayout(horizontalSpacing: 8, verticalSpacing: 8) {
+                    ForEach(ChronicCondition.allCases, id: \.self) { condition in
+                        SelectableChipView(
+                            label:      condition.displayName,
+                            isSelected: vm.preferences.chronicConditions.contains(condition),
+                            onToggle:   { vm.toggleCondition(condition) }
+                        )
                     }
                 }
-                .listRowInsets(EdgeInsets(top: HTSpacing.sm, leading: HTSpacing.md,
-                                         bottom: HTSpacing.sm, trailing: HTSpacing.md))
             }
+            .padding(.vertical, HTSpacing.xs)
 
-            // Medications free text
+            Divider().background(Color.htBorder)
+
             VStack(alignment: .leading, spacing: HTSpacing.xs) {
                 Text(Strings.UserProfile.medicationsLabel)
                     .font(HTTypography.subheadline)
@@ -224,19 +260,17 @@ struct UserProfileView: View {
                 .font(HTTypography.body)
                 .lineLimit(2...4)
             }
-
-        } header: {
-            Text(Strings.UserProfile.healthSection)
-        } footer: {
-            Text(Strings.UserProfile.healthFooter)
+            .padding(.vertical, HTSpacing.xs)
         }
+        .htCard()
     }
 
     // MARK: - Goals section
 
     private var goalsSection: some View {
-        Section {
-            // Fitness goals chip grid
+        VStack(alignment: .leading, spacing: HTSpacing.sm) {
+            SectionHeader(Strings.UserProfile.goalsSection, systemImage: "target")
+
             VStack(alignment: .leading, spacing: HTSpacing.xs) {
                 Text(Strings.UserProfile.goalsLabel)
                     .font(HTTypography.subheadline)
@@ -253,28 +287,26 @@ struct UserProfileView: View {
                     }
                 }
             }
-            .listRowInsets(EdgeInsets(top: HTSpacing.sm, leading: HTSpacing.md,
-                                     bottom: HTSpacing.sm, trailing: HTSpacing.md))
+            .padding(.vertical, HTSpacing.xs)
 
-            // Training frequency
+            Divider().background(Color.htBorder)
+
             Stepper(value: Binding(
                 get: { vm.preferences.trainingDaysPerWeek ?? 3 },
                 set: { vm.preferences.trainingDaysPerWeek = $0 }
             ), in: 1...7) {
                 HStack {
                     Text(Strings.UserProfile.trainingDaysLabel)
+                        .font(HTTypography.body)
                     Spacer()
                     Text("\(vm.preferences.trainingDaysPerWeek ?? 3)")
                         .foregroundStyle(.secondary)
                         .monospacedDigit()
                 }
             }
-
-        } header: {
-            Text(Strings.UserProfile.goalsSection)
-        } footer: {
-            Text(Strings.UserProfile.goalsFooter)
+            .padding(.vertical, HTSpacing.xs)
         }
+        .htCard()
     }
 
     // MARK: - Text buffer helpers

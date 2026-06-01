@@ -74,6 +74,8 @@ struct EditMealLogSheet: View {
                     .font(HTTypography.caption)
                     .foregroundStyle(.secondary)
             }
+            .htCard()
+            .padding(.horizontal, HTSpacing.md)
 
             Spacer()
 
@@ -108,9 +110,7 @@ struct EditMealLogSheet: View {
             )
             .font(HTTypography.body)
             .lineLimit(3...6)
-            .padding(HTSpacing.sm)
-            .background(Color.htSurfaceVariant)
-            .clipShape(RoundedRectangle(cornerRadius: HTDimensions.CornerRadius.sm))
+            .htCard()
             .padding(.horizontal, HTSpacing.md)
 
             Spacer()

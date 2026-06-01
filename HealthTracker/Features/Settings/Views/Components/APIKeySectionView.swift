@@ -10,21 +10,35 @@ struct APIKeySectionView: View {
     @FocusState private var isKeyFieldFocused: Bool
 
     var body: some View {
-        Section {
+        VStack(alignment: .leading, spacing: HTSpacing.sm) {
+            SectionHeader(Strings.Settings.aiSection, systemImage: "cpu")
+
             // Provider picker
-            Picker(Strings.Settings.providerLabel, selection: $vm.selectedProvider) {
-                ForEach(AIProvider.allCases, id: \.self) { provider in
-                    Text(provider.displayName).tag(provider)
+            HStack {
+                Text(Strings.Settings.providerLabel)
+                    .font(HTTypography.body)
+                Spacer()
+                Picker("", selection: $vm.selectedProvider) {
+                    ForEach(AIProvider.allCases, id: \.self) { provider in
+                        Text(provider.displayName).tag(provider)
+                    }
                 }
+                .pickerStyle(.menu)
+                .tint(Color.htAccent)
             }
             .onChange(of: vm.selectedProvider) { vm.onProviderChanged() }
+
+            Divider().background(Color.htBorder)
 
             // Status row
             HStack {
                 Text(Strings.Settings.apiKeyLabel)
+                    .font(HTTypography.body)
                 Spacer()
                 keyStatusBadge
             }
+
+            Divider().background(Color.htBorder)
 
             if vm.selectedProvider == .openAI {
                 // OpenAI not yet implemented
@@ -36,26 +50,29 @@ struct APIKeySectionView: View {
                         .foregroundStyle(.secondary)
                 }
             } else {
-                // Key input — placeholder adapts to the selected provider
+                // Key input
                 SecureField(
                     vm.selectedProvider.apiKeyPlaceholder,
                     text: $vm.apiKeyInput
                 )
                 .focused($isKeyFieldFocused)
+                .font(HTTypography.body)
                 .textContentType(.password)
                 .autocorrectionDisabled()
                 .textInputAutocapitalization(.never)
                 .submitLabel(.done)
                 .onSubmit { vm.saveAPIKey() }
 
+                Divider().background(Color.htBorder)
+
                 // Action buttons
                 HStack(spacing: HTSpacing.sm) {
-                    // Save
                     Button {
                         isKeyFieldFocused = false
                         vm.saveAPIKey()
                     } label: {
                         Label(Strings.Settings.saveKey, systemImage: "checkmark.circle")
+                            .font(HTTypography.body)
                     }
                     .disabled(vm.apiKeyInput.trimmingCharacters(in: .whitespaces).isEmpty
                               || vm.isSavingKey)
@@ -63,30 +80,35 @@ struct APIKeySectionView: View {
 
                     Spacer()
 
-                    // Delete (only when a key is stored)
                     if vm.hasStoredKey {
                         Button(role: .destructive) {
                             showDeleteConfirm = true
                         } label: {
                             Label(Strings.Settings.deleteKey, systemImage: "trash")
+                                .font(HTTypography.body)
                         }
                     }
                 }
 
-                // Inline feedback (saved / deleted) — auto-clears after 2 s
+                // Inline feedback
                 if let feedback = vm.keyFeedback, feedback != .deleted {
                     feedbackRow(for: feedback)
                 }
             }
 
-        } header: {
-            Text(Strings.Settings.aiSection)
-        } footer: {
+            Divider().background(Color.htBorder)
+
+            // Console link
             Link(destination: vm.selectedProvider.consoleURL) {
-                Label(vm.selectedProvider.consoleLabel, systemImage: "arrow.up.right.square")
-                    .font(HTTypography.caption)
+                HStack {
+                    Label(vm.selectedProvider.consoleLabel, systemImage: "arrow.up.right.square")
+                        .font(HTTypography.caption)
+                        .foregroundStyle(.secondary)
+                    Spacer()
+                }
             }
         }
+        .htCard()
         .confirmationDialog(
             Strings.Settings.deleteKeyTitle,
             isPresented: $showDeleteConfirm,
@@ -144,7 +166,7 @@ struct APIKeySectionView: View {
         case .deleted:
             EmptyView()
         case .error:
-            EmptyView()  // handled by alert
+            EmptyView()
         }
     }
 }

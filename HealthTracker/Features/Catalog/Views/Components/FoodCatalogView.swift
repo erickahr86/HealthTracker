@@ -77,20 +77,22 @@ struct FoodCatalogView: View {
     // MARK: - List
 
     private var foodList: some View {
-        List {
-            ForEach(vm.foodsByCategory, id: \.0) { category, foods in
-                Section {
-                    ForEach(foods) { food in
-                        foodRow(food)
-                    }
-                } header: {
+        ScrollView {
+            VStack(spacing: HTSpacing.md) {
+                ForEach(vm.foodsByCategory, id: \.0) { category, foods in
                     let cat = category ?? FoodCategory.other
-                    Label(cat.displayName, systemImage: cat.systemImage)
+                    VStack(alignment: .leading, spacing: HTSpacing.sm) {
+                        SectionHeader(cat.displayName, systemImage: cat.systemImage)
+                        ForEach(Array(foods.enumerated()), id: \.element.id) { idx, food in
+                            if idx > 0 { Divider().background(Color.htBorder) }
+                            foodRow(food)
+                        }
+                    }
+                    .htCard()
                 }
             }
+            .padding(HTSpacing.md)
         }
-        .scrollContentBackground(.hidden)
-        .listStyle(.insetGrouped)
     }
 
     @ViewBuilder

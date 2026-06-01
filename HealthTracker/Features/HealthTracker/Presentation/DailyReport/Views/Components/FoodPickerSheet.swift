@@ -179,12 +179,16 @@ struct FoodPickerSheet: View {
                 ContentUnavailableView.search(text: searchText)
             }
         } else {
-            List(rows) { food in
-                foodRow(food)
-                    .listRowBackground(Color.htSurface)
+            ScrollView {
+                VStack(alignment: .leading, spacing: 0) {
+                    ForEach(Array(rows.enumerated()), id: \.element.id) { idx, food in
+                        if idx > 0 { Divider().background(Color.htBorder) }
+                        foodRow(food)
+                    }
+                }
+                .htCard()
+                .padding(HTSpacing.md)
             }
-            .listStyle(.plain)
-            .scrollContentBackground(.hidden)
             .scrollDismissesKeyboard(.interactively)
         }
     }
@@ -200,6 +204,7 @@ struct FoodPickerSheet: View {
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(food.name)
+                        .font(HTTypography.body)
                         .foregroundStyle(.primary)
                     Text("\(food.defaultAmount.formatted()) \(food.unit)")
                         .font(HTTypography.caption)
@@ -207,10 +212,12 @@ struct FoodPickerSheet: View {
                 }
                 Spacer()
                 Image(systemName: "chevron.right")
-                    .font(.caption)
+                    .font(.caption.weight(.semibold))
                     .foregroundStyle(.secondary)
             }
+            .padding(.vertical, HTSpacing.sm)
         }
+        .buttonStyle(.plain)
     }
 
     // MARK: Filtering

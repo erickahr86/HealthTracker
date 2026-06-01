@@ -18,26 +18,30 @@ struct SettingsView: View {
         @Bindable var vm = vm
 
         NavigationStack {
-            Form {
-                // 1. Health profile
-                profileSection
+            ScrollView {
+                VStack(spacing: HTSpacing.md) {
 
-                // 2. AI Provider + API key
-                APIKeySectionView(vm: vm)
+                    // 1. Health profile
+                    profileCard
 
-                // 3. Unit preferences
-                MeasurementsSectionView(vm: vm)
+                    // 2. AI Provider + API key
+                    APIKeySectionView(vm: vm)
 
-                // 4. Catalog
-                catalogSection
+                    // 3. Unit preferences
+                    MeasurementsSectionView(vm: vm)
 
-                // 5. About
-                aboutSection
+                    // 4. Catalog
+                    catalogCard
+
+                    // 5. About
+                    aboutCard
+                }
+                .padding(HTSpacing.md)
             }
             .scrollDismissesKeyboard(.interactively)
-            .navigationTitle(Strings.Settings.title)
-            .scrollContentBackground(.hidden)
             .background(Color.htBackground.ignoresSafeArea())
+            .navigationTitle(Strings.Settings.title)
+            .navigationBarTitleDisplayMode(.large)
         }
         .onAppear { vm.loadData() }
         .fullScreenCover(isPresented: $showExerciseCatalog) {
@@ -49,51 +53,95 @@ struct SettingsView: View {
         }
     }
 
-    // MARK: - Profile section
+    // MARK: - Profile card
 
-    private var profileSection: some View {
-        Section {
-            NavigationLink {
-                UserProfileView(repository: container.featureFactory.userPreferencesRepository)
-            } label: {
-                Label(Strings.Settings.profileLabel, systemImage: "person.crop.circle")
-                    .foregroundStyle(Color.primary)
+    private var profileCard: some View {
+        VStack(alignment: .leading, spacing: HTSpacing.xs) {
+            VStack(alignment: .leading, spacing: HTSpacing.sm) {
+                SectionHeader(Strings.Settings.profileSection, systemImage: "person.crop.circle")
+
+                NavigationLink {
+                    UserProfileView(repository: container.featureFactory.userPreferencesRepository)
+                } label: {
+                    HStack {
+                        Label(Strings.Settings.profileLabel, systemImage: "person")
+                            .font(HTTypography.body)
+                            .foregroundStyle(.primary)
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(.secondary)
+                    }
+                }
             }
-        } header: {
-            Text(Strings.Settings.profileSection)
-        } footer: {
+            .htCard()
+
             Text(Strings.Settings.profileHint)
+                .font(HTTypography.caption)
+                .foregroundStyle(.secondary)
+                .padding(.horizontal, HTSpacing.xs)
         }
     }
 
-    // MARK: - Catalog section
+    // MARK: - Catalog card
 
-    private var catalogSection: some View {
-        Section {
-            Button {
-                showExerciseCatalog = true
-            } label: {
-                Label(Strings.Settings.exerciseCatalog, systemImage: "dumbbell")
-                    .foregroundStyle(Color.primary)
+    private var catalogCard: some View {
+        VStack(alignment: .leading, spacing: HTSpacing.xs) {
+            VStack(alignment: .leading, spacing: HTSpacing.sm) {
+                SectionHeader(Strings.Settings.catalogSection, systemImage: "list.bullet")
+
+                Button { showExerciseCatalog = true } label: {
+                    HStack {
+                        Label(Strings.Settings.exerciseCatalog, systemImage: "dumbbell")
+                            .font(HTTypography.body)
+                            .foregroundStyle(.primary)
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                .buttonStyle(.plain)
             }
-        } header: {
-            Text(Strings.Settings.catalogSection)
-        } footer: {
+            .htCard()
+
             Text(Strings.Settings.exerciseCatalogHint)
+                .font(HTTypography.caption)
+                .foregroundStyle(.secondary)
+                .padding(.horizontal, HTSpacing.xs)
         }
     }
 
-    // MARK: - About section
+    // MARK: - About card
 
-    private var aboutSection: some View {
-        Section(Strings.Settings.aboutSection) {
-            LabeledContent(Strings.Settings.versionLabel, value: vm.appVersion)
+    private var aboutCard: some View {
+        VStack(alignment: .leading, spacing: HTSpacing.sm) {
+            SectionHeader(Strings.Settings.aboutSection, systemImage: "info.circle")
+
+            HStack {
+                Text(Strings.Settings.versionLabel)
+                    .font(HTTypography.body)
+                Spacer()
+                Text(vm.appVersion)
+                    .font(HTTypography.body)
+                    .foregroundStyle(.secondary)
+            }
+
+            Divider().background(Color.htBorder)
 
             Link(destination: URL(string: "https://console.anthropic.com/docs")!) {
-                Label(Strings.Settings.anthropicDocs, systemImage: "book")
+                HStack {
+                    Label(Strings.Settings.anthropicDocs, systemImage: "book")
+                        .font(HTTypography.body)
+                        .foregroundStyle(.primary)
+                    Spacer()
+                    Image(systemName: "arrow.up.right")
+                        .font(.caption)
+                        .foregroundStyle(Color.htAccent)
+                }
             }
-            .tint(Color.htAccent)
         }
+        .htCard()
     }
 }
 

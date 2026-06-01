@@ -22,47 +22,67 @@ struct AddFoodSheet: View {
 
     var body: some View {
         NavigationStack {
-            Form {
-                // Name
-                Section {
-                    TextField(Strings.Catalog.foodNamePlaceholder, text: $name)
-                        .autocorrectionDisabled()
-                        .textInputAutocapitalization(.words)
-                } header: {
-                    Text(Strings.Catalog.nameLabel)
-                }
-
-                // Unit
-                Section {
-                    TextField(Strings.Catalog.unitPlaceholder, text: $unit)
-                        .autocorrectionDisabled()
-                        .textInputAutocapitalization(.never)
-                } header: {
-                    Text(Strings.Catalog.unitLabel)
-                }
-
-                // Category
-                Section {
-                    Picker(Strings.Catalog.categoryLabel, selection: $category) {
-                        ForEach(FoodCategory.allCases, id: \.self) { cat in
-                            Text(cat.displayName).tag(cat)
+            ScrollView {
+                VStack(spacing: HTSpacing.md) {
+                    VStack(alignment: .leading, spacing: HTSpacing.sm) {
+                        HStack {
+                            Text(Strings.Catalog.nameLabel)
+                                .font(HTTypography.body)
+                            Spacer()
+                            TextField(Strings.Catalog.foodNamePlaceholder, text: $name)
+                                .autocorrectionDisabled()
+                                .textInputAutocapitalization(.words)
+                                .multilineTextAlignment(.trailing)
                         }
-                    }
-                    .pickerStyle(.menu)
-                } header: {
-                    Text(Strings.Catalog.categoryLabel)
-                }
+                        .padding(.vertical, HTSpacing.xs)
 
-                // Default amount
-                Section {
-                    TextField("0", text: $amountText)
-                        .keyboardType(.decimalPad)
-                } header: {
-                    Text(Strings.Catalog.amountLabel)
+                        Divider().background(Color.htBorder)
+
+                        HStack {
+                            Text(Strings.Catalog.unitLabel)
+                                .font(HTTypography.body)
+                            Spacer()
+                            TextField(Strings.Catalog.unitPlaceholder, text: $unit)
+                                .autocorrectionDisabled()
+                                .textInputAutocapitalization(.never)
+                                .multilineTextAlignment(.trailing)
+                        }
+                        .padding(.vertical, HTSpacing.xs)
+
+                        Divider().background(Color.htBorder)
+
+                        HStack {
+                            Text(Strings.Catalog.categoryLabel)
+                                .font(HTTypography.body)
+                            Spacer()
+                            Picker("", selection: $category) {
+                                ForEach(FoodCategory.allCases, id: \.self) { cat in
+                                    Text(cat.displayName).tag(cat)
+                                }
+                            }
+                            .pickerStyle(.menu)
+                            .tint(Color.htAccent)
+                        }
+                        .padding(.vertical, HTSpacing.xs)
+
+                        Divider().background(Color.htBorder)
+
+                        HStack {
+                            Text(Strings.Catalog.amountLabel)
+                                .font(HTTypography.body)
+                            Spacer()
+                            TextField("0", text: $amountText)
+                                .keyboardType(.decimalPad)
+                                .multilineTextAlignment(.trailing)
+                                .frame(width: 80)
+                        }
+                        .padding(.vertical, HTSpacing.xs)
+                    }
+                    .htCard()
                 }
+                .padding(HTSpacing.md)
             }
             .scrollDismissesKeyboard(.interactively)
-            .scrollContentBackground(.hidden)
             .background(Color.htBackground.ignoresSafeArea())
             .navigationTitle(Strings.Catalog.addFood)
             .navigationBarTitleDisplayMode(.inline)

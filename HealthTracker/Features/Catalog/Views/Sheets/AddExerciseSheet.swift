@@ -21,47 +21,61 @@ struct AddExerciseSheet: View {
 
     var body: some View {
         NavigationStack {
-            Form {
-                // Name
-                Section {
-                    TextField(Strings.Catalog.exerciseNamePlaceholder, text: $name)
-                        .autocorrectionDisabled()
-                } header: {
-                    Text(Strings.Catalog.nameLabel)
-                }
-
-                // Muscle group
-                Section {
-                    Picker(Strings.Catalog.muscleGroupLabel, selection: $muscleGroup) {
-                        ForEach(MuscleGroup.allCases, id: \.self) { group in
-                            Text(group.displayName).tag(group)
+            ScrollView {
+                VStack(spacing: HTSpacing.md) {
+                    VStack(alignment: .leading, spacing: HTSpacing.sm) {
+                        HStack {
+                            Text(Strings.Catalog.nameLabel)
+                                .font(HTTypography.body)
+                            Spacer()
+                            TextField(Strings.Catalog.exerciseNamePlaceholder, text: $name)
+                                .autocorrectionDisabled()
+                                .multilineTextAlignment(.trailing)
                         }
-                    }
-                    .pickerStyle(.menu)
-                } header: {
-                    Text(Strings.Catalog.muscleGroupLabel)
-                }
+                        .padding(.vertical, HTSpacing.xs)
 
-                // Default weight
-                Section {
-                    HStack(spacing: HTSpacing.xs) {
-                        TextField("0", text: $weightText)
-                            .keyboardType(.decimalPad)
+                        Divider().background(Color.htBorder)
 
-                        Picker("", selection: $weightUnit) {
-                            ForEach(WeightUnit.allCases, id: \.self) { unit in
-                                Text(unit.displayName).tag(unit)
+                        HStack {
+                            Text(Strings.Catalog.muscleGroupLabel)
+                                .font(HTTypography.body)
+                            Spacer()
+                            Picker("", selection: $muscleGroup) {
+                                ForEach(MuscleGroup.allCases, id: \.self) { group in
+                                    Text(group.displayName).tag(group)
+                                }
                             }
+                            .pickerStyle(.menu)
+                            .tint(Color.htAccent)
                         }
-                        .pickerStyle(.menu)
-                        .fixedSize()
+                        .padding(.vertical, HTSpacing.xs)
+
+                        Divider().background(Color.htBorder)
+
+                        HStack {
+                            Text(Strings.Catalog.weightLabel)
+                                .font(HTTypography.body)
+                            Spacer()
+                            TextField("0", text: $weightText)
+                                .keyboardType(.decimalPad)
+                                .multilineTextAlignment(.trailing)
+                                .frame(width: 80)
+                            Picker("", selection: $weightUnit) {
+                                ForEach(WeightUnit.allCases, id: \.self) { unit in
+                                    Text(unit.displayName).tag(unit)
+                                }
+                            }
+                            .pickerStyle(.menu)
+                            .fixedSize()
+                            .tint(Color.htAccent)
+                        }
+                        .padding(.vertical, HTSpacing.xs)
                     }
-                } header: {
-                    Text(Strings.Catalog.weightLabel)
+                    .htCard()
                 }
+                .padding(HTSpacing.md)
             }
             .scrollDismissesKeyboard(.interactively)
-            .scrollContentBackground(.hidden)
             .background(Color.htBackground.ignoresSafeArea())
             .navigationTitle(Strings.Catalog.addExercise)
             .navigationBarTitleDisplayMode(.inline)
