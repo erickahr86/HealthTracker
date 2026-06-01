@@ -26,46 +26,57 @@ struct APIKeySectionView: View {
                 keyStatusBadge
             }
 
-            // Key input — placeholder adapts to the selected provider
-            SecureField(
-                vm.selectedProvider.apiKeyPlaceholder,
-                text: $vm.apiKeyInput
-            )
-            .focused($isKeyFieldFocused)
-            .textContentType(.password)
-            .autocorrectionDisabled()
-            .textInputAutocapitalization(.never)
-            .submitLabel(.done)
-            .onSubmit { vm.saveAPIKey() }
-
-            // Action buttons
-            HStack(spacing: HTSpacing.sm) {
-                // Save
-                Button {
-                    isKeyFieldFocused = false
-                    vm.saveAPIKey()
-                } label: {
-                    Label(Strings.Settings.saveKey, systemImage: "checkmark.circle")
+            if vm.selectedProvider == .openAI {
+                // OpenAI not yet implemented
+                HStack(spacing: HTSpacing.sm) {
+                    Image(systemName: "clock")
+                        .foregroundStyle(.secondary)
+                    Text(Strings.Settings.comingSoon)
+                        .font(HTTypography.body)
+                        .foregroundStyle(.secondary)
                 }
-                .disabled(vm.apiKeyInput.trimmingCharacters(in: .whitespaces).isEmpty
-                          || vm.isSavingKey)
-                .tint(Color.htAccent)
+            } else {
+                // Key input — placeholder adapts to the selected provider
+                SecureField(
+                    vm.selectedProvider.apiKeyPlaceholder,
+                    text: $vm.apiKeyInput
+                )
+                .focused($isKeyFieldFocused)
+                .textContentType(.password)
+                .autocorrectionDisabled()
+                .textInputAutocapitalization(.never)
+                .submitLabel(.done)
+                .onSubmit { vm.saveAPIKey() }
 
-                Spacer()
-
-                // Delete (only when a key is stored)
-                if vm.hasStoredKey {
-                    Button(role: .destructive) {
-                        showDeleteConfirm = true
+                // Action buttons
+                HStack(spacing: HTSpacing.sm) {
+                    // Save
+                    Button {
+                        isKeyFieldFocused = false
+                        vm.saveAPIKey()
                     } label: {
-                        Label(Strings.Settings.deleteKey, systemImage: "trash")
+                        Label(Strings.Settings.saveKey, systemImage: "checkmark.circle")
+                    }
+                    .disabled(vm.apiKeyInput.trimmingCharacters(in: .whitespaces).isEmpty
+                              || vm.isSavingKey)
+                    .tint(Color.htAccent)
+
+                    Spacer()
+
+                    // Delete (only when a key is stored)
+                    if vm.hasStoredKey {
+                        Button(role: .destructive) {
+                            showDeleteConfirm = true
+                        } label: {
+                            Label(Strings.Settings.deleteKey, systemImage: "trash")
+                        }
                     }
                 }
-            }
 
-            // Inline feedback (saved / deleted) — auto-clears after 2 s
-            if let feedback = vm.keyFeedback, feedback != .deleted {
-                feedbackRow(for: feedback)
+                // Inline feedback (saved / deleted) — auto-clears after 2 s
+                if let feedback = vm.keyFeedback, feedback != .deleted {
+                    feedbackRow(for: feedback)
+                }
             }
 
         } header: {

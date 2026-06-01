@@ -5,6 +5,7 @@ import SwiftUI
 struct NotesSectionView: View {
 
     @Bindable var vm: DailyReportViewModel
+    var isFocused: FocusState<Bool>.Binding
 
     var body: some View {
         VStack(alignment: .leading, spacing: HTSpacing.sm) {
@@ -20,6 +21,7 @@ struct NotesSectionView: View {
                         .allowsHitTesting(false)
                 }
                 TextEditor(text: notesBinding)
+                    .focused(isFocused)
                     .font(HTTypography.body)
                     .frame(minHeight: 80, maxHeight: 200)
                     .scrollContentBackground(.hidden)
@@ -45,7 +47,8 @@ struct NotesSectionView: View {
 
 #Preview {
     @Previewable @State var vm = DailyReportViewModel(factory: AppContainer.preview.featureFactory)
-    NotesSectionView(vm: vm)
+    @Previewable @FocusState var focused: Bool
+    NotesSectionView(vm: vm, isFocused: $focused)
         .padding(HTSpacing.md)
         .background(Color.htBackground)
 }

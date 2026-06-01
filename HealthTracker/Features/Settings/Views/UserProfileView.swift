@@ -33,6 +33,7 @@ struct UserProfileView: View {
             healthSection
             goalsSection
         }
+        .scrollDismissesKeyboard(.interactively)
         .navigationTitle(Strings.UserProfile.title)
         .navigationBarTitleDisplayMode(.large)
         .scrollContentBackground(.hidden)

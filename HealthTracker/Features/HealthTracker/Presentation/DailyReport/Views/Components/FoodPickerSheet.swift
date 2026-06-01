@@ -185,6 +185,7 @@ struct FoodPickerSheet: View {
             }
             .listStyle(.plain)
             .scrollContentBackground(.hidden)
+            .scrollDismissesKeyboard(.interactively)
         }
     }
 

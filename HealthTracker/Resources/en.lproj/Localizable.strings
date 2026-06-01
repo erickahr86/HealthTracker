@@ -74,6 +74,7 @@
 "today.add.label"       = "Add";
 "today.cancel.label"    = "Cancel";
 "today.confirm.label"   = "Add";
+"today.done.label"      = "Done";
 
 // MARK: - Today screen — exercise picker
 "today.edit.exercise.title"           = "Edit Exercise";
@@ -120,6 +121,7 @@
 "settings.delete_key.message"      = "You will need to enter it again to use AI analysis.";
 "settings.delete_key.confirm"      = "Delete";
 "settings.cancel"                  = "Cancel";
+"settings.coming_soon"             = "Coming Soon";
 "settings.section.measurements"    = "Measurements";
 "settings.hydration.label"         = "Hydration unit";
 "settings.measurements.footer"     = "Unit used to log daily water intake. Detected automatically from your device region.";

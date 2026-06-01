@@ -75,6 +75,7 @@
 "today.add.label"       = "Agregar";
 "today.cancel.label"    = "Cancelar";
 "today.confirm.label"   = "Agregar";
+"today.done.label"      = "Listo";
 
 // MARK: - Pantalla Hoy — selector de ejercicio
 "today.edit.exercise.title"           = "Editar ejercicio";
@@ -121,6 +122,7 @@
 "settings.delete_key.message"      = "Necesitarás ingresarla nuevamente para usar el análisis IA.";
 "settings.delete_key.confirm"      = "Eliminar";
 "settings.cancel"                  = "Cancelar";
+"settings.coming_soon"             = "Próximamente";
 "settings.section.measurements"    = "Medidas";
 "settings.hydration.label"         = "Unidad de hidratación";
 "settings.measurements.footer"     = "Unidad utilizada para registrar la ingesta de agua diaria. Se detecta automáticamente según la región del dispositivo.";

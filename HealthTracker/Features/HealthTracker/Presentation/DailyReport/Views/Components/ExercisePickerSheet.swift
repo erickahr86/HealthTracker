@@ -75,6 +75,7 @@ struct ExercisePickerSheet: View {
                     prompt: Strings.Today.searchExercisePlaceholder)
         .listStyle(.insetGrouped)
         .scrollContentBackground(.hidden)
+        .scrollDismissesKeyboard(.interactively)
     }
 
     private func exerciseRow(_ exercise: Exercise) -> some View {

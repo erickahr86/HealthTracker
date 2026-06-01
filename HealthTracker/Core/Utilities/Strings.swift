@@ -96,6 +96,7 @@ enum Strings {
         static var addLabel:      String { L("today.add.label") }
         static var cancelLabel:   String { L("today.cancel.label") }
         static var confirmLabel:  String { L("today.confirm.label") }
+        static var doneLabel:     String { L("today.done.label") }
         static var errorTitle:    String { L("error.title") }
 
         // Exercise picker
@@ -149,6 +150,7 @@ enum Strings {
         static var deleteKeyMessage:    String { L("settings.delete_key.message") }
         static var deleteKeyConfirm:    String { L("settings.delete_key.confirm") }
         static var cancelLabel:         String { L("settings.cancel") }
+        static var comingSoon:          String { L("settings.coming_soon") }
 
         // Measurements section
         static var measurementsSection: String { L("settings.section.measurements") }

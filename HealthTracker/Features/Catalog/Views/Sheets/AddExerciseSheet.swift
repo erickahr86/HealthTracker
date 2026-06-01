@@ -60,6 +60,7 @@ struct AddExerciseSheet: View {
                     Text(Strings.Catalog.weightLabel)
                 }
             }
+            .scrollDismissesKeyboard(.interactively)
             .scrollContentBackground(.hidden)
             .background(Color.htBackground.ignoresSafeArea())
             .navigationTitle(Strings.Catalog.addExercise)

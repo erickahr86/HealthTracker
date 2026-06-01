@@ -34,6 +34,7 @@ struct SettingsView: View {
                 // 5. About
                 aboutSection
             }
+            .scrollDismissesKeyboard(.interactively)
             .navigationTitle(Strings.Settings.title)
             .scrollContentBackground(.hidden)
             .background(Color.htBackground.ignoresSafeArea())

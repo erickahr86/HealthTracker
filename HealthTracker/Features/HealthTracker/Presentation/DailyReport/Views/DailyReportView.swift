@@ -13,6 +13,7 @@ struct DailyReportView: View {
     @State private var vm: DailyReportViewModel
     @State private var showExercisePicker = false
     @State private var activeMealSlot: MealSlot?
+    @FocusState private var notesIsFocused: Bool
 
     init(container: AppContainer) {
         _vm = State(wrappedValue: DailyReportViewModel(factory: container.featureFactory))
@@ -38,6 +39,19 @@ struct DailyReportView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     if vm.report.trafficLight != nil {
                         TrafficLightBadge(vm.report.trafficLight, style: .dotWithLabel)
+                    }
+                }
+                ToolbarItemGroup(placement: .keyboard) {
+                    if !notesIsFocused {
+                        Spacer()
+                        Button(Strings.Today.doneLabel) {
+                            UIApplication.shared.sendAction(
+                                #selector(UIResponder.resignFirstResponder),
+                                to: nil, from: nil, for: nil
+                            )
+                        }
+                        .font(HTTypography.bodyMedium)
+                        .foregroundStyle(Color.htAccent)
                     }
                 }
             }
@@ -101,7 +115,7 @@ struct DailyReportView: View {
                     .onChange(of: vm.report.bloodPressure) { vm.scheduleAutoSave() }
 
                 // Notes
-                NotesSectionView(vm: vm)
+                NotesSectionView(vm: vm, isFocused: $notesIsFocused)
                     .onChange(of: vm.report.notes) { vm.scheduleAutoSave() }
 
                 // Existing analysis result
@@ -125,6 +139,7 @@ struct DailyReportView: View {
             }
             .padding(HTSpacing.md)
         }
+        .scrollDismissesKeyboard(.interactively)
         .sheet(isPresented: $showExercisePicker) {
             ExercisePickerSheet(
                 exercises: vm.exercises,

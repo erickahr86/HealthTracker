@@ -61,6 +61,7 @@ struct AddFoodSheet: View {
                     Text(Strings.Catalog.amountLabel)
                 }
             }
+            .scrollDismissesKeyboard(.interactively)
             .scrollContentBackground(.hidden)
             .background(Color.htBackground.ignoresSafeArea())
             .navigationTitle(Strings.Catalog.addFood)
