@@ -26,6 +26,7 @@ final class DailyReportViewModel {
     private let getExercisesUC:   any GetExercisesUseCase
     private let getFoodsUC:       any GetFoodsUseCase
     private let preferencesRepo:  any UserPreferencesRepository
+    private let fetchHealthDataUC: any FetchHealthDataUseCase
 
     private var isDataLoaded  = false
     private var autoSaveTask: Task<Void, Never>?
@@ -36,9 +37,10 @@ final class DailyReportViewModel {
         getTodayReport  = factory.makeGetOrCreateTodayReportUseCase()
         saveReportUC    = factory.makeSaveDailyReportUseCase()
         analyzeReportUC = factory.makeAnalyzeReportWithAIUseCase()
-        getExercisesUC  = factory.makeGetExercisesUseCase()
-        getFoodsUC      = factory.makeGetFoodsUseCase()
-        preferencesRepo = factory.userPreferencesRepository
+        getExercisesUC    = factory.makeGetExercisesUseCase()
+        getFoodsUC        = factory.makeGetFoodsUseCase()
+        preferencesRepo   = factory.userPreferencesRepository
+        fetchHealthDataUC = factory.makeFetchHealthDataUseCase()
     }
 
     // MARK: - Load
@@ -58,6 +60,36 @@ final class DailyReportViewModel {
             isDataLoaded  = true
         } catch {
             errorMessage = error.localizedDescription
+            return
+        }
+        await syncFromHealthKit()
+    }
+
+    // MARK: - HealthKit sync
+
+    var isHealthKitAvailable: Bool { fetchHealthDataUC.isAvailable }
+
+    /// Pre-fills steps and sleep from HealthKit if those fields are currently empty.
+    /// Stores HealthKit workouts for inclusion in the AI prompt.
+    /// Errors are silently ignored — the user can always enter data manually.
+    func syncFromHealthKit() async {
+        guard isDataLoaded else { return }
+        guard isHealthKitAvailable else { return }
+        do {
+            let data = try await fetchHealthDataUC.execute()
+            if report.steps == nil, let steps = data.steps {
+                report.steps = steps
+            }
+            if (report.sleepHours == nil || report.sleepHours?.isEmpty == true),
+               let hours = data.sleepHours {
+                let formatted = hours.truncatingRemainder(dividingBy: 1) == 0
+                    ? String(Int(hours))
+                    : String(format: "%.1f", hours)
+                report.sleepHours = formatted
+            }
+            report.healthKitWorkouts = data.workouts
+        } catch {
+            // Ignore — HealthKit data is supplemental, not required
         }
     }
 

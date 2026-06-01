@@ -46,6 +46,7 @@ struct DailyReportView: View {
         .onAppear {
             vm.refreshPreferences()
             Task { await vm.reloadCatalogs() }
+            Task { await vm.syncFromHealthKit() }
         }
         .alert(
             Strings.Today.errorTitle,

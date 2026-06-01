@@ -13,6 +13,7 @@ final class FeatureFactory {
     private let foodRepository:           any FoodRepository
     private let aiProviderRepository:     any AIProviderRepository
     private let providerFactory:          ProviderFactory
+    private let healthKitRepository:      any HealthKitRepository
 
     /// Exposed so ViewModels can read and write user preferences directly.
     let userPreferencesRepository: any UserPreferencesRepository
@@ -25,6 +26,7 @@ final class FeatureFactory {
         foodRepository:           any FoodRepository,
         aiProviderRepository:     any AIProviderRepository,
         userPreferencesRepository: any UserPreferencesRepository,
+        healthKitRepository:      any HealthKitRepository,
         providerFactory:          ProviderFactory
     ) {
         self.dailyReportRepository    = dailyReportRepository
@@ -32,6 +34,7 @@ final class FeatureFactory {
         self.foodRepository           = foodRepository
         self.aiProviderRepository     = aiProviderRepository
         self.userPreferencesRepository = userPreferencesRepository
+        self.healthKitRepository      = healthKitRepository
         self.providerFactory          = providerFactory
     }
 
@@ -90,5 +93,9 @@ final class FeatureFactory {
             exerciseRepository: exerciseRepository,
             foodRepository:     foodRepository
         )
+    }
+
+    func makeFetchHealthDataUseCase() -> any FetchHealthDataUseCase {
+        FetchHealthDataUseCaseImpl(healthKitRepository: healthKitRepository)
     }
 }

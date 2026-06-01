@@ -31,6 +31,9 @@ struct DailyReport: Identifiable, Hashable {
     var analysisDate: Date?
     var trafficLight: TrafficLight?
 
+    /// Transient — populated from HealthKit on each launch, never persisted to SwiftData.
+    var healthKitWorkouts: [HealthKitWorkout] = []
+
     init(
         id: UUID = UUID(),
         date: Date = Date(),

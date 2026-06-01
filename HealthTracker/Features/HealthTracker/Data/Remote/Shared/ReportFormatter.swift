@@ -25,6 +25,19 @@ enum ReportFormatter {
                 lines.append(Strings.Report.steps(steps))
             }
         }
+
+        // 1b. HealthKit Workouts (if any recorded by iPhone/Watch today)
+        if !report.healthKitWorkouts.isEmpty {
+            lines.append(Strings.Report.healthKitWorkoutsSection)
+            for w in report.healthKitWorkouts {
+                if let kcal = w.calories {
+                    lines.append("  \(w.name) — \(w.durationMinutes) min (\(kcal) kcal)")
+                } else {
+                    lines.append("  \(w.name) — \(w.durationMinutes) min")
+                }
+            }
+        }
+
         lines.append("")
 
         // 2. Meals

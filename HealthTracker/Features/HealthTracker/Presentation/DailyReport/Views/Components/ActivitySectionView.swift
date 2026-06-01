@@ -26,14 +26,30 @@ struct ActivitySectionView: View {
                 label: Strings.Today.stepsLabel,
                 systemImage: "shoeprints.fill"
             ) {
-                TextField(
-                    Strings.Today.stepsPlaceholder,
-                    text: stepsText,
-                    prompt: Text(Strings.Today.stepsPlaceholder)
-                )
-                .keyboardType(.numberPad)
-                .multilineTextAlignment(.trailing)
-                .font(HTTypography.body)
+                HStack(spacing: HTSpacing.xs) {
+                    TextField(
+                        Strings.Today.stepsPlaceholder,
+                        text: stepsText,
+                        prompt: Text(Strings.Today.stepsPlaceholder)
+                    )
+                    .keyboardType(.numberPad)
+                    .multilineTextAlignment(.trailing)
+                    .font(HTTypography.body)
+
+                    if vm.isHealthKitAvailable {
+                        Button {
+                            Task {
+                                vm.report.steps = nil
+                                await vm.syncFromHealthKit()
+                            }
+                        } label: {
+                            Image(systemName: "arrow.clockwise")
+                                .font(.system(size: 14, weight: .semibold))
+                                .foregroundStyle(Color.htAccent)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
             }
 
             Divider().background(Color.htBorder)

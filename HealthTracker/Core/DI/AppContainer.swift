@@ -23,6 +23,7 @@ final class AppContainer {
     let foodRepository:           any FoodRepository
     let aiProviderRepository:     any AIProviderRepository
     let userPreferencesRepository: any UserPreferencesRepository
+    let healthKitRepository:      any HealthKitRepository
 
     // MARK: - Public: ModelContainer (for .modelContainer() scene modifier)
 
@@ -46,12 +47,16 @@ final class AppContainer {
         let foodRepo     = FoodRepositoryImpl(context: context)
         let aiRepo       = AIProviderRepositoryImpl()
         let prefsRepo    = UserPreferencesRepositoryImpl()
+        let hkRepo: any HealthKitRepository = inMemory
+            ? HealthKitRepositoryStub()
+            : HealthKitRepositoryImpl()
 
         dailyReportRepository     = dailyRepo
         exerciseRepository        = exerciseRepo
         foodRepository            = foodRepo
         aiProviderRepository      = aiRepo
         userPreferencesRepository = prefsRepo
+        healthKitRepository       = hkRepo
 
         // Build factories
         let pFactory = ProviderFactory(aiProviderRepository: aiRepo)
@@ -62,6 +67,7 @@ final class AppContainer {
             foodRepository:           foodRepo,
             aiProviderRepository:     aiRepo,
             userPreferencesRepository: prefsRepo,
+            healthKitRepository:      hkRepo,
             providerFactory:          pFactory
         )
     }

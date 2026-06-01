@@ -42,6 +42,7 @@ enum Strings {
         static var feeling: String             { L("report.section.feeling") }
         static var photoAttached: String       { L("report.photo_attached") }
         static var noData: String              { L("report.no_data") }
+        static var healthKitWorkoutsSection: String { L("report.healthkit.workouts") }
 
         static func steps(_ count: Int) -> String {
             String(format: L("report.steps"), count)

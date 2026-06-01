@@ -23,10 +23,11 @@
 "report.section.feeling"              = "4. Feeling:";
 "report.photo_attached"               = " [photo attached]";
 "report.no_data"                      = "No data registered";
-"report.energy"                       = "energy %d/10";
+"report.energy"                       = "energy %d/5";
 "report.sleep"                        = "sleep %@ hrs";
 "report.glucose"                      = "glucose %d mg/dL";
 "report.blood_pressure"               = "blood pressure %@";
+"report.healthkit.workouts"           = "1b. HealthKit Workouts:";
 
 // MARK: - Meal slots
 "meal.slot.desayuno"  = "Breakfast";
