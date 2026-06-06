@@ -30,27 +30,73 @@ enum SystemPrompts {
         \(objectiveBlockSpanish(prefs))
         \(conditionsBlockSpanish(prefs))
 
-        FORMATO DE RESPUESTA OBLIGATORIO — usa estos marcadores exactos:
+        FORMATO DE RESPUESTA OBLIGATORIO — devuelve ÚNICAMENTE un objeto JSON válido.
+        Sin comillas de código, sin texto antes ni después. Sigue este esquema exacto.
+        Las 5 secciones son obligatorias; si no hay datos usa 0 en los campos numéricos.
 
-        [METABOLIC]
-        [Calorías estimadas, proteína total, fibra, carga glucémica, distribución de macros\
-        \(prefs.chronicConditions.isEmpty ? "" : ", impacto en condiciones médicas indicadas")]
+        {
+          "trafficLight": "green|yellow|red",
+          "title": "Reporte Diario",
+          "subtitle": "Síntesis fisiológica, nutricional y metabólica",
+          "sections": [
+            {
+              "id": "fisiologico", "number": 1,
+              "title": "Análisis Fisiológico Breve",
+              "type": "richText",
+              "blocks": [
+                {"type":"p","md":"Párrafo con **negritas** e *itálicas* permitidas."}
+              ]
+            },
+            {
+              "id": "macros", "number": 2,
+              "title": "Desglose de Macronutrientes y Calorías",
+              "type": "meals",
+              "note": "Nota opcional sobre estimaciones de pesos y porciones.",
+              "meals": [
+                {
+                  "id": "desayuno", "label": "Desayuno", "subtitle": "Descripción energética",
+                  "items": [{"name":"Alimento","portion":"porción","protein":0,"carbs":0,"fat":0,"kcal":0}]
+                },
+                {"id":"comida","label":"Comida","subtitle":"...","items":[{"name":"...","portion":"...","protein":0,"carbs":0,"fat":0,"kcal":0}]},
+                {"id":"cena","label":"Cena","subtitle":"...","items":[{"name":"...","portion":"...","protein":0,"carbs":0,"fat":0,"kcal":0}]},
+                {"id":"snack","label":"Snack","subtitle":"...","items":[{"name":"...","portion":"...","protein":0,"carbs":0,"fat":0,"kcal":0}]}
+              ]
+            },
+            {
+              "id": "totales", "number": 3,
+              "title": "Resumen Total del Día",
+              "type": "totals",
+              "totals": {"protein":0,"carbs":0,"fat":0,"kcal":0},
+              "commentary": [
+                {"key":"protein","title":"Proteína","text":"Análisis cualitativo."},
+                {"key":"carbs","title":"Carbohidratos","text":"Análisis cualitativo."},
+                {"key":"fat","title":"Grasas","text":"Análisis cualitativo."},
+                {"key":"kcal","title":"Calorías","text":"Análisis cualitativo."}
+              ]
+            },
+            {
+              "id": "renal", "number": 4,
+              "title": "Semáforo de Salud Renal",
+              "type": "renal",
+              "subtitle": "Directrices NKF",
+              "rows": [
+                {"items":"lista de alimentos","status":"green","label":"Verde","reason":"Razón clínica."}
+              ],
+              "callout": {"icon":"💧","title":"Balance Hidroelectrolítico","text":"Análisis con **negritas** permitidas."}
+            },
+            {
+              "id": "metabolico", "number": 5,
+              "title": "Diagnóstico Metabólico",
+              "type": "bullets",
+              "bullets": [{"title":"Título del punto","text":"Descripción detallada del diagnóstico."}]
+            }
+          ]
+        }
 
-        Semáforo del día: [🟢 Verde / 🟡 Amarillo / 🔴 Rojo] — [razón breve]
-
-        [FUNCTIONAL]
-        [Análisis del entrenamiento, volumen, progresión]
-
-        [LONGEVITY]
-        [Observaciones relevantes según el perfil de salud del usuario]
-
-        [MISSION]
-        [Un ajuste concreto y accionable para mañana]
-
-        REGLAS: Responde SIEMPRE en español. NO uses emojis de caritas, partes del cuerpo \
-        ni cohetes. Para el semáforo usa SOLO los emojis 🟢 🟡 🔴. \
-        Incluye los marcadores [METABOLIC] [FUNCTIONAL] [LONGEVITY] [MISSION] tal cual — \
-        no los traduzcas ni modifiques.
+        REGLAS: Devuelve ÚNICAMENTE el JSON — sin texto antes ni después, sin comillas de código.
+        Para el campo trafficLight usa exactamente "green", "yellow" o "red" (en inglés, sin emojis).
+        Responde SIEMPRE en español en todos los campos de texto del JSON.
+        NO uses emojis de caritas, partes del cuerpo ni cohetes (excepto 💧 en el callout si aplica).
         """
     }
 
@@ -120,27 +166,73 @@ enum SystemPrompts {
         \(objectiveBlockEnglish(prefs))
         \(conditionsBlockEnglish(prefs))
 
-        MANDATORY RESPONSE FORMAT — use these exact markers:
+        MANDATORY RESPONSE FORMAT — return ONLY a valid JSON object.
+        No code fences, no text before or after. Follow this schema exactly.
+        All 5 sections are required; use 0 for numeric fields when data is missing.
 
-        [METABOLIC]
-        [Estimated calories, total protein, fiber, glycemic load, macro distribution\
-        \(prefs.chronicConditions.isEmpty ? "" : ", impact on indicated medical conditions")]
+        {
+          "trafficLight": "green|yellow|red",
+          "title": "Daily Report",
+          "subtitle": "Physiological, nutritional and metabolic synthesis",
+          "sections": [
+            {
+              "id": "physiological", "number": 1,
+              "title": "Brief Physiological Analysis",
+              "type": "richText",
+              "blocks": [
+                {"type":"p","md":"Paragraph with **bold** and *italic* allowed."}
+              ]
+            },
+            {
+              "id": "macros", "number": 2,
+              "title": "Macronutrient and Calorie Breakdown",
+              "type": "meals",
+              "note": "Optional note about portion and weight estimates.",
+              "meals": [
+                {
+                  "id": "breakfast", "label": "Breakfast", "subtitle": "Energy description",
+                  "items": [{"name":"Food","portion":"portion","protein":0,"carbs":0,"fat":0,"kcal":0}]
+                },
+                {"id":"lunch","label":"Lunch","subtitle":"...","items":[{"name":"...","portion":"...","protein":0,"carbs":0,"fat":0,"kcal":0}]},
+                {"id":"dinner","label":"Dinner","subtitle":"...","items":[{"name":"...","portion":"...","protein":0,"carbs":0,"fat":0,"kcal":0}]},
+                {"id":"snack","label":"Snack","subtitle":"...","items":[{"name":"...","portion":"...","protein":0,"carbs":0,"fat":0,"kcal":0}]}
+              ]
+            },
+            {
+              "id": "totals", "number": 3,
+              "title": "Daily Summary",
+              "type": "totals",
+              "totals": {"protein":0,"carbs":0,"fat":0,"kcal":0},
+              "commentary": [
+                {"key":"protein","title":"Protein","text":"Qualitative analysis."},
+                {"key":"carbs","title":"Carbohydrates","text":"Qualitative analysis."},
+                {"key":"fat","title":"Fat","text":"Qualitative analysis."},
+                {"key":"kcal","title":"Calories","text":"Qualitative analysis."}
+              ]
+            },
+            {
+              "id": "renal", "number": 4,
+              "title": "Renal Health Semaphore",
+              "type": "renal",
+              "subtitle": "NKF Guidelines",
+              "rows": [
+                {"items":"food list","status":"green","label":"Green","reason":"Clinical reason."}
+              ],
+              "callout": {"icon":"💧","title":"Hydroelectrolyte Balance","text":"Analysis with **bold** allowed."}
+            },
+            {
+              "id": "metabolic", "number": 5,
+              "title": "Metabolic Diagnosis",
+              "type": "bullets",
+              "bullets": [{"title":"Point title","text":"Detailed diagnosis description."}]
+            }
+          ]
+        }
 
-        Traffic light: [🟢 Green / 🟡 Yellow / 🔴 Red] — [brief reason]
-
-        [FUNCTIONAL]
-        [Training analysis, volume, progression]
-
-        [LONGEVITY]
-        [Relevant observations based on the user's health profile]
-
-        [MISSION]
-        [One concrete, actionable adjustment for tomorrow]
-
-        RULES: Always respond in English. Do NOT use face, body part, or rocket emojis. \
-        For the traffic light use ONLY the emojis 🟢 🟡 🔴. \
-        Include the markers [METABOLIC] [FUNCTIONAL] [LONGEVITY] [MISSION] exactly as written — \
-        do not translate or modify them.
+        RULES: Return ONLY the JSON — no text before or after, no code fences.
+        For the trafficLight field use exactly "green", "yellow" or "red" (no emojis).
+        Always respond in English in all text fields of the JSON.
+        Do NOT use face, body part, or rocket emojis (💧 in callout is allowed if relevant).
         """
     }
 

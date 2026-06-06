@@ -4,19 +4,17 @@ import Foundation
 
 enum AnthropicMapper {
 
-    /// Converts an `AnthropicResponse` into a domain `AnalysisResult`.
     static func toAnalysisResult(_ response: AnthropicResponse) -> AnalysisResult {
         let rawText = response.content
             .compactMap(\.text)
             .joined(separator: "\n")
 
+        let report       = AnalysisReport.parse(from: rawText)
+        let trafficLight = report.map { AnalysisTextParser.trafficLight(from: $0.trafficLight) } ?? .yellow
+
         return AnalysisResult(
-            rawText:           rawText,
-            trafficLight:      AnalysisTextParser.parseTrafficLight(from: rawText),
-            metabolicSection:  AnalysisTextParser.extractSection(from: rawText, startMarker: AnalysisTextParser.Marker.metabolic),
-            functionalSection: AnalysisTextParser.extractSection(from: rawText, startMarker: AnalysisTextParser.Marker.functional),
-            longevitySection:  AnalysisTextParser.extractSection(from: rawText, startMarker: AnalysisTextParser.Marker.longevity),
-            missionSection:    AnalysisTextParser.extractSection(from: rawText, startMarker: AnalysisTextParser.Marker.mission),
+            rawText:      rawText,
+            trafficLight: trafficLight,
             tokenUsage: TokenUsage(
                 inputTokens:  response.usage.inputTokens,
                 outputTokens: response.usage.outputTokens

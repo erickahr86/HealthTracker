@@ -243,13 +243,14 @@ enum Strings {
         }
     }
 
-    // MARK: - Analysis card sections
+    // MARK: - Analysis card
 
     enum Analysis {
-        static var metabolic:  String { L("analysis.section.metabolic") }
-        static var functional: String { L("analysis.section.functional") }
-        static var longevity:  String { L("analysis.section.longevity") }
-        static var mission:    String { L("analysis.section.mission") }
+        static var macroProtein:  String { L("analysis.macro.protein") }
+        static var macroCarbs:    String { L("analysis.macro.carbs") }
+        static var macroFat:      String { L("analysis.macro.fat") }
+        static var macroKcal:     String { L("analysis.macro.kcal") }
+        static var macroSubtotal: String { L("analysis.macro.subtotal") }
     }
 
     // MARK: - Tab bar labels

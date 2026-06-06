@@ -303,11 +303,12 @@
 "food.other.olive_oil"      = "Aceite de oliva";
 "food.other.protein_powder" = "Proteína en polvo";
 
-// MARK: - Secciones de la card de análisis
-"analysis.section.metabolic"  = "Análisis Metabólico";
-"analysis.section.functional" = "Evaluación Funcional";
-"analysis.section.longevity"  = "Longevidad y Prevención";
-"analysis.section.mission"    = "Misión para Mañana";
+// MARK: - Card de análisis
+"analysis.macro.protein"  = "Proteína";
+"analysis.macro.carbs"    = "Carbohidratos";
+"analysis.macro.fat"      = "Grasas";
+"analysis.macro.kcal"     = "kcal";
+"analysis.macro.subtotal" = "Subtotal";
 
 // MARK: - Sexo biológico
 "biological.sex.male"   = "Hombre";
