@@ -46,18 +46,19 @@ enum ReportFormatter {
             let slotLogs = report.mealLogs.filter { $0.mealSlot == slot }
             guard !slotLogs.isEmpty else { continue }
 
-            let items: [String] = slotLogs.compactMap { log in
+            let itemLines: [String] = slotLogs.compactMap { log in
+                let photoTag = log.photoData != nil ? " [photo]" : ""
                 if let food = log.food, let amount = log.amount {
-                    return "\(formatAmount(amount)) \(food.unit) \(food.name)"
+                    return "  - \(formatAmount(amount)) \(food.unit) \(food.name)\(photoTag)"
                 } else if let freeText = log.freeText, !freeText.isEmpty {
-                    return freeText
+                    return "  - \(freeText)\(photoTag)"
                 }
                 return nil
             }
-            guard !items.isEmpty else { continue }
+            guard !itemLines.isEmpty else { continue }
 
-            let photoNote = slotLogs.contains { $0.photoData != nil } ? Strings.Report.photoAttached : ""
-            lines.append("\(slot.displayName): \(items.joined(separator: ", "))\(photoNote)")
+            lines.append("\(slot.displayName) (\(itemLines.count) item\(itemLines.count == 1 ? "" : "s")):")
+            lines.append(contentsOf: itemLines)
         }
         lines.append("")
 

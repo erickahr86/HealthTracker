@@ -32,7 +32,7 @@ final class GeminiAPIClient: LLMProvider {
     private enum API {
         static let baseURL        = "https://generativelanguage.googleapis.com/v1beta/models"
         static let action         = "generateContent"
-        static let maxOutputTokens = 1500
+        static let maxOutputTokens = 4000
     }
 
     // MARK: - LLMProvider

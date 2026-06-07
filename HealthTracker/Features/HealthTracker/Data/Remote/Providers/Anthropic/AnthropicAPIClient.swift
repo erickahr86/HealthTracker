@@ -29,7 +29,7 @@ final class AnthropicAPIClient: LLMProvider {
     private enum API {
         static let endpoint       = "https://api.anthropic.com/v1/messages"
         static let version        = "2023-06-01"
-        static let maxTokens      = 1000
+        static let maxTokens      = 4000
     }
 
     // MARK: - LLMProvider

@@ -97,7 +97,7 @@ struct AnalysisCardView: View {
             if isExpanded {
                 Divider().background(Color.htBorder)
                 sectionContent(section)
-                    .padding(.top, HTSpacing.sm)
+                    .padding(.all, HTSpacing.sm)
             }
         }
         .animation(.spring(response: 0.3, dampingFraction: 0.85), value: isExpanded)
@@ -135,10 +135,12 @@ struct AnalysisCardView: View {
             mealsContent(section)
         case "totals":
             totalsContent(section)
-        case "renal":
-            renalContent(section)
+        case "hydration":
+            hydrationContent(section)
         case "bullets":
             bulletsContent(section)
+        case "conditionImpacts":
+            conditionImpactsContent(section)
         default:
             EmptyView()
         }
@@ -282,10 +284,10 @@ struct AnalysisCardView: View {
                     columns: [GridItem(.flexible()), GridItem(.flexible())],
                     spacing: HTSpacing.sm
                 ) {
-                    macroPillCard(label: Strings.Analysis.macroProtein, value: t.protein, unit: "g")
-                    macroPillCard(label: Strings.Analysis.macroCarbs,   value: t.carbs,   unit: "g")
-                    macroPillCard(label: Strings.Analysis.macroFat,     value: t.fat,     unit: "g")
-                    macroPillCard(label: Strings.Analysis.macroKcal,    value: t.kcal,    unit: "")
+                    macroPillCard(label: Strings.Analysis.macroProtein, value: t.protein, unit: "g",  target: section.targets?.protein)
+                    macroPillCard(label: Strings.Analysis.macroCarbs,   value: t.carbs,   unit: "g",  target: section.targets?.carbs)
+                    macroPillCard(label: Strings.Analysis.macroFat,     value: t.fat,     unit: "g",  target: section.targets?.fat)
+                    macroPillCard(label: Strings.Analysis.macroKcal,    value: t.kcal,    unit: "",   target: section.targets?.kcal)
                 }
             }
 
@@ -309,12 +311,12 @@ struct AnalysisCardView: View {
         }
     }
 
-    private func macroPillCard(label: String, value: Double, unit: String) -> some View {
+    private func macroPillCard(label: String, value: Double, unit: String, target: MacroTarget?) -> some View {
         VStack(spacing: HTSpacing.xxs) {
             HStack(alignment: .lastTextBaseline, spacing: 2) {
                 Text(formatTotal(value))
                     .font(.system(size: 28, weight: .bold, design: .rounded))
-                    .foregroundStyle(Color.htAccent)
+                    .foregroundStyle(macroStatusColor(value, target: target))
                 if !unit.isEmpty {
                     Text(unit)
                         .font(HTTypography.captionBold)
@@ -324,6 +326,14 @@ struct AnalysisCardView: View {
             Text(label)
                 .font(HTTypography.caption)
                 .foregroundStyle(.secondary)
+            if let t = target {
+                let hint = unit.isEmpty
+                    ? "min \(formatTotal(t.min)) · opt \(formatTotal(t.optimal))"
+                    : "min \(formatTotal(t.min)) · opt \(formatTotal(t.optimal)) \(unit)"
+                Text(hint)
+                    .font(.system(size: 10))
+                    .foregroundStyle(.tertiary)
+            }
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, HTSpacing.sm)
@@ -331,27 +341,17 @@ struct AnalysisCardView: View {
         .clipShape(RoundedRectangle(cornerRadius: HTDimensions.CornerRadius.md))
     }
 
-    // MARK: - renal renderer
+    // MARK: - hydration renderer
 
-    private func renalContent(_ section: AnalysisSection) -> some View {
-        VStack(alignment: .leading, spacing: HTSpacing.sm) {
-            if let subtitle = section.subtitle {
-                Text(subtitle)
-                    .font(HTTypography.caption)
-                    .foregroundStyle(.secondary)
-            }
-
-            VStack(alignment: .leading, spacing: HTSpacing.sm) {
-                ForEach(section.rows ?? [], id: \.items) { row in
-                    renalRowView(row)
-                }
-            }
-
+    private func hydrationContent(_ section: AnalysisSection) -> some View {
+        Group {
             if let callout = section.callout {
                 renalCalloutView(callout)
             }
         }
     }
+
+    // MARK: - renal helpers
 
     private func renalRowView(_ row: RenalRow) -> some View {
         HStack(alignment: .top, spacing: HTSpacing.sm) {
@@ -413,7 +413,68 @@ struct AnalysisCardView: View {
         }
     }
 
+    // MARK: - conditionImpacts renderer
+
+    private func conditionImpactsContent(_ section: AnalysisSection) -> some View {
+        VStack(alignment: .leading, spacing: HTSpacing.md) {
+            ForEach(section.impacts ?? [], id: \.id) { impact in
+                VStack(alignment: .leading, spacing: HTSpacing.sm) {
+                    HStack(alignment: .top, spacing: HTSpacing.sm) {
+                        Circle()
+                            .fill(statusColor(impact.trafficLight))
+                            .frame(width: 10, height: 10)
+                            .padding(.top, 4)
+
+                        VStack(alignment: .leading, spacing: HTSpacing.xxs) {
+                            Text(impact.title)
+                                .font(HTTypography.subheadlineBold)
+                                .foregroundStyle(.primary)
+                            Text(attrStr(impact.text))
+                                .font(HTTypography.body)
+                                .foregroundStyle(.primary)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .textSelection(.enabled)
+                        }
+                    }
+                    if let rows = impact.rows {
+                        VStack(alignment: .leading, spacing: HTSpacing.xs) {
+                            ForEach(rows, id: \.items) { row in
+                                HStack(alignment: .top, spacing: HTSpacing.sm) {
+                                    Text(row.label)
+                                        .font(.system(size: 11, weight: .semibold))
+                                        .foregroundStyle(.white)
+                                        .padding(.horizontal, HTSpacing.xs)
+                                        .padding(.vertical, 2)
+                                        .background(statusColor(row.status).opacity(0.9))
+                                        .clipShape(Capsule())
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text(row.items)
+                                            .font(HTTypography.caption)
+                                            .foregroundStyle(.secondary)
+                                        Text(row.reason)
+                                            .font(HTTypography.caption)
+                                            .foregroundStyle(.primary)
+                                    }
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                }
+                            }
+                        }
+                        .padding(.leading, HTSpacing.lg)
+                    }
+                }
+            }
+        }
+    }
+
     // MARK: - Helpers
+
+    private func macroStatusColor(_ value: Double, target: MacroTarget?) -> Color {
+        guard let t = target else { return Color.htAccent }
+        if value < t.min || value > t.max { return Color.htTrafficRed }
+        let low = t.optimal * 0.9, high = t.optimal * 1.1
+        if value >= low && value <= high { return Color.htTrafficGreen }
+        return Color.htTrafficYellow
+    }
 
     private func attrStr(_ md: String) -> AttributedString {
         (try? AttributedString(
@@ -509,26 +570,42 @@ private let previewJSON = """
       "title": "Daily Summary",
       "type": "totals",
       "totals": {"protein":94.7,"carbs":172.2,"fat":56.2,"kcal":1554},
+      "targets": {
+        "protein": {"min":80,"optimal":100,"max":150},
+        "carbs":   {"min":130,"optimal":170,"max":220},
+        "fat":     {"min":40,"optimal":55,"max":80},
+        "kcal":    {"min":1400,"optimal":1600,"max":1900}
+      },
       "commentary": [
         {"key":"protein","title":"Protein","text":"Solid structural contribution. The combination of eggs and 140g pork efficiently covers the amino acid block needed to repair fibers."},
-        {"key":"carbs","title":"Carbohydrates","text":"Very balanced distribution. Starches from potatoes, 8 tortillas total, and oatmeal precisely refueled the muscle glycogen tanks."},
+        {"key":"carbs","title":"Carbohydrates","text":"Very balanced distribution. Oatmeal and tortillas precisely refueled the muscle glycogen tanks."},
         {"key":"fat","title":"Fat","text":"Moderate-low range and extremely clean. Dominated by unsaturated fats from peanut butter and egg yolks."},
-        {"key":"kcal","title":"Calories","text":"Clean and controlled caloric deficit. Combining high expenditure from 8,500 steps and training with this intake forces the body to oxidize fat tissue."}
+        {"key":"kcal","title":"Calories","text":"Clean and controlled caloric deficit. High expenditure from 8,500 steps combined with this intake forces the body to oxidize fat tissue."}
       ]
     },
     {
-      "id": "renal", "number": 4,
-      "title": "Renal Health Semaphore",
-      "type": "renal",
-      "subtitle": "NKF Guidelines",
-      "rows": [
-        {"items":"Oatmeal, Peanut Butter, Eggs, Pork, Apple","status":"green","label":"Green","reason":"Natural, dense foods free of chemical additives. Lean pork provides potassium and excellent amino acid bioavailability."},
-        {"items":"Corn tortillas, Refried beans","status":"yellow","label":"Yellow","reason":"Safe base sources. Beans may add a baseline of sodium if commercial, perfectly controlled by portion."}
-      ],
-      "callout": {"icon":"💧","title":"Hydroelectrolyte Balance","text":"Your **120 oz of water** completely protected your kidneys today. With 8,500 steps and gym sweat, this liquid maintained perfect blood volume."}
+      "id": "conditions", "number": 4,
+      "title": "Impact on Your Health Conditions",
+      "type": "conditionImpacts",
+      "impacts": [
+        {
+          "id": "renalDisease", "title": "Kidney Disease", "trafficLight": "green",
+          "text": "Today's intake was **renal-friendly**. Low phosphorus load and controlled protein portions kept filtration demand well within safe limits.",
+          "rows": [
+            {"items":"Oatmeal, Peanut Butter, Eggs, Pork, Apple","status":"green","label":"Green","reason":"Natural foods free of additives. Lean pork delivers high-quality amino acids with a modest potassium contribution."},
+            {"items":"Corn tortillas, Refried beans","status":"yellow","label":"Yellow","reason":"Safe staples. Commercial beans may carry baseline sodium — perfectly managed at this portion size."}
+          ]
+        }
+      ]
     },
     {
-      "id": "metabolic", "number": 5,
+      "id": "hydration", "number": 5,
+      "title": "Hydration",
+      "type": "hydration",
+      "callout": {"icon":"💧","title":"Hydroelectrolyte Balance","text":"Your **120 oz of water** completely protected your kidneys today. With 8,500 steps and gym sweat, this intake maintained perfect blood volume and renal perfusion."}
+    },
+    {
+      "id": "metabolic", "number": 6,
       "title": "Metabolic Diagnosis",
       "type": "bullets",
       "bullets": [
