@@ -329,7 +329,19 @@
 "condition.highCholesterol"    = "High Cholesterol";
 "condition.heartDisease"       = "Heart Disease";
 "condition.asthma"             = "Asthma";
-"condition.arthritis"          = "Arthritis";
+"condition.arthritis"               = "Arthritis";
+"condition.crohnsDisease"           = "Crohn's Disease";
+"condition.celiacDisease"           = "Celiac Disease";
+"condition.eczema"                  = "Eczema";
+"condition.ulcerativeColitis"       = "Ulcerative Colitis";
+"condition.irritableBowelSyndrome"  = "Irritable Bowel Syndrome";
+"condition.gerd"                    = "GERD / Acid Reflux";
+"condition.osteoporosis"            = "Osteoporosis";
+"condition.polycysticOvary"         = "PCOS";
+"condition.anemia"                  = "Anemia";
+"condition.gout"                    = "Gout";
+"condition.migraine"                = "Migraine";
+"condition.sarcopenia"              = "Sarcopenia";
 
 // MARK: - Fitness goals
 "goal.weightLoss"           = "Weight Loss";

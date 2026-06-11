@@ -327,7 +327,19 @@
 "condition.highCholesterol"    = "Colesterol alto";
 "condition.heartDisease"       = "Enfermedad cardíaca";
 "condition.asthma"             = "Asma";
-"condition.arthritis"          = "Artritis";
+"condition.arthritis"               = "Artritis";
+"condition.crohnsDisease"           = "Enfermedad de Crohn";
+"condition.celiacDisease"           = "Enfermedad celíaca";
+"condition.eczema"                  = "Eccema";
+"condition.ulcerativeColitis"       = "Colitis ulcerosa";
+"condition.irritableBowelSyndrome"  = "Síndrome de intestino irritable";
+"condition.gerd"                    = "Reflujo gastroesofágico";
+"condition.osteoporosis"            = "Osteoporosis";
+"condition.polycysticOvary"         = "Ovario poliquístico (SOP)";
+"condition.anemia"                  = "Anemia";
+"condition.gout"                    = "Gota";
+"condition.migraine"                = "Migraña";
+"condition.sarcopenia"              = "Sarcopenia";
 
 // MARK: - Objetivos de salud
 "goal.weightLoss"           = "Bajar de peso";

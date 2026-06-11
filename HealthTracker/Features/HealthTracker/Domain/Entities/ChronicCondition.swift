@@ -16,6 +16,18 @@ enum ChronicCondition: String, Codable, CaseIterable, Hashable {
     case heartDisease
     case asthma
     case arthritis
+    case crohnsDisease
+    case celiacDisease
+    case eczema
+    case ulcerativeColitis
+    case irritableBowelSyndrome
+    case gerd
+    case osteoporosis
+    case polycysticOvary
+    case anemia
+    case gout
+    case migraine
+    case sarcopenia
 
     var displayName: String {
         NSLocalizedString("condition.\(rawValue)", comment: "Chronic condition label")
